@@ -1,0 +1,13 @@
+# Changelog
+
+## [Core v1.1.17] – 2025-10-25
+- Immutable mathematical foundation consolidated.
+- Added 1-Lipschitz constraint to Vantage-Swap Invariance.
+- Explicit normalization and index-set expectations.
+- COHERENCE_REPAIR steps formalized.
+- Metrics clipped to [0, 1].
+
+## [Instructions v1.1.17] – 2025-10-25
+- Plain-language interface.
+- Default mode: natural conversation; formal TSC mode on request.
+- Added “See-more” handler and structured output format.
