@@ -16,5 +16,5 @@ When a new version is released, add the new file next to the old one and update 
 Do not delete or rename older versions.
 
 ### Citation
-> Triadic Self-Coherence (TSC). Core v1.1.17 and Instructions v1.1.18. 2025.  
-> https://github.com/yourname/Triadic-Self-Coherence
+> Triadic Self-Coherence (TSC). Core v1.1.17 and Instructions v1.1.17. 2025.  
+> https://github.com/usurobor/ct
