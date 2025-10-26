@@ -7,8 +7,8 @@ across three views:
 - **Cohering (Deep):** ongoing recursive rhythm through time  
 
 **License:** CC BY 4.0  
-**Core Spec:** [TSC_Core_v1.1.17.pdf](TSC_Core_v1.1.17.pdf)  
-**Instructions:** [TSC_Instructions_v1.1.18.md](TSC_Instructions_v1.1.18.md)
+**Core Spec:** [tsc-core-v1.1.17.pdf](tsc-core-v1.1.17.pdf)  
+**Instructions:** [tsc-instructions-v1.1.17.md](tsc-instructions-v1.1.17.md)
 
 ### Versioning
 Each file name includes its version.  
