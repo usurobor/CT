@@ -1,0 +1,112 @@
+# OBSERVABILITY_SCHEMA.yaml
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: TSC Coherence Log Event
+type: object
+required:
+  - ts
+  - state
+  - metrics
+  - witnesses
+  - decision
+  - sampling
+  - ood
+  - tau
+  - cadence
+  - cost
+  - version
+properties:
+  ts: { type: string, description: "ISO8601 timestamp" }
+  version:
+    type: object
+    properties:
+      core: { type: string, description: "e.g., v1.1.17" }
+      addendum: { type: string, description: "e.g., v1.2.9" }
+  state:
+    type: string
+    enum: [OPTIMIZE, REINFLATE, MINIMAL_INFO, LOCKDOWN, HANDSHAKE]
+  metrics:
+    type: object
+    properties:
+      H_c: { type: number }
+      V_c: { type: number }
+      D_c: { type: number }
+      C_sigma: { type: number }
+      C_sigma_CI:
+        type: object
+        properties:
+          lo: { type: number }
+          hi: { type: number }
+      B_bootstrap: { type: integer }
+  witnesses:
+    type: object
+    properties:
+      H_variance: { type: number }
+      H_entropy: { type: number }
+      H_lipschitz: { type: number }
+      D_entropy: { type: number }
+      D_variance: { type: number }
+      floors:
+        type: object
+        properties:
+          nu_min: { type: number }
+          H_min: { type: number }
+          nu_min_D: { type: number }
+          H_min_D: { type: number }
+  decision:
+    type: object
+    properties:
+      verdict:
+        type: string
+        enum: [PASS, FAIL, FAIL/DEGENERATE, FAIL/DEGENERATE_D]
+      cause_code:
+        type: string
+        enum: [DRIFT, DEGENERATE_HVD, DEGENERATE_D, OOD, MINIMIZING, HANDSHAKE, LOCKDOWN]
+  sampling:
+    type: object
+    properties:
+      policy: { type: string, description: "π_verify label" }
+      policy_params: { type: object, additionalProperties: true }
+      sample_size: { type: integer }
+  ood:
+    type: object
+    properties:
+      Z_t: { type: number }
+      Z_crit: { type: number }
+      p_ref_hash: { type: string }
+  tau:
+    type: object
+    properties:
+      tau_max: { type: number }
+      tau_alloc:
+        type: object
+        properties:
+          H: { type: number }
+          V: { type: number }
+          D: { type: number }
+  cadence:
+    type: object
+    properties:
+      K_base: { type: integer }
+      K_min: { type: integer }
+      K_max: { type: integer }
+      per_agent:
+        type: array
+        items:
+          type: object
+          properties:
+            agent_id: { type: string }
+            K_i: { type: integer }
+            alpha_i: { type: number }
+            sigma2_i: { type: number }
+            delta_C_width: { type: number }
+  cost:
+    type: object
+    properties:
+      J_cost: { type: number }
+      I_C: { type: number }
+      verify_cost: { type: number }
+      weights:
+        type: object
+        properties:
+          w_info: { type: number }
+          w_verify: { type: number }

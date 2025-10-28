@@ -1,13 +1,103 @@
-# Changelog
+# CHANGELOG
+All notable changes to this project will be documented in this file.  
+Entries are ordered from newest to oldest.
 
-## [Core v1.1.17] – 2025-10-25
-- Immutable mathematical foundation consolidated.
-- Added 1-Lipschitz constraint to Vantage-Swap Invariance.
-- Explicit normalization and index-set expectations.
-- COHERENCE_REPAIR steps formalized.
-- Metrics clipped to [0, 1].
+---
 
-## [Instructions v1.1.17] – 2025-10-25
-- Plain-language interface.
-- Default mode: natural conversation; formal TSC mode on request.
-- Added “See-more” handler and structured output format.
+## [v1.2.9] – 2025-10-28  
+**Status:** Stable / Final Consolidation  
+
+### Highlights  
+- Consolidated all v1.2.x logic into unified specification (verification, controller, resources).  
+- No new mechanics introduced.  
+- Added compliance schema and audit checklist.  
+- Standardized file naming to `tsc-core` / `tsc-operational`.  
+- Retired global cadence in favor of per-agent cadence \(K_i\).
+
+---
+
+## [v1.2.8] – 2025-10-20  
+**Status:** Hardened Verification & Onboarding  
+
+### Highlights  
+- Added **Verification Sampling Policy** \(π_verify\) for adversarial verification.  
+- Introduced **J_cost** = information + verification cost.  
+- Added **HANDSHAKE** state for new-agent onboarding.  
+- Secured distributed trust initialization (α_i = 0).  
+- Expanded “Simplify” actions to cover verification cost.
+
+---
+
+## [v1.2.7] – 2025-10-15  
+**Status:** Full Control Formalization  
+
+### Highlights  
+- Introduced **LOCKDOWN** state for OOD isolation.  
+- Fixed threshold at 0.80 (removed adaptive θ_t).  
+- Added **τ-budget** as a managed controller resource.  
+- Unified sensitivity tuning under meta-controller \(R_meta\).  
+- Linked distributed agents axiomatically to core composition law.
+
+---
+
+## [v1.2.6] – 2025-10-10  
+**Status:** Meta-Stability & Distributed Dynamics  
+
+### Highlights  
+- Added hysteresis to prevent controller state oscillation.  
+- Introduced formal \(I(C)\) definition.  
+- Defined programmatic “Simplify” action.  
+- Implemented distributed cadence \(K_i\) tied to trust α_i.  
+
+---
+
+## [v1.2.5] – 2025-10-06  
+**Status:** Adaptive Dynamics & Minimal-Information Control  
+
+### Highlights  
+- Made `REINFLATE` objective adaptive with dynamic witness weights.  
+- Introduced uncertainty-gated cadence \(K\).  
+- Replaced “H-first fallback” with `STATE_MINIMAL_INFO`.  
+- Clarified meta-controller as preconditioner for Φ_info optimization.  
+
+---
+
+## [v1.2.4] – 2025-10-02  
+**Status:** Info-Theoretic Control & Isometry  
+
+### Highlights  
+- Upgraded Lyapunov candidate to information-theoretic Φ_info.  
+- Added gauge-isometry objective to R_meta.  
+- Introduced formal `STATE_REINFLATE` safe mode.  
+- Hardened D_c metric against collapse via entropy/variance floors.  
+
+---
+
+## [v1.2.3] – 2025-09-29  
+**Status:** Hardened Witnesses & Meta-Gauging  
+
+### Highlights  
+- Added entropy floor H_min to prevent multimodal collapse.  
+- Introduced meta-optimization for gauge sharpness.  
+- Added trust-weighted consensus for multi-agent coherence.  
+
+---
+
+## [v1.2.2] – 2025-09-26  
+**Status:** Gauge & Risk-Aware Addendum  
+
+### Highlights  
+- Added gauge normalization and variance witness.  
+- Introduced CI-based verification and risk-aware thresholds.  
+- Added Lyapunov formulation for controller convergence.  
+
+---
+
+## [v1.1.17] – 2025-09-20  
+**Status:** Immutable Core Foundation  
+
+### Highlights  
+- Defined Triadic Axioms (A1–A4).  
+- Established coherence metrics \(H_c, V_c, D_c, C_\Sigma\).  
+- Proved contraction of controller \(R\) and final coalgebra uniqueness.  
+- This version is immutable and mathematically authoritative.
