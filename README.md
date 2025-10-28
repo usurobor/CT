@@ -45,7 +45,7 @@ This repository contains:
 ├── runtime/
 │   └── tsc-instructions.md    # Runtime / GPT-level system instructions
 │
-└── tsc-core/                  # Normative specification layer
+└── core/                  # Normative specification layer
     ├── OBSERVABILITY_SCHEMA.yaml   # Normative schema for telemetry and logs
     ├── SPEC-COMPLIANCE.md         # Compliance and audit checklist
     ├── tsc-core.md                # Immutable mathematical foundation (v1.1.19)
