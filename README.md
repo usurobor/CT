@@ -79,7 +79,7 @@ VERSIONING
 
 Component                                   Version     Status      Description
 ─────────────────────────────────────────────────────────────────────────────
-Core Spec (tsc-core.md)                     v1.1.19     Immutable   Defines axioms, metrics, and coherence invariants.
+Core Spec (tsc-core.md)                     v1.1.19     Stable      Defines axioms, metrics, and coherence invariants.
 Operational Addendum (tsc-operational.md)   v1.2.9      Final       Specifies controller logic, verification, and runtime behavior.
 Observability & Compliance                  v1.2.9      Stable      Normative schema and audit checklist.
 
