@@ -4,7 +4,7 @@
 *README v1.3.19 (Updated 2025-10-28)*
 
 > [!IMPORTANT]
-> This README provides orientation and intuition. Formal content is governed by the **Core Knowledge File v1.1.18**. The repo’s `tsc-core.md v1.1.19` aligns editorially; `tsc-operational.md v1.2.9` defines procedures. If this document conflicts with the specs, the specs govern.  
+> **Authority:** `core/tsc-core.md v1.1.19` is the canonical mathematics. `core/tsc-operational.md v1.2.9` is the normative runtime spec. This README and files under `/docs` (e.g., the glossary and worked examples) are explanatory. If anything conflicts, **the specs govern**.
 > **See also:** [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
 
 ---
