@@ -1,10 +1,11 @@
 # Triadic Self-Coherence (TSC)
 
-Tagline: Name your perspective. Map across perspectives. Verify the maps preserve structure.
-README v1.3.14 (Updated 2025-10-28 — mobile-friendly formatting)
+**Tagline:** Name your perspective. Map across perspectives. Verify the maps preserve structure.
 
-## Authority (short)
-This README provides orientation and intuition. Formal content is governed by the Core Knowledge File v1.1.18. The repo’s tsc-core.md v1.1.19 aligns editorially; tsc-operational.md v1.2.9 defines procedures. If this document conflicts with the specs, the specs govern.
+*README v1.3.14 (Updated 2025-10-28)*
+
+> [!IMPORTANT]
+> This README provides orientation and intuition. Formal content is governed by the **Core Knowledge File v1.1.18**. The repo’s `tsc-core.md v1.1.19` aligns editorially; `tsc-operational.md v1.2.9` defines procedures. If this document conflicts with the specs, the specs govern.
 
 ---
 
@@ -12,31 +13,31 @@ This README provides orientation and intuition. Formal content is governed by th
 Any system that observes itself risks distortion—not by “changing reality,” but because different viewpoints select and transform different aspects. How do we stay consistent across those shifting perspectives?
 
 ## What you get (at a glance)
-- A vocabulary to label perspectives (H, V, D) and avoid hidden swaps
-- A way to model translations between perspectives and measure their loss
-- An operational check (C_Σ vs τ) to decide: continue, repair, or escalate
-- A criterion for when to trust or repair your system’s self-reports
+- A vocabulary to label perspectives (**H, V, D**) and avoid hidden swaps  
+- A way to model translations between perspectives and measure their loss  
+- An operational check (**C_Σ vs τ**) to decide: continue, repair, or escalate  
+- A criterion for when to **trust** or **repair** your system’s self-reports
 
 ---
 
 ## The three vantages (cross-domain anchors)
 
-H — Horizontal: what the system IS
-- AI: activation/state at a moment
-- Cognitive science: neural population state in a snapshot
-- Organization: roles, assets, policy at rest
+### H — Horizontal: what the system IS
+- AI: activation/state at a moment  
+- Cognitive science: neural population state in a snapshot  
+- Organization: roles, assets, policy at rest  
 
-V — Vertical: how different views RELATE
-- AI: token embeddings ↔ attention patterns
-- Cognitive science: neural measures ↔ cognitive models (rules, symbols)
-- Organization: budget ↔ staffing ↔ delivery
+### V — Vertical: how different views RELATE
+- AI: token embeddings ↔ attention patterns  
+- Cognitive science: neural measures ↔ cognitive models (rules, symbols)  
+- Organization: budget ↔ staffing ↔ delivery  
 
-D — Deep: how the system CHANGES
-- AI: behavior drift across sessions
-- Cognitive science: strategy shifts over learning blocks
-- Organization: policy effects over quarters
+### D — Deep: how the system CHANGES
+- AI: behavior drift across sessions  
+- Cognitive science: strategy shifts over learning blocks  
+- Organization: policy effects over quarters  
 
-A system is coherent when H, V, and D yield mutually compatible descriptions of the same system.
+*A system is coherent when H, V, and D yield mutually compatible descriptions of the same system.*
 
 ---
 
