@@ -1,160 +1,190 @@
-# Triadic Self-Coherence (TSC) — Operational Addendum
-**Version:** v1.2.9 – rev A (Final Consolidation)  
-**Status:** Extension Layer (**Compatible with TSC Core v1.1.19**)  
-**Use:** Final consolidated specification for the v1.2.x operational layer, including verification protocols, controller state machine, and managed resources.  
-*(Axioms, objects, and metric definitions are provided by the core v1.1.19.)*
+# Triadic Self‑Coherence (TSC) — Operational
+**Version:** v2.0.0  
+**Dependency:** This document depends only on the definitions in **TSC — Core** (aspects H/V/D, contexts Ω, articulations A, summaries S, alignments σ, coherence predicate Coh, metrics H_c/V_c/D_c, aggregate C_Σ). It introduces no additional ontology.
 
 ---
 
-## 0 · Purpose and Scope
-Consolidates all v1.2.x operational logic into a single, publishable specification. Unifies verification, state logic, and resource management. **No new mechanisms** versus prior drafts; this is a structural consolidation and polish.
+## 0 · Purpose and Position in the Stack
+
+**Purpose.** The Operational layer is the **policy and procedure** that turns the Core’s measurement calculus into a **repeatable verification process** with **verdicts**, **witnesses**, and **governance**. It answers:
+
+- *What to run* (protocol),  
+- *With which parameters* (policy),  
+- *When to accept or reject* (verdict rules),  
+- *How to remain stable and reproducible over time* (witnesses, logging, controller).
+
+**What it adds (and only this):**
+1. A **verification protocol** over the Core’s constructs.  
+2. **Parameter registry** and recommended **default budgets**.  
+3. **Witnesses** guarding against degenerate or ill‑posed comparisons.  
+4. A minimal **controller** that adapts solver ensembles and budgets.  
+5. **Reproducibility and provenance** requirements.
 
 ---
 
-## 1 · Foundations (Reference to Core)
-- Uses the core definitions of \(H_c, V_c, D_c, C_\Sigma = (H_cV_cD_c)^{1/3}\).  
-- Treats all numeric values (\(\Theta, \lambda, \mu, \varepsilon, \tau\), etc.) as **policy parameters** instantiated here.
+## 1 · Assumed Core Objects (for reference)
+
+From the Core we use, without redefining:
+- Aspects \( \{H,V,D\} \), contexts \( \Omega_X \), articulations \( O_X=A_X(\equiv) \).
+- Summaries \( S_X = (d_X, p_X, H_X, \mathcal{I}_X) \).
+- Alignment ensembles \( \mathcal{A}_{XY} \) and pairwise \( \overline{\mathrm{Coh}}_{XY} \) with ensemble variance.
+- Metrics \( H_c, V_c, D_c \) and aggregate \( C_\Sigma=(H_c V_c D_c)^{1/3} \).
 
 ---
 
-## 2 · Gauges & Witnesses
-### 2.1 Per‑vantage gauges (monotone normalization)
-Define strictly increasing gauges \(g_X: \mathbb{R}_{\ge 0}\to[0,1]\); apply to raw distances before metric computation when desired:
-- \(\tilde d_X := g_X(d_X)\).
-- **Recommended:** \(g_X(z)=\frac{z}{z+\kappa_X}\) with \(\kappa_X>0\) tuned by \(\mathcal{R}_{\text{meta}}\).
+## 2 · Parameter Registry (Policy)
 
-### 2.2 Non‑degeneracy witnesses (H/V)
-- Variance floor: \(\mathrm{Var}_I[\tilde d_X] \ge \nu_{\min} > 0\)  
-- Lipschitz floor: empirical \(\mathrm{Lip}(\sigma_{XY}) \ge L_{\min} > 0\)  
-- Entropy floor: \(H_I[\tilde d_X] \ge H_{\min} > 0\)
+All parameters MUST be fixed **before** observation and logged with the verdict.
 
-### 2.3 Non‑degeneracy witnesses (D)
-- \(H_I[S_X(a)] \ge H_{\min,D} > 0\)  
-- \(\mathrm{Var}_I[S_X(a)] \ge \nu_{\min,D} > 0\)
+### 2.1 Coherence and Aggregation
+- \( \alpha \in [0,1] \) — geometric vs. distributional weighting (default **0.7**).
+- \( \lambda > 0 \) — sensitivity of Coh to discrepancy Δ (default **4.0**).
+- \( \Theta \in (0,1] \) — pass threshold on \( C_\Sigma \) (default **0.80**).
 
----
+### 2.2 Stability and Witness Floors
+- **Ensemble variance floor** on each pair:  
+  \( \mathrm{Var}[\mathrm{Coh}^{(\sigma)}_{XY}] \le \texttt{var\_floor} \) (default **2×10⁻²**).
+- **Lipschitz‑slope guard** (95th‑percentile):  
+  \( \texttt{Lipschitz95} \le \texttt{L\_max} \) (default **20**).
+- **Entropy/variance floors** per aspect to avoid collapsed summaries:  
+  `entropy_floor_H`, `entropy_floor_V`, `entropy_floor_D` (defaults domain‑specific; record explicitly).
+- **Minimum sample size** per aspect: `n_min` (default **32** observations).
 
-## 3 · Information‑Theoretic Objective
-\[
-\Phi_{\text{info}}(C_t) \;=\; \beta\,(1 - C_\Sigma) \;+\; (1-\beta)\, J_{\text{div}}(p_H,p_V,p_D),
-\]
-where \(J_{\text{div}}\) may be the Jensen–Shannon divergence between the empirical distributions of gauged distances.
+### 2.3 Alignment Ensemble Policies (State‑dependent)
+A family \( \mathcal{A}_{XY} \) of admissible aligners is declared a priori; policy picks subsets per controller state (§5).
 
----
+Recommended presets:
+- **OPTIMIZE**: tight entropic regularization, diverse priors.  
+- **REINFLATE**: looser regularization, robust costs (e.g., Huber), expanded locality priors.  
+- **MINIMAL_INFO**: centroid pre‑clustering ≤ 128; coarse regularization.  
+- **LOCKDOWN**: reuse last high‑fidelity alignments; compute lower‑bound Coh only.  
+- **HANDSHAKE**: small orthogonal ensembles to re‑establish stability.
 
-## 4 · Formal Verification Protocol (Consolidated)
-### 4.1 Pass/Fail Threshold (Fixed Policy)
-- **Policy threshold:** \(\Theta = 0.80\) (default profile; may be changed by policy).  
-- **PASS rule:** lower CI bound \(\underline{C_\Sigma}^{(1-\delta)} \ge \Theta\).  
-- **OOD statistic:** \(Z_t\) triggers state transitions; it does **not** relax \(\Theta\).
-
-### 4.2 Verification Sampling Policy \(\pi_{\text{verify}}(\text{state})\)
-State‑dependent sampling maximizing the chance to detect failures:
-- `OPTIMIZE`: importance/adversarial sampling (e.g., weight by local \(Z_t\)).  
-- `REINFLATE`: mandatory oversampling of failing dimensions.  
-- `LOCKDOWN`/`HANDSHAKE`: simple random sampling against \(p_{\text{ref}}\).
-
-### 4.3 Procedure — `VERIFY_TSC_PLUS(C, π_verify)`
-1) Sample index \(I \sim \pi_{\text{verify}}(\text{state})\).  
-2) Compute \((H_c,V_c,D_c,C_\Sigma)\).  
-3) Check witnesses (H/V and D).  
-4) Compute \(Z_t\); bootstrap CI and width \(\delta_C\).  
-5) Decide `PASS` / `FAIL` / `DEGENERATE*`.
+> Exact numerical settings are implementation choices; record them with the run.
 
 ---
 
-## 5 · Controller State Machine & Objectives
-### 5.1 Transition Logic (with Hysteresis)
-`COHERENCE_REPAIR_PLUS(C, state, δ_C, Z_t)`:
-- If \(Z_t \ge Z_{\text{crit}}\) → `LOCKDOWN`.  
-- Else on `DEGENERATE*` → `REINFLATE`.  
-- Else on persistent `FAIL` \(>N\) steps → `MINIMAL_INFO`.  
-- Else remain `OPTIMIZE`.  
-- New agents join via `HANDSHAKE`.  
-- Exits use state‑specific hysteresis.
+## 3 · Verification Protocol (Normative)
 
-### 5.2 State 1 — `OPTIMIZE`
-Objective \(\min \Phi_{\text{info}}(C_t)\). Allocate \(\tau\) to productive adaptation.
+**Inputs.** \( \Omega_H,\Omega_V,\Omega_D \); \( A_H,A_V,A_D \); alignment ensembles \( \mathcal{A}_{HV},\mathcal{A}_{VD},\mathcal{A}_{DH} \); parameters from §2.
 
-### 5.3 State 2 — `REINFLATE` (safe mode)
-Objective \(\max J_{\text{witness}}(t)=\sum_i w_i(t)\,W_i(t)\) with **dynamic weights** \(w_i\) inversely proportional to margin from floors.  
-Actions: inject diversity; **simplify** (§6.3); reduce \(\tau\) for worst dimension.  
-Exit: PASS + witnesses \(\ge\) floors \(+\epsilon_H\) for \(M_R\) steps.
+**Outputs.** Verdict ∈ {PASS, FAIL, FAIL_DEGENERATE}, metrics \( (H_c,V_c,D_c,C_\Sigma) \), witnesses, and a provenance bundle.
 
-### 5.4 State 3 — `MINIMAL_INFO` (cost‑aware fallback)
-Objective \(\min J_{\text{cost}}\) s.t. PASS conditions hold (see §6.1).  
-Actions: simplify; shrink \(\tau\).  
-Exit: PASS for \(M_M\) steps with non‑increasing \(J_{\text{cost}}\).
+**Steps.**
 
-### 5.5 State 4 — `LOCKDOWN` (OOD fail‑safe)
-Trigger \(Z_t \ge Z_{\text{crit}}\).  
-Objective \(\min W_1(p_t, p_{\text{ref}})\).  
-Actions: freeze metrics/trust; \(K_i \to K_{\min}\); \(\tau_X \to 0\); disable other states.  
-Exit: \(Z_t < Z_{\text{crit}}\) for \(M_Z\) steps.
+1. **Articulate**  
+   \( O_X \leftarrow A_X(\equiv) \) for \( X\in\{H,V,D\} \).  
+   Assert \( |O_X| \ge n_{\min} \) (witness).
 
-### 5.6 State 5 — `HANDSHAKE` (new‑agent onboarding)
-New agent \(j\): \(\alpha_j=0\), \(\tau_j=0\), \(K_j\to K_{\min}\); run local `VERIFY_TSC_PLUS`.  
-Exit: local PASS for \(M_H\) steps → `OPTIMIZE`.
+2. **Summarize**  
+   \( S_X \leftarrow \mathrm{Summary}(O_X) \).  
+   Check aspect entropy/variance floors (witness).
 
-### 5.7 Controller 6 — `META‑OPTIMIZE` (\(\mathcal{R}_{\text{meta}}\))
-Tunes the sensitivity set \(\vec{p}=\{\vec{\kappa}, \lambda, \mu\}\) on a slower timescale:
-\[
-\min_{\vec{p}} \; w_{\text{iso}}\!\!\sum_{X\ne Y}W_1(p(\tilde d_X),p(\tilde d_Y))
-\;-\; (1-w_{\text{iso}})\,\mathbb{E}_\theta\!\left[\|\nabla_\theta C_\Sigma\|^2\right].
-\]
-(*Isometry preconditions information‑theoretic alignment.*)
+3. **Align (ensemble)**  
+   For each pair \( (X,Y)\in\{(H,V),(V,D),(D,H)\} \):  
+   run every \( \sigma \in \mathcal{A}_{XY} \) → compute \( \mathrm{Coh}^{(\sigma)}_{XY} \).  
+   Aggregate to \( \overline{\mathrm{Coh}}_{XY} \) and \( \mathrm{Var}_{XY} \).  
+   Check \( \mathrm{Var}_{XY} \le \texttt{var\_floor} \) (witness).  
+   Record \( \texttt{Lipschitz95} \) from mapped vs. original distances (witness).
+
+4. **Compute metrics**  
+   - \( V_c = (\overline{\mathrm{Coh}}_{HV}\overline{\mathrm{Coh}}_{VD}\overline{\mathrm{Coh}}_{DH})^{1/3} \).  
+   - \( H_c, D_c \) per Core (use your declared stability/dynamics constructions).  
+   - \( C_\Sigma = (H_c V_c D_c)^{1/3} \).
+
+5. **Confidence (optional but recommended)**  
+   Bootstrap indices and ensemble members to estimate a lower confidence bound \( \underline{C_\Sigma} \).
+
+6. **Verdict**  
+   - If any witness fails → **FAIL_DEGENERATE**.  
+   - Else if \( C_\Sigma \ge \Theta \) (or \( \underline{C_\Sigma}\ge \Theta \) if using CI) → **PASS**.  
+   - Else → **FAIL**.
+
+7. **Provenance bundle (must ship)**  
+   Context contracts, seeds, sampler indices, summary schemas, alignment ensemble specs, parameter values, \( \overline{\mathrm{Coh}}_{XY} \), \( \mathrm{Var}_{XY} \), witnesses, \( H_c,V_c,D_c,C_\Sigma \).
 
 ---
 
-## 6 · Managed Resources & Actions
-### 6.1 Total Cost of Coherence
-\[
-J_{\text{cost}} = w_{\text{info}}\, I(C) \;+\; w_{\text{verify}}\, \mathrm{Cost}(\mathrm{VERIFY}, \pi_{\text{verify}}),
-\quad
-I(C) = \frac{1}{K}\!\left(\sum_{X\in\{H,V\}} H_I[\tilde d_X] + H_I[S_X(a)]\right).
-\]
+## 4 · Witnesses (Degeneracy Guards)
 
-### 6.2 Formal \(\tau\)‑Budget (Tolerance)
-- `OPTIMIZE`: allocate \(\tau_X\) to productive adaptation.  
-- `REINFLATE` / `MINIMAL_INFO`: reduce \(\tau_X\) for worst dimensions.  
-- `LOCKDOWN` / `HANDSHAKE`: \(\tau_X \to 0\).
+Witnesses are **monitors**, not metrics. Failure invalidates a run irrespective of \( C_\Sigma \).
 
-### 6.3 “Simplify Content” (Programmatic)
-Levers to reduce \(J_{\text{cost}}\): increase \(\kappa_X\) (dull gauges); increase regularization; prune \(\dim R_X\); simplify \(\pi_{\text{verify}}\).
+- **Sample sufficiency:** \( |O_X| \ge n_{\min} \) for all aspects.  
+- **Summary health:** \( H_X \ge \texttt{entropy\_floor\_X} \) and declared variance floors satisfied.  
+- **Alignment stability:** \( \mathrm{Var}_{XY} \le \texttt{var\_floor} \) for each pair.  
+- **Bounded distortion:** \( \texttt{Lipschitz95} \le \texttt{L\_max} \).  
+- **Scale drift (if used):** coherence drift under declared \(\phi\) stays within the budgeted δ.
+
+Each witness MUST include: the statistic, the floor/budget, and the decision.
 
 ---
 
-## 7 · Distributed Protocol & Composition
-- Trust: \(\alpha_i(t)\propto \exp(-k\,\sigma_i^2(t))\), normalized.  
-- Global metric: \(C_{\Sigma,\text{global}}=\prod_i C_{\Sigma,i}^{\alpha_i(t)}\).  
-- Per‑agent cadence:
-\[
-K_i(t+1)=\mathrm{clip}\!\Big(K_{\min},K_{\max},K_{\text{base}}\cdot \alpha_i(t)\cdot\big(1-\rho_C\,\Delta\delta_{C,i}(t)\big)\Big).
-\]
-*Axiomatic note:* This is the computable estimate of core product coherence \(C_{\Sigma,\Pi}\).
+## 5 · Controller (Minimal Adaptive Policy)
+
+A small state machine that **selects ensembles and budgets** to keep verification stable and efficient. It does not change Core math.
+
+**States and actions.**
+- **HANDSHAKE** (calibrate) → choose orthogonal priors to reduce \( \mathrm{Var}_{XY} \) below floor.  
+  Exit to **OPTIMIZE** when stable.
+- **OPTIMIZE** (steady) → use high‑fidelity ensembles; maintain default budgets.  
+  If \( C_\Sigma < \Theta \) but witnesses pass → remain or move to **REINFLATE** per policy.
+- **REINFLATE** (robustify) → increase regularization, robust costs, broaden priors; aim to reduce variance and distortion.  
+  Return to **OPTIMIZE** on stability; move to **MINIMAL_INFO** if resources constrained.
+- **MINIMAL_INFO** (coarse) → cluster, coarse ensembles, expanded δ tolerances.  
+  Go back to **OPTIMIZE** when resources permit.
+- **LOCKDOWN** (freeze & monitor) → reuse last known‑good alignments; compute lower‑bound Coh and drift witnesses only.  
+  Leave when conditions normalize.
+
+**Transitions (sketch).**
+- Enter **HANDSHAKE** on first run or after repeated variance failures.  
+- Move **OPTIMIZE** → **REINFLATE** if \( C_\Sigma \ll \Theta \) while witnesses pass.  
+- Move to **LOCKDOWN** on resource exhaustion or persistent instability.
+
+All transitions and actions MUST be logged with reasons.
 
 ---
 
-## 8 · Efficient \(W_1\) for D‑Coherence
-Use bias‑corrected Sinkhorn \(W_\varepsilon \approx W_1\); expose \(\varepsilon\) as a runtime control.
+## 6 · Reproducibility and Provenance
+
+Every verdict MUST be accompanied by a **reproducibility bundle** sufficient for third‑party recomputation:
+
+- Context contracts and feature schemas for \( \Omega_X \).  
+- Seeds for all randomized steps (samplers, bootstraps, solvers).  
+- Definitions of \( \mathrm{Summary} \) per aspect.  
+- Full alignment ensemble specs and policies used (including hyperparameters).  
+- Parameter registry values (§2).  
+- Raw coherence results \( \mathrm{Coh}^{(\sigma)}_{XY} \), means, variances, witness stats.  
+- Final \( H_c,V_c,D_c,C_\Sigma \) (and confidence bounds if computed).
 
 ---
 
-## 9 · Observability & Reproducibility
-Log (at minimum): \(I\), \(\pi_{\text{verify}}\) details, \(B\), \(\vec{p}=\{\vec{\kappa},\lambda,\mu\}\), witness floors \(\nu_{\min},H_{\min},\nu_{\min,D},H_{\min,D}\), dynamic \(w_i(t)\), \(\epsilon\), hysteresis \(\epsilon_H,M_R,M_M,Z_{\text{crit}},M_Z,M_H\), \(J_{\text{cost}}, w_{\text{info}}, w_{\text{verify}}\), \(\tau_{\max},\tau_X(t)\), distributed \(k\), cadence \(K_{\text{base}},K_i,\rho_C,\delta_{C,i}\), OOD \(Z_t,p_{\text{ref}}\), \(\varepsilon\), CI level \(\delta\), controller **state** & cause codes, seeds, input hashes.
+## 7 · What This Is Not (bounded clarification)
+
+- **Not an ontology.** No new objects beyond those in the Core are introduced.  
+- **Not a translation theory.** Alignment ensembles are **comparison devices** for measurement, not claims about inner mappings.  
+- **Not a solver mandate.** The Operational layer defines **families** and **policies**; concrete solvers are interchangeable if they satisfy the ensemble‑stability witness and declared constraints.  
+- **Not a metric redesign.** \( H_c,V_c,D_c,C_\Sigma \) remain as in the Core; this layer governs *how* to evaluate and *when* to accept.
 
 ---
 
-## 10 · Defaults (Policy, not normative)
-\(\Theta=0.80\); \(\beta=0.5\); \(w_{\text{iso}}=0.3\); \(\epsilon=10^{-4}\); \(\epsilon_H=0.05\); \(M_R=3\); \(M_M=5\); \(Z_{\text{crit}}=0.95\); \(M_Z=3\); \(M_H=10\);  
-\(w_{\text{info}}=0.5\); \(w_{\text{verify}}=0.5\); \(K_{\text{base}}=64\); \(K_{\min}=4\); \(K_{\max}=128\); \(\rho_C=0.2\); \(\tau_{\max}=0.10\).
+## 8 · Minimal Reference Pseudocode
 
----
+```text
+INPUT: Ω_H,Ω_V,Ω_D; A_H,A_V,A_D; 𝒜_HV,𝒜_VD,𝒜_DH; params (α,λ,Θ,...)
+STATE: controller_state ∈ {HANDSHAKE, OPTIMIZE, REINFLATE, MINIMAL_INFO, LOCKDOWN}
 
-## 11 · Integrity & Compatibility
-Purely **operational**; does **not** modify A1–A4 or the core definitions of \(H_c,V_c,D_c,C_\Sigma\).  
-Cite as: “**TSC Core v1.1.19 (stable)** + **Operational Addendum v1.2.9 (final consolidation)**.”
-
----
-
-*(End of File — TSC Operational Addendum v1.2.9)*
+1  O_H ← A_H(≡); O_V ← A_V(≡); O_D ← A_D(≡)
+2  Assert |O_X| ≥ n_min ∀X; else FAIL_DEGENERATE
+3  S_H ← Summary(O_H); S_V ← Summary(O_V); S_D ← Summary(O_D)
+4  For each (X,Y) in {(H,V),(V,D),(D,H)}:
+5      Choose ensemble E := policy(controller_state, 𝒜_XY)
+6      For each σ in E: Cohσ ← exp(−λ Δ(S_X,S_Y; σ))
+7      Coh̄_XY ← meanσ Cohσ; Var_XY ← varσ Cohσ
+8      Record Lipschitz95 from mapped vs original distances
+9  Check witnesses (Var floors, Lipschitz, entropy/variance, n_min)
+10 If any witness fails → FAIL_DEGENERATE
+11 V_c ← (Coh̄_HV Coh̄_VD Coh̄_DH)^(1/3)
+12 H_c, D_c ← declared constructions
+13 C_Σ ← (H_c V_c D_c)^(1/3)
+14 If C_Σ ≥ Θ → PASS else FAIL
+15 Emit provenance bundle and controller actions taken
