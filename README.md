@@ -85,7 +85,7 @@ Any system that observes itself risks distortion—not by “changing reality,�
 
 ## Mathematical foundation (plain language)
 - **A1 — Vantage sufficiency:** each view carries enough information to reconstruct the whole.  
-  > **Note — Scope of A1.** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate + **A2 — Vantage compatibility:** structure-preserving maps (σ_XY) relate different 
+  > **Note — Scope of A1.** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate TSC.
 - **A2 — Vantage compatibility:** structure-preserving maps (σ_XY) relate different views.  
   > **Note — On bijections and many-to-one mappings.** In many real systems, several H-states may yield the same V-report.  
   > A2’s bijection requirement applies **between equivalence classes** defined by your A1 equivalence, not raw states.  
