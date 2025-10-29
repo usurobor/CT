@@ -1,180 +1,220 @@
-# Triadic Self-Coherence (TSC) — Core Knowledge File
-**Version:** v1.1.20 — Stable Mathematical Core (Revised)  
-**Status:** Stable mathematical foundation (updates are rare, versioned, and backwards-compatible)  
-**Use:** Canonical reference for axioms, objects, metrics, and theorems of TSC.  
-*(Operational choices — thresholds, tolerances, cadence, gauges, repair policies — are out of scope and belong to the operational addendum.)*
+# Triadic Self‑Coherence (TSC) — Core
+**Version:** v2.0.0 (C≡‑native, self‑contained)
+
+**Scope.** This document is normative and self‑contained. It defines the primitives, axioms, constructions, metrics, and semantics of Triadic Self‑Coherence. It depends on no other file.
 
 ---
 
-## 0 · Purpose and Scope
-This document specifies the **mathematical core** of Triadic Self-Coherence (TSC). It defines the coherence object, triadic axioms, metric–topological semantics, bisimulation, dimensional coherence metrics, and key theorems (including final-coalgebra uniqueness and compositional stability).
+## −1 · Ontological Bedrock (C≡)
+
+**Primitive.** `≡` denotes a phenomenon understood as a *self‑labeling relation*.
+
+**Aspectual articulation.** Every phenomenon articulates as three co‑constitutive aspects:
+- **H** — structural/causal articulation (what holds together),
+- **V** — relational/phenomenal articulation (how parts stand together),
+- **D** — dynamical/functional articulation (how change/agency unfolds).
+
+**Relational priority.** Relation is primary; relata crystallize within ongoing cohering. The three aspects are *co‑labels* of one phenomenon and admit role‑exchange across scales.
+
+> The remainder of this file specifies how to measure whether the three articulations of the *same* phenomenon cohere.
 
 ---
 
-## 1 · Triadic Axioms (Structural Invariants)
-Let \(C\) denote the **coherence object**. For each vantage \(X \in \{H,V,D\}\) (Horizontal, Vertical, Deep):
+## 0 · Objects and Notation
 
-- **Lens:** \(L_X : C \to R_X\) and **Reconstructor:** \(\varepsilon_X : R_X \to C\) with
+- **Aspects.** \( \mathcal{A}=\{H,V,D\} \).
+
+- **Observation context.** For each \(X\in\mathcal{A}\), fix a set (or measurable/metric space) \( \Omega_X \) within which aspect \(X\) is observable.
+
+- **Articulation operator.** For each \(X\), an operator
+  \[
+  A_X:\ \text{Phenomena}\ \rightsquigarrow\ \mathcal{P}(\Omega_X)
+  \]
+  returns a finite observation set \( O_X := A_X(\equiv) \subseteq \Omega_X \).
+
+- **Structural summary.** Each observation set \( O_X \) admits a *summary*
+  \[
+  S_X = \mathrm{Summary}(O_X) = \big(d_X,\ p_X,\ H_X,\ \mathcal{I}_X\big),
+  \]
+  where:
+  - \(d_X:\, O_X\times O_X\to \mathbb{R}_{\ge 0}\) is a metric (pairwise structure),
+  - \(p_X\) is a probability mass function over declared features of \(O_X\) (distributional profile),
+  - \(H_X := -\sum_i p_X(i)\log p_X(i)\) (entropy),
+  - \(\mathcal{I}_X\) is an optional set of declared invariants (e.g., spectra, motif counts).
+
+- **Parameters.** Coherence parameters \( \alpha\in[0,1] \), \( \lambda>0 \). Tolerances \( \tau,\varepsilon,\delta\ge 0 \). A pass threshold \( \Theta\in(0,1] \).
+
+---
+
+## 1 · Axioms (Aspectual)
+
+**A1 · Aspect completeness (verification sufficiency).**  
+For each \(X\in\mathcal{A}\) there exist admissible contexts \( \Omega_X \) and operators \(A_X\) such that \(O_X=A_X(\equiv)\) carries sufficient structure for non‑trivial cross‑aspect coherence evaluation with any \(Y\in\mathcal{A}\).
+
+**A2 · Cross‑aspect commensurability.**  
+For any \(X,Y\in\mathcal{A}\) there exists a *coherence predicate*
 \[
-\varepsilon_X \circ L_X \;=\; \mathrm{id}_C \qquad \text{(A1: Vantage Sufficiency)}.
+\mathrm{Coh}_{XY}:\ \mathcal{P}(\Omega_X)\times\mathcal{P}(\Omega_Y)\to [0,1],
+\]
+satisfying: **symmetry** \( \mathrm{Coh}_{XY}(O_X,O_Y)=\mathrm{Coh}_{YX}(O_Y,O_X) \),  
+**reflexivity** \( \mathrm{Coh}_{XX}(O_X,O_X)=1 \),  
+**weak transitivity:** if \( \mathrm{Coh}_{XY}\ge \tau \) and \( \mathrm{Coh}_{YZ}\ge \tau \), then \( \mathrm{Coh}_{XZ}\ge \tau-\varepsilon \).
+
+**A3 · Scale‑equivariance.**  
+For declared scale morphisms \( \phi_X:\Omega_X\to\Omega_X \),
+\[
+\mathrm{Coh}_{XY}(\phi_X(O_X),\,\phi_Y(O_Y))=\mathrm{Coh}_{XY}(O_X,O_Y)\ \pm\ \delta(\phi_X,\phi_Y),
+\]
+with bounded drift \( \delta \).
+
+**A4 · Self‑articulation stability.**  
+Iterated self‑observation (articulating the articulation, etc.) converges to a stable class: there exists a unique (up to tolerance) fixed point of the triadic self‑application (see §4).
+
+---
+
+## 2 · Coherence Construction
+
+### 2.1 Summaries (constructive)
+Given \(O_X\), compute \(S_X=(d_X,p_X,H_X,\mathcal{I}_X)\) as in §0.  
+The map \(\mathrm{Summary}\) is fixed *before* verification and may be domain‑specific.
+
+### 2.2 Alignments (correspondence for comparison)
+An **alignment** between \(O_X\) and \(O_Y\) is any weighted correspondence (e.g., a transport plan) \(\sigma_{XY}\) satisfying declared *structure‑preserving* constraints, such as:
+- **Order preservation (tolerant).** If \( d_X(o_i,o_j) < d_X(o_k,o_\ell) \), then typically \( d_Y(\sigma o_i,\sigma o_j) \le d_Y(\sigma o_k,\sigma o_\ell) \) within a declared slack.
+- **Bounded distortion.** \( d_Y(\sigma o_i,\sigma o_j) \le C\cdot d_X(o_i,o_j) \) for some \(C\ge 1\).
+- **Flexible cardinality.** Partial and many‑to‑one correspondences are admissible.
+
+An **alignment ensemble** \( \mathcal{A}_{XY} \) is any finite family of admissible alignments, fixed in advance.
+
+### 2.3 Discrepancy and predicate
+Define the discrepancy between summaries via alignment \(\sigma\):
+\[
+\Delta_{XY}^{(\sigma)}(S_X,S_Y)
+:= \alpha\,\mathbb{E}_{(i,j)}\big|\,d_X(o_i,o_j)-d_Y(\sigma o_i,\sigma o_j)\,\big|
+\ +\ (1-\alpha)\,\mathrm{JSD}(p_X\Vert p_Y),
+\]
+where \(\mathrm{JSD}\) is the Jensen–Shannon divergence:
+\[
+\mathrm{JSD}(p\Vert q)=\tfrac12\,\mathrm{KL}\!\big(p\Vert \tfrac12(p+q)\big)\ +\ \tfrac12\,\mathrm{KL}\!\big(q\Vert \tfrac12(p+q)\big),
+\quad
+\mathrm{KL}(a\Vert b)=\sum_i a_i\log\frac{a_i}{b_i}.
 \]
 
-**A2: Vantage-Swap Compatibility.**  
-There exist bijections \(\sigma_{XY} : R_X \leftrightarrow R_Y\) with inverses \(\sigma_{YX}=\sigma_{XY}^{-1}\) such that
+The **pairwise coherence** for a chosen \(\sigma\) is
 \[
-L_X \;=\; \sigma_{YX} \circ L_Y, \qquad
-\varepsilon_X \;=\; \varepsilon_Y \circ \sigma_{XY},
-\]
-and each \(\sigma_{XY}\) is **1-Lipschitz (non-expansive)**; isometries are the ideal case.
-
-**A3: Scale Equivariance (Fractal–Holographic Law).**  
-For any scale morphism \(s: C \to C\) there exist \(\phi_X : R_X \to R_X\) with
-\[
-L_X \circ s \;=\; \phi_X \circ L_X, \qquad
-\varepsilon_X \circ \phi_X \;=\; s \circ \varepsilon_X.
+\mathrm{Coh}^{(\sigma)}_{XY}(O_X,O_Y) = \exp\!\big(-\lambda\,\Delta_{XY}^{(\sigma)}(S_X,S_Y)\big).
 \]
 
-**A4: Coinductive Closure (Finality).**  
-Let \(\Delta : C \to R_H \times R_V \times R_D\) be \(\Delta(c)=(L_H(c),L_V(c),L_D(c))\).  
-\((C,\Delta)\) is **final** in its coalgebra class: every other triadic observation factors uniquely (up to a \(\tau\)-isometry) through \(C\).
-
----
-
-### §1.1 · Note on Bijections and Information Loss
-
-In practice, many systems exhibit **many-to-one vantage relations**—for example, multiple hidden states may yield the same observable report, or different neural patterns may produce identical behavior. Axiom A2's bijection requirement should therefore be understood as operating **between equivalence classes**, not raw states.
-
-**Formal construction:**
-
-1. **Declare equivalence:** Under A1, choose an equivalence relation \(\approx_X\) on each representation space \(R_X\), capturing when two states are indistinguishable within your domain's chosen equivalence (observational equivalence, typed abstraction, etc.).
-
-2. **Quotient spaces:** Define the quotient space \(R_X / \approx_X\) whose elements are equivalence classes \([r]_X = \{r' \in R_X : r' \approx_X r\}\).
-
-3. **Bijection between quotients:** Then \(\sigma_{XY} : (R_X / \approx_X) \leftrightarrow (R_Y / \approx_Y)\) is the required bijection, with the 1-Lipschitz constraint applying to the quotient metric  
-   \(\tilde{d}_X([r], [s]) := \inf_{r' \in [r], s' \in [s]} d_X(r', s')\).
-
-**Practical instantiation:**
-
-If your domain naturally admits lossy mappings (many H-states → one V-report), you may:
-
-- **Preferred:** Quotient first by your declared equivalence, then construct \(\sigma_{XY}\) as a bijection between equivalence classes. The **non-isometry** (information loss) then measures distortion *within* these equivalence classes under the quotient metric.
-
-- **Alternative:** Relax A2 to permit \(\sigma_{XY}\) that are injective, surjective, or approximately invertible (with a declared distortion bound), while explicitly documenting the metric relationship  
-  \(d_X \circ \sigma_{XY} \approx_\tau d_Y\).  
-  This must be declared as a modeling choice and validated for representation-independence.
-
-**Why this matters:**  
-The quotient construction ensures A2's bijection requirement doesn't artificially rule out real systems with inherent information loss. The "gap" (e.g., between physical states and reports) appears as non-isometry of \(\sigma_{HV}\) on quotient spaces, not as a failure of the axioms.
-
-**Cross-reference:**  
-See README v1.3.20 “Mathematical foundation” and the representation-independence cookbook (forthcoming) for instantiation guidance.
-
----
-
-## 2 · Metric–Topological Semantics
-Work in \(\mathfrak{Met}_\tau\), the category of metric-tolerant spaces with 1-Lipschitz morphisms.
-
-- Each \(R_X\) carries a metric \(d_X\).  
-- **Semantic equivalence:** \(a \approx b \iff d_X(a,b) \le \tau_X\).  
-- A change of vantage \(\sigma_{XY}\) is TSC-valid if
+The **ensemble coherence** and **stability** are
 \[
-\big|\, d_X(a,b) - d_Y(\sigma_{XY}(a), \sigma_{XY}(b)) \,\big| \le \tau.
-\]
-- **Parameters (symbolic):** scale factors \(\lambda,\mu>0\), transport regularizer \(\varepsilon\ge 0\). The core **does not** assign numeric values; instantiation is operational.
-- Expectations \(\mathbb{E}[\cdot]\) are over an explicit index set \(I\); the operational layer **must report \(I\)** when publishing metrics.
-- **Dynamics carrier:** Fix a measurable space \(M\) and a Markov kernel \(S_t : M \to \mathcal{D}(M)\) (time-indexed). How \(M\) and \(S_t\) are constructed (e.g., via a chosen vantage \(X^\star\) and its \(R_{X^\star}\)) is an **operational** declaration.
-
-Define the clamping map \(\rho(x) = \max(0,\min(1,x))\).
-
----
-
-## 3 · Bisimulation (Behavioral Equivalence)
-Let \(\mathcal{S}_X : M_X \to \mathcal{D}(M_X)\) be a vantage-specific transition operator; endow \(\mathcal{D}(M_X)\) with \(W_1\) (Wasserstein-1).
-
-A relation \(R \subseteq M_X \times M_X\) is a **bisimulation** iff for all \((a,b)\in R\):
-1) \(d_X(a,b) \le \tau_X\), and  
-2) \(W_1(\mathcal{S}_X(a), \mathcal{S}_X(b)) \le \tau_X\).
-
-Triadic bisimilarity requires the condition hold under all three vantages.
-
----
-
-## 4 · Dimensional Coherence Metrics
-With \(\lambda,\mu>0\) and time-indexed sequences or samples from \(I\):
-
-\[
-\begin{aligned}
-H_c &= \mathbb{E}_{(i,j)\in I}\!\left[\exp\!\big(-\lambda \cdot d_H(R_H^i, R_H^j)\big)\right],\\[4pt]
-V_c &= \rho\!\left( 1 - \tfrac{1}{3}\!\sum_{X\neq Y}\mathbb{E}_{(a,b)\in I}\!\Big[ \big|\, d_X(a,b) - d_Y(\sigma_{XY}(a),\sigma_{XY}(b)) \,\big| \Big] \right),\\[4pt]
-D_c &= \exp\!\big(-\mu \cdot W_1(S_t, S_{t+1})\big),\\[6pt]
-C_\Sigma &= \big(H_c \cdot V_c \cdot D_c\big)^{1/3}.
-\end{aligned}
+\overline{\mathrm{Coh}}_{XY} := \mathbb{E}_{\sigma\in \mathcal{A}_{XY}}\big[\mathrm{Coh}^{(\sigma)}_{XY}\big],
+\qquad
+\mathrm{Var}_{XY} := \mathrm{Var}_{\sigma\in \mathcal{A}_{XY}}\big[\mathrm{Coh}^{(\sigma)}_{XY}\big].
 \]
 
-> **Thresholds.** The core **does not** prescribe a numeric pass threshold for \(C_\Sigma\).  
-> An operational symbol \(\Theta\in(0,1]\) may be introduced for policy (e.g., “PASS iff \(C_\Sigma \ge \Theta\)” or CI-based criteria). Selection, estimation, and auditing of \(\Theta\) are **operational** concerns.
+A declared **stability floor** requires \( \mathrm{Var}_{XY} \) to remain below a fixed bound; otherwise the comparison is considered **degenerate**.
 
 ---
 
-## 5 · Verification Routine (Abstract)
-This core specifies an **abstract** verification that returns metrics and constraint checks. Any **pass/fail** decision (thresholding, CI bounds, OOD handling, sampling policy) is delegated to the operational layer.
+## 3 · Metrics
 
-**procedure \(\mathrm{VERIFY\_TSC}(C)\):**  
-1. Compute \(R_X \leftarrow L_X(C)\) for \(X\in\{H,V,D\}\).  
-2. Check A1–A3 symbolically (up to \(\tau\)): \(\varepsilon_X\!\circ\!L_X \approx \mathrm{id}_C\); \(\sigma,\phi\) respect \(d_X\).  
-3. Compute \(H_c,V_c,D_c,C_\Sigma\) (using declared \(I\)).  
-4. Return \(\{H_c,V_c,D_c,C_\Sigma\}\) and diagnostics; **do not** decide policy.
+- **Within‑aspect stability (H\_c).** A scalar in \([0,1]\) derived from dispersion of repeated H‑articulations (e.g., exponential of a summary‑drift measure). One constructive choice is
+  \[
+  H_c := \exp\!\big(-\gamma_H\,\mathrm{Std}[p_H]\big)
+  \]
+  for a fixed \( \gamma_H>0 \).
+
+- **Dynamical stability (D\_c).** A scalar in \([0,1]\) derived from temporal dispersion in D‑articulations. One constructive choice is
+  \[
+  D_c := \exp\!\big(-\mu\,\mathrm{Std}[p_D]\big)
+  \]
+  for a fixed \( \mu>0 \).
+
+- **Cross‑aspect fit (V\_c).** Geometric mean of the three pairwise coherences:
+  \[
+  V_c := \big(\overline{\mathrm{Coh}}_{HV}\cdot \overline{\mathrm{Coh}}_{VD}\cdot \overline{\mathrm{Coh}}_{DH}\big)^{1/3}.
+  \]
+
+- **Aggregate coherence.**
+  \[
+  C_{\Sigma} := (H_c\,V_c\,D_c)^{1/3}.
+  \]
+
+A verification *passes* if \( C_{\Sigma} \ge \Theta \) and all declared stability floors are satisfied.
 
 ---
 
-## 6 · Controller (Existence & Properties)
-Let \(\mathcal{R}\) denote a controller acting on representations/parameters to improve coherence.
+## 4 · Aspectual Coalgebra Semantics (self‑contained)
 
-- **Contraction (abstract):** There exists a metric on controller state such that repeated application of \(\mathcal{R}\) is contractive toward a \(\tau\)-coherent fixed point.  
-- **Functoriality:** \(\mathcal{R}\) preserves TSC-valid morphisms.  
-- **Budgeting symbols:** \(\{\tau_X\}\) and a global \(\tau_{\max}\) may be tracked in proofs; no numeric values are assigned here.  
-- Concrete state machines, repair policies, gauges, cadence, OOD behavior, and sampling are **operational**.
-
----
-
-## 7 · Compositional Corollaries
-1) **Composition:** Non-expansive pipelines preserve coherence (with bounded tolerance accumulation).  
-2) **Products:** For components \(i\) with weights \(\alpha_i>0\),
+Let \( \mathcal{O} := \mathcal{P}(\Omega_H)\times \mathcal{P}(\Omega_V)\times \mathcal{P}(\Omega_D) \).  
+Define the *articulation functor*
 \[
-H_{c,\Pi}=\prod_i H_{c,i}^{\alpha_i},\quad
-V_{c,\Pi}=\prod_i V_{c,i}^{\alpha_i},\quad
-D_{c,\Pi}=\prod_i D_{c,i}^{\alpha_i},\quad
-C_{\Sigma,\Pi}=\Big(\prod_i C_{\Sigma,i}^{\alpha_i}\Big)^{1/(\sum_i \alpha_i)}.
+F(\equiv) := \big(A_H(\equiv),\,A_V(\equiv),\,A_D(\equiv)\big) \in \mathcal{O}.
 \]
 
----
+A **coalgebra** is a pair \( (E,\delta) \) with \( \delta:E\to F(E) \).  
+A morphism \(h:(E,\delta)\to(E',\delta')\) satisfies \( F(h)\circ \delta = \delta'\circ h \).
 
-## 8 · Final-Coalgebra Uniqueness (Sketch)
-If A1–A4 hold in \(\mathfrak{Met}_\tau\) with 1-Lipschitz morphisms, then \((C,\Delta)\) is final up to \(\tau\)-isometry: for any \(F\)-coalgebra \((Z,\Delta_Z)\) there exists a unique (up to \(\tau\)-isometry) morphism
+Equip \(\mathcal{O}\) with a metric \( \mathbf{d} \) induced by §2.3 (e.g., max of componentwise summary distances). Assume:
+- **Lipschitz articulations.** Each \(A_X\) is Lipschitz into its summary metric.
+- **Non‑expansive discrepancy.** The induced discrepancy under admissible alignments is non‑expansive in summaries.
+- **Bounded scale drift.** Declared scale morphisms yield uniformly bounded \( \delta \) as in A3.
+
+**Theorem (tolerant finality).** Under the above conditions, there exists a coalgebra \( (\mathbb{E},\Delta) \) such that for any \( (E,\delta) \) there is a unique \( h:E\to \mathbb{E} \) with
 \[
-u_Z : (Z,\Delta_Z) \to (C,\Delta)
+\mathbf{d}\big(F(h)\circ \delta,\ \Delta\circ h\big) \le \tau,
 \]
-such that \(\Delta \circ u_Z \approx F(u_Z)\circ \Delta_Z\). Uniqueness follows from bisimilarity (A4) and the contraction of \(\mathcal{R}\).
+for a fixed tolerance \( \tau \). (Sketch: construct the terminal chain in \( (\mathcal{O},\mathbf{d}) \); completeness and non‑expansivity yield a Cauchy limit; approximate uniqueness follows from a tolerant fixed‑point argument.)
 
 ---
 
-## 9 · Stability Under Composition and Products
-All corollaries from §7 apply; the product metric is non-expansive, hence coherence is preserved under bounded accumulation of tolerances. (No numeric bounds are fixed by the core.)
+## 5 · Verification Interface (mathematical contract)
+
+A *verification* is specified by:
+1. Declared contexts \( \Omega_H,\Omega_V,\Omega_D \) and admissible summaries,
+2. Articulation operators \( A_H,A_V,A_D \),
+3. Alignment ensembles \( \mathcal{A}_{HV},\mathcal{A}_{VD},\mathcal{A}_{DH} \),
+4. Parameters \( \alpha,\lambda,\Theta \) and stability floors.
+
+**Procedure.**
+- Produce \( O_X=A_X(\equiv) \) and \( S_X=\mathrm{Summary}(O_X) \),
+- Compute \( \overline{\mathrm{Coh}}_{XY} \) and \( \mathrm{Var}_{XY} \) for all pairs,
+- Compute \( H_c,D_c,V_c,C_{\Sigma} \) and verify stability floors,
+- Return \( (H_c,V_c,D_c,C_{\Sigma}) \) and the pairwise coherence/stability diagnostics.
 
 ---
 
-## 10 · Parameter Symbols and Normalization
-- \(\lambda,\mu>0\) tune similarity/transport scales; \(\varepsilon\ge 0\) regularizes \(W_1\) when needed.  
-- The operational layer may optionally apply monotone **gauge** maps \(g_X\) to raw distances; such choices are **out of scope** here and must be declared operationally.
+## 6 · Composition
+
+For two phenomena with articulations \( O_X \) and \( O'_X \), define the **aligned product**
+\[
+O_X \otimes O'_X := \text{disjoint union with declared cross‑weights},
+\]
+and extend summaries and alignments block‑wise. With the constructions of §2–§3, the aggregate coherence satisfies a *log‑convexity* property under this product, ensuring modular verification.
 
 ---
 
-## 11 · Integrity and Versioning
-- This file is the **canonical mathematical definition** of TSC.  
-- It is **stable** (not immutable): revisions are **rare**, **versioned**, and aim for **backwards compatibility**.  
-- Later layers (operational specs, instructions, implementations) **must not redefine** the axioms or metrics specified here.  
-- All **operational constants** (e.g., pass thresholds \(\Theta\), CI levels \(\delta\), bootstrap sizes \(B\), cadence bounds, gauge parameters) are **out of scope** and must be declared/audited by the operational layer.
+## 7 · Parameters and Domains
+
+- \( \alpha \in [0,1] \), \( \lambda>0 \), \( \Theta\in(0,1] \), tolerances \( \tau,\varepsilon,\delta\ge 0 \).
+- All randomization, if any, must be declared with seeds; all summaries and ensembles must be fixed *before* observation.
+- Every numeric choice must be recorded alongside the verification result to enable reproducibility.
 
 ---
 
-*(End of File — TSC Core v1.1.20, Stable Mathematical Core)*
+## 8 · Symbols (quick reference)
+
+- `≡` — phenomenon (self‑labeling relation).  
+- \( \Omega_X \) — observation context for aspect \(X\).  
+- \( A_X \) — articulation operator; \( O_X=A_X(\equiv) \).  
+- \( S_X=(d_X,p_X,H_X,\mathcal{I}_X) \) — structural summary.  
+- \( \sigma_{XY} \) — alignment (weighted correspondence).  
+- \( \mathcal{A}_{XY} \) — alignment ensemble.  
+- \( \Delta_{XY} \) — discrepancy; \( \mathrm{Coh}_{XY}=\exp(-\lambda \Delta_{XY}) \).  
+- \( H_c, D_c, V_c, C_{\Sigma} \) — metrics and aggregate verdict.  
+- \( \alpha,\lambda,\Theta,\tau,\varepsilon,\delta \) — parameters and tolerances.  
+- \( F \), \( (E,\delta) \), \( (\mathbb{E},\Delta) \) — coalgebraic semantics.
+
+---
+
+**End — TSC Core (self‑contained).**
