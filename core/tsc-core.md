@@ -1,17 +1,13 @@
 # Triadic Self-Coherence (TSC) — Core Knowledge File
-**Version:** v1.1.19 — Stable Mathematical Core (Revised)  
-**Status:** Stable mathematical foundation (updates are rare, versioned, and backwards‑compatible)  
+**Version:** v1.1.20 — Stable Mathematical Core (Revised)  
+**Status:** Stable mathematical foundation (updates are rare, versioned, and backwards-compatible)  
 **Use:** Canonical reference for axioms, objects, metrics, and theorems of TSC.  
 *(Operational choices — thresholds, tolerances, cadence, gauges, repair policies — are out of scope and belong to the operational addendum.)*
 
 ---
 
 ## 0 · Purpose and Scope
-This document specifies the **mathematical core** of Triadic Self‑Coherence (TSC). It defines the coherence object, triadic axioms, metric–topological semantics, bisimulation, dimensional coherence metrics, and key theorems (including final‑coalgebra uniqueness and compositional stability).
-
-**Revision note (v1.1.19):**
-- Removes the “immutability” clause of prior editions; the core is **stable** rather than immutable. Revisions are **rare**, **versioned**, and designed for **backwards compatibility**.
-- Eliminates **hard‑coded constants** (e.g., numeric pass thresholds). Such choices are modeled as **symbols/parameters** in this core and must be **instantiated** by the operational layer.
+This document specifies the **mathematical core** of Triadic Self-Coherence (TSC). It defines the coherence object, triadic axioms, metric–topological semantics, bisimulation, dimensional coherence metrics, and key theorems (including final-coalgebra uniqueness and compositional stability).
 
 ---
 
@@ -23,13 +19,13 @@ Let \(C\) denote the **coherence object**. For each vantage \(X \in \{H,V,D\}\) 
 \varepsilon_X \circ L_X \;=\; \mathrm{id}_C \qquad \text{(A1: Vantage Sufficiency)}.
 \]
 
-**A2: Vantage‑Swap Compatibility.**  
+**A2: Vantage-Swap Compatibility.**  
 There exist bijections \(\sigma_{XY} : R_X \leftrightarrow R_Y\) with inverses \(\sigma_{YX}=\sigma_{XY}^{-1}\) such that
 \[
 L_X \;=\; \sigma_{YX} \circ L_Y, \qquad
 \varepsilon_X \;=\; \varepsilon_Y \circ \sigma_{XY},
 \]
-and each \(\sigma_{XY}\) is **1‑Lipschitz (non‑expansive)**; isometries are the ideal case.
+and each \(\sigma_{XY}\) is **1-Lipschitz (non-expansive)**; isometries are the ideal case.
 
 **A3: Scale Equivariance (Fractal–Holographic Law).**  
 For any scale morphism \(s: C \to C\) there exist \(\phi_X : R_X \to R_X\) with
@@ -44,25 +40,56 @@ Let \(\Delta : C \to R_H \times R_V \times R_D\) be \(\Delta(c)=(L_H(c),L_V(c),L
 
 ---
 
+### §1.1 · Note on Bijections and Information Loss
+
+In practice, many systems exhibit **many-to-one vantage relations**—for example, multiple hidden states may yield the same observable report, or different neural patterns may produce identical behavior. Axiom A2's bijection requirement should therefore be understood as operating **between equivalence classes**, not raw states.
+
+**Formal construction:**
+
+1. **Declare equivalence:** Under A1, choose an equivalence relation \(\approx_X\) on each representation space \(R_X\), capturing when two states are indistinguishable within your domain's chosen equivalence (observational equivalence, typed abstraction, etc.).
+
+2. **Quotient spaces:** Define the quotient space \(R_X / \approx_X\) whose elements are equivalence classes \([r]_X = \{r' \in R_X : r' \approx_X r\}\).
+
+3. **Bijection between quotients:** Then \(\sigma_{XY} : (R_X / \approx_X) \leftrightarrow (R_Y / \approx_Y)\) is the required bijection, with the 1-Lipschitz constraint applying to the quotient metric  
+   \(\tilde{d}_X([r], [s]) := \inf_{r' \in [r], s' \in [s]} d_X(r', s')\).
+
+**Practical instantiation:**
+
+If your domain naturally admits lossy mappings (many H-states → one V-report), you may:
+
+- **Preferred:** Quotient first by your declared equivalence, then construct \(\sigma_{XY}\) as a bijection between equivalence classes. The **non-isometry** (information loss) then measures distortion *within* these equivalence classes under the quotient metric.
+
+- **Alternative:** Relax A2 to permit \(\sigma_{XY}\) that are injective, surjective, or approximately invertible (with a declared distortion bound), while explicitly documenting the metric relationship  
+  \(d_X \circ \sigma_{XY} \approx_\tau d_Y\).  
+  This must be declared as a modeling choice and validated for representation-independence.
+
+**Why this matters:**  
+The quotient construction ensures A2's bijection requirement doesn't artificially rule out real systems with inherent information loss. The "gap" (e.g., between physical states and reports) appears as non-isometry of \(\sigma_{HV}\) on quotient spaces, not as a failure of the axioms.
+
+**Cross-reference:**  
+See README v1.3.20 “Mathematical foundation” and the representation-independence cookbook (forthcoming) for instantiation guidance.
+
+---
+
 ## 2 · Metric–Topological Semantics
-Work in \(\mathfrak{Met}_\tau\), the category of metric‑tolerant spaces with 1‑Lipschitz morphisms.
+Work in \(\mathfrak{Met}_\tau\), the category of metric-tolerant spaces with 1-Lipschitz morphisms.
 
 - Each \(R_X\) carries a metric \(d_X\).  
 - **Semantic equivalence:** \(a \approx b \iff d_X(a,b) \le \tau_X\).  
-- A change of vantage \(\sigma_{XY}\) is TSC‑valid if
+- A change of vantage \(\sigma_{XY}\) is TSC-valid if
 \[
 \big|\, d_X(a,b) - d_Y(\sigma_{XY}(a), \sigma_{XY}(b)) \,\big| \le \tau.
 \]
 - **Parameters (symbolic):** scale factors \(\lambda,\mu>0\), transport regularizer \(\varepsilon\ge 0\). The core **does not** assign numeric values; instantiation is operational.
 - Expectations \(\mathbb{E}[\cdot]\) are over an explicit index set \(I\); the operational layer **must report \(I\)** when publishing metrics.
-- **Dynamics carrier:** Fix a measurable space \(M\) and a Markov kernel \(S_t : M \to \mathcal{D}(M)\) (time‑indexed). How \(M\) and \(S_t\) are constructed (e.g., via a chosen vantage \(X^\star\) and its \(R_{X^\star}\)) is an **operational** declaration.
+- **Dynamics carrier:** Fix a measurable space \(M\) and a Markov kernel \(S_t : M \to \mathcal{D}(M)\) (time-indexed). How \(M\) and \(S_t\) are constructed (e.g., via a chosen vantage \(X^\star\) and its \(R_{X^\star}\)) is an **operational** declaration.
 
 Define the clamping map \(\rho(x) = \max(0,\min(1,x))\).
 
 ---
 
 ## 3 · Bisimulation (Behavioral Equivalence)
-Let \(\mathcal{S}_X : M_X \to \mathcal{D}(M_X)\) be a vantage‑specific transition operator; endow \(\mathcal{D}(M_X)\) with \(W_1\) (Wasserstein‑1).
+Let \(\mathcal{S}_X : M_X \to \mathcal{D}(M_X)\) be a vantage-specific transition operator; endow \(\mathcal{D}(M_X)\) with \(W_1\) (Wasserstein-1).
 
 A relation \(R \subseteq M_X \times M_X\) is a **bisimulation** iff for all \((a,b)\in R\):
 1) \(d_X(a,b) \le \tau_X\), and  
@@ -73,7 +100,7 @@ Triadic bisimilarity requires the condition hold under all three vantages.
 ---
 
 ## 4 · Dimensional Coherence Metrics
-With \(\lambda,\mu>0\) and time‑indexed sequences or samples from \(I\):
+With \(\lambda,\mu>0\) and time-indexed sequences or samples from \(I\):
 
 \[
 \begin{aligned}
@@ -85,7 +112,7 @@ C_\Sigma &= \big(H_c \cdot V_c \cdot D_c\big)^{1/3}.
 \]
 
 > **Thresholds.** The core **does not** prescribe a numeric pass threshold for \(C_\Sigma\).  
-> An operational symbol \(\Theta\in(0,1]\) may be introduced for policy (e.g., “PASS iff \(C_\Sigma \ge \Theta\)” or CI‑based criteria). Selection, estimation, and auditing of \(\Theta\) are **operational** concerns.
+> An operational symbol \(\Theta\in(0,1]\) may be introduced for policy (e.g., “PASS iff \(C_\Sigma \ge \Theta\)” or CI-based criteria). Selection, estimation, and auditing of \(\Theta\) are **operational** concerns.
 
 ---
 
@@ -103,15 +130,15 @@ This core specifies an **abstract** verification that returns metrics and constr
 ## 6 · Controller (Existence & Properties)
 Let \(\mathcal{R}\) denote a controller acting on representations/parameters to improve coherence.
 
-- **Contraction (abstract):** There exists a metric on controller state such that repeated application of \(\mathcal{R}\) is contractive toward a \(\tau\)‑coherent fixed point.  
-- **Functoriality:** \(\mathcal{R}\) preserves TSC‑valid morphisms.  
+- **Contraction (abstract):** There exists a metric on controller state such that repeated application of \(\mathcal{R}\) is contractive toward a \(\tau\)-coherent fixed point.  
+- **Functoriality:** \(\mathcal{R}\) preserves TSC-valid morphisms.  
 - **Budgeting symbols:** \(\{\tau_X\}\) and a global \(\tau_{\max}\) may be tracked in proofs; no numeric values are assigned here.  
 - Concrete state machines, repair policies, gauges, cadence, OOD behavior, and sampling are **operational**.
 
 ---
 
 ## 7 · Compositional Corollaries
-1) **Composition:** Non‑expansive pipelines preserve coherence (with bounded tolerance accumulation).  
+1) **Composition:** Non-expansive pipelines preserve coherence (with bounded tolerance accumulation).  
 2) **Products:** For components \(i\) with weights \(\alpha_i>0\),
 \[
 H_{c,\Pi}=\prod_i H_{c,i}^{\alpha_i},\quad
@@ -122,8 +149,8 @@ C_{\Sigma,\Pi}=\Big(\prod_i C_{\Sigma,i}^{\alpha_i}\Big)^{1/(\sum_i \alpha_i)}.
 
 ---
 
-## 8 · Final‑Coalgebra Uniqueness (Sketch)
-If A1–A4 hold in \(\mathfrak{Met}_\tau\) with 1‑Lipschitz morphisms, then \((C,\Delta)\) is final up to \(\tau\)‑isometry: for any \(F\)‑coalgebra \((Z,\Delta_Z)\) there exists a unique (up to \(\tau\)‑isometry) morphism
+## 8 · Final-Coalgebra Uniqueness (Sketch)
+If A1–A4 hold in \(\mathfrak{Met}_\tau\) with 1-Lipschitz morphisms, then \((C,\Delta)\) is final up to \(\tau\)-isometry: for any \(F\)-coalgebra \((Z,\Delta_Z)\) there exists a unique (up to \(\tau\)-isometry) morphism
 \[
 u_Z : (Z,\Delta_Z) \to (C,\Delta)
 \]
@@ -132,7 +159,7 @@ such that \(\Delta \circ u_Z \approx F(u_Z)\circ \Delta_Z\). Uniqueness follows 
 ---
 
 ## 9 · Stability Under Composition and Products
-All corollaries from §7 apply; the product metric is non‑expansive, hence coherence is preserved under bounded accumulation of tolerances. (No numeric bounds are fixed by the core.)
+All corollaries from §7 apply; the product metric is non-expansive, hence coherence is preserved under bounded accumulation of tolerances. (No numeric bounds are fixed by the core.)
 
 ---
 
@@ -145,9 +172,9 @@ All corollaries from §7 apply; the product metric is non‑expansive, hence coh
 ## 11 · Integrity and Versioning
 - This file is the **canonical mathematical definition** of TSC.  
 - It is **stable** (not immutable): revisions are **rare**, **versioned**, and aim for **backwards compatibility**.  
-- Later layers (operational specs, instructions, implementations) **must not redefine the axioms or metrics** specified here.  
+- Later layers (operational specs, instructions, implementations) **must not redefine** the axioms or metrics specified here.  
 - All **operational constants** (e.g., pass thresholds \(\Theta\), CI levels \(\delta\), bootstrap sizes \(B\), cadence bounds, gauge parameters) are **out of scope** and must be declared/audited by the operational layer.
 
 ---
 
-*(End of File — TSC Core v1.1.19, Stable Mathematical Core)*
+*(End of File — TSC Core v1.1.20, Stable Mathematical Core)*
