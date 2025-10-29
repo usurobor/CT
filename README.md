@@ -1,10 +1,10 @@
 # Triadic Self-Coherence (TSC)
 
 **Tagline:** Name your perspective. Map across perspectives. Verify the maps preserve structure.  
-*README v1.3.19 (Updated 2025-10-28)*
+*README v1.3.20 (Updated 2025-10-29)*
 
 > [!IMPORTANT]
-> **Authority:** `core/tsc-core.md v1.1.19` is the canonical mathematics. `core/tsc-operational.md v1.2.9` is the normative runtime spec. This README and files under `/docs` (e.g., the glossary and worked examples) are explanatory. If anything conflicts, **the specs govern**.
+> **Authority:** `core/tsc-core.md v1.1.20` is the canonical mathematics. `core/tsc-operational.md v1.2.9` is the normative runtime spec.
 > **See also:** [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
 
 ---
@@ -85,8 +85,12 @@ Any system that observes itself risks distortion—not by “changing reality,�
 
 ## Mathematical foundation (plain language)
 - **A1 — Vantage sufficiency:** each view carries enough information to reconstruct the whole.  
-  > **Note — Scope of A1.** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate TSC.
+  > **Note — Scope of A1.** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate + **A2 — Vantage compatibility:** structure-preserving maps (σ_XY) relate different 
 - **A2 — Vantage compatibility:** structure-preserving maps (σ_XY) relate different views.  
+  > **Note — On bijections and many-to-one mappings.** In many real systems, several H-states may yield the same V-report.  
+  > A2’s bijection requirement applies **between equivalence classes** defined by your A1 equivalence, not raw states.  
+  > If your domain has many-to-one mappings, quotient first; then σ_XY is a bijection between quotient spaces.  
+  > The remaining information loss appears as non-isometry of σ_XY on those quotients. (See `core/tsc-core.md` §1.1.)
 - **A3 — Scale equivariance:** coherence laws persist across observation scales.  
 - **A4 — Coinductive closure:** iterated self-observation converges to a unique, stable fixed point.
 
@@ -206,16 +210,15 @@ If you think TSC claims **X**, pause and check the witness.
 **Correction:** Math can be validated before benchmarks.
 
 **Misreading 4:** “Any vantage perfectly reconstructs the whole.”  
-**Witness:** Have you stated your **equivalence class** for A1?  
-**Correction:** A1 is “sufficiency up to declared equivalence.”
-
+**Witness:** Have you declared your **equivalence classes** and **quotiented** your spaces before constructing σ-maps?  
+**Correction:** A1 is “sufficiency up to declared equivalence,” and A2 bijections apply between those quotient spaces.
 ---
 
 ## Repository layout (mobile-friendly)
 
 - `/core/`
-  - `tsc-core.md` (v1.1.19) — editorial alignment with Core v1.1.18
-  - `tsc-operational.md` (v1.2.9) — controller logic and procedures
+  - `tsc-core.md` — editorial alignment with Core v1.1.18
+  - `tsc-operational.md` — controller logic and procedures
   - `OBSERVABILITY_SCHEMA` — telemetry/logging standards
 - `/reference/`
   - `tsc-controller.py` — minimal functional controller
