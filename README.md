@@ -217,7 +217,7 @@ If you think TSC claims **X**, pause and check the witness.
 ## Repository layout (mobile-friendly)
 
 - `/core/`
-  - `tsc-core.md` — editorial alignment with Core v1.1.18
+  - `tsc-core.md` — canonical mathematical foundation
   - `tsc-operational.md` — controller logic and procedures
   - `OBSERVABILITY_SCHEMA` — telemetry/logging standards
 - `/reference/`
