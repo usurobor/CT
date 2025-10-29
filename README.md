@@ -4,7 +4,7 @@
 *README v1.3.20 (Updated 2025-10-29)*
 
 > [!IMPORTANT]
-> **Authority:** `core/tsc-core.md v1.1.20` is the canonical mathematics. `core/tsc-operational.md v1.2.9` is the normative runtime spec.
+> **Authority:** `core/tsc-core.md` is the canonical mathematics. `core/tsc-operational.md` is the normative runtime spec.
 > **See also:** [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
 
 ---
