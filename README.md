@@ -29,12 +29,16 @@ Any system that observes itself risks distortion—not by “changing reality,�
 
 ## Before the theory: this documentation uses TSC
 
-> [!TIP] Try it in 60 seconds
-> **H (what the docs ARE):** files/specs/code here.  
-> **V (how readers RELATE):** mathematician ↔ engineer ↔ philosopher lenses.  
-> **D (how understanding CHANGES):** README → Core → Operational → Reference.  
-> **Quick coherence check:** Restate TSC in one sentence *and* name one σ map for your domain. If that’s hard, notice what was lost—then continue.  
-> (Optional: [skip to the theory](#the-three-vantages-cross-domain-anchors). See also: [Appendix — Documentation as Worked Example](#appendix--documentation-as-worked-example).)
+> [!TIP]
+> **Try it in 60 seconds**
+>
+> - **H (what the docs ARE):** files, specs, and code in this repo.
+> - **V (how readers RELATE):** mathematician ↔ engineer ↔ philosopher lenses.
+> - **D (how understanding CHANGES):** README → Core → Operational → Reference.
+>
+> **Quick coherence check:** Restate TSC in one sentence **and** name one σ map for your domain. If that’s hard, note what was lost—then continue.  
+> *(Optional: [Skip to the theory](#the-three-vantages-cross-domain-anchors) • See also: [Appendix — Documentation as Worked Example](#appendix--documentation-as-worked-example).)*
+
 
 **Why this matters.** If you feel the pull of different interpretations (math vs. eng vs. philo), you’re experiencing the problem TSC formalizes: maintaining compatibility across vantages. The gap between your intuitive grasp (V) and the specs (H) isn’t mysterious—it’s **information loss in the σ map** between your vantage and the formal artifacts.
 
