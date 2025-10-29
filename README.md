@@ -11,8 +11,7 @@
 
 ## What this is (in 10 seconds)
 
-**TSC is a mathematical framework for coherent self-reference.** It explains how a system can describe itself from multiple perspectives (H, V, D) without talking past itself. The key move is to **make perspective changes explicit** and model the translations **σ_XY** between them. Where those translations lose information, apparent “gaps” (e.g., consciousness, emergence) arise—not as new substances, but as **measurable properties of non-isometric maps**. *AI is one application among many.*
-
+**TSC is a mathematical framework for coherent self-reference. It explains how a system can describe itself from multiple perspectives—**H** (what it is), **V** (how views relate), and **D** (how it changes)—without talking past itself. The key move is to make perspective changes explicit and model the translations (**σ_XY**) between them. Where those translations lose information, apparent “gaps” (e.g., consciousness, emergence) arise—not as new substances, but as measurable properties of **non-isometric** maps. **AI is one application among many.**
 ---
 
 ## What’s at stake
