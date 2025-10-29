@@ -13,6 +13,8 @@
 Any system that observes itself risks distortion—not by “changing reality,” but because different viewpoints select and transform different aspects. How do we stay consistent across those shifting perspectives?
 
 ## What you get (at a glance)
+> [!TIP]
+> Need definitions? See the **TSC Glossary** → [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
 - A vocabulary to label perspectives (**H, V, D**) and avoid hidden swaps  
 - A way to model translations between perspectives and measure their loss  
 - An operational check (**C_Σ vs τ**) to decide: continue, repair, or escalate  
@@ -136,8 +138,9 @@ Engineering / AI Safety
   - tsc-instructions.md — runtime procedures for AI systems
 - /diagrams/
   - state-machine.md — visual state transitions
+- /docs/
+  - tsc-glossary.md — definitions and cross-links 
 
----
 
 ## Quick start (time • prerequisites • outcomes • friction)
 
@@ -187,3 +190,5 @@ Planned: Additional references (JAX, Rust); case studies (LLMs, multi-agent coor
 
 ## License
 See LICENSE file.
+
+[Glossary](./docs/tsc-glossary.md) · [↑ Back to top](#triadic-self-coherence-tsc)
