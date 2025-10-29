@@ -281,8 +281,5 @@ If you think TSC claims **X**, pause and check the witness.
 
 ---
 
-## Citation
-“Triadic Self-Coherence (TSC) — Core Knowledge File v1.1.18; Editorial v1.1.19; Operational Addendum v1.2.9.” © 2025 Coherent Theory Project.
-
 ## License
 See `LICENSE` file.
