@@ -14,7 +14,7 @@ Any system that observes itself risks distortion—not by “changing reality,�
 
 ## What you get (at a glance)
 > [!TIP]
-> Need definitions? See the **TSC Glossary** → [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
+> Need definitions? See the **TSC Glossary** → [./docs/tsc-glossary.md](./docs/tsc-glossary.md).
 - A vocabulary to label perspectives (**H, V, D**) and avoid hidden swaps  
 - A way to model translations between perspectives and measure their loss  
 - An operational check (**C_Σ vs τ**) to decide: continue, repair, or escalate  
