@@ -85,7 +85,7 @@ Any system that observes itself risks distortion—not by “changing reality,�
 
 ## Mathematical foundation (plain language)
 - **A1 — Vantage sufficiency:** each view carries enough information to reconstruct the whole.  
-  > [!NOTE] **Scope of A1:** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate TSC (see forthcoming representation-independence cookbook).
+  > **Note — Scope of A1.** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate TSC.
 - **A2 — Vantage compatibility:** structure-preserving maps (σ_XY) relate different views.  
 - **A3 — Scale equivariance:** coherence laws persist across observation scales.  
 - **A4 — Coinductive closure:** iterated self-observation converges to a unique, stable fixed point.
