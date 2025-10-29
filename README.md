@@ -1,7 +1,7 @@
 # Triadic Self-Coherence (TSC)
 
 Tagline: Name your perspective. Map across perspectives. Verify the maps preserve structure.
-README v1.3.13 (Updated 2025-10-28)
+README v1.3.14 (Updated 2025-10-28 — mobile-friendly formatting)
 
 ## Authority (short)
 This README provides orientation and intuition. Formal content is governed by the Core Knowledge File v1.1.18. The repo’s tsc-core.md v1.1.19 aligns editorially; tsc-operational.md v1.2.9 defines procedures. If this document conflicts with the specs, the specs govern.
@@ -20,20 +20,21 @@ Any system that observes itself risks distortion—not by “changing reality,�
 ---
 
 ## The three vantages (cross-domain anchors)
+
 H — Horizontal: what the system IS
-• AI: activation/state at a moment
-• Cognitive science: neural population state in a snapshot
-• Organization: roles, assets, policy at rest
+- AI: activation/state at a moment
+- Cognitive science: neural population state in a snapshot
+- Organization: roles, assets, policy at rest
 
 V — Vertical: how different views RELATE
-• AI: token embeddings ↔ attention patterns
-• Cognitive science: neural measures ↔ cognitive models (rules, symbols)
-• Organization: budget ↔ staffing ↔ delivery
+- AI: token embeddings ↔ attention patterns
+- Cognitive science: neural measures ↔ cognitive models (rules, symbols)
+- Organization: budget ↔ staffing ↔ delivery
 
 D — Deep: how the system CHANGES
-• AI: behavior drift across sessions
-• Cognitive science: strategy shifts over learning blocks
-• Organization: policy effects over quarters
+- AI: behavior drift across sessions
+- Cognitive science: strategy shifts over learning blocks
+- Organization: policy effects over quarters
 
 A system is coherent when H, V, and D yield mutually compatible descriptions of the same system.
 
@@ -85,8 +86,8 @@ TSC reframing: H is the physical/functional description; V is the family of repo
 Do this next:
 Estimate σ_HV for your domain, measure its distortion, track C_Σ over time.
 If C_Σ drops below τ:
-• Refine σ_HV (add missing features/representations), or
-• Trigger repair (REINFLATE for witness margins, MINIMAL_INFO for complexity reduction).
+- Refine σ_HV (add missing features/representations), or
+- Trigger repair (REINFLATE for witness margins, MINIMAL_INFO for complexity reduction).
 See tsc-operational.md for full repair policy specification.
 
 ---
@@ -122,25 +123,18 @@ Engineering / AI Safety
 
 ---
 
-## Repository layout
+## Repository layout (mobile-friendly)
 
-Normative (authoritative):
-/core/
-  ├── tsc-core.md (v1.1.19) — editorial alignment with Core v1.1.18
-  ├── tsc-operational.md (v1.2.9) — controller logic and procedures
-  └── OBSERVABILITY_SCHEMA — telemetry/logging standards
-
-Reference (illustrative):
-/reference/
-  └── tsc-controller.py — minimal functional controller
-
-Integration:
-/runtime/
-  └── tsc-instructions.md — runtime procedures for AI systems
-
-Documentation:
-/diagrams/
-  └── state-machine.md — visual state transitions
+- /core/
+  - tsc-core.md (v1.1.19) — editorial alignment with Core v1.1.18
+  - tsc-operational.md (v1.2.9) — controller logic and procedures
+  - OBSERVABILITY_SCHEMA — telemetry/logging standards
+- /reference/
+  - tsc-controller.py — minimal functional controller
+- /runtime/
+  - tsc-instructions.md — runtime procedures for AI systems
+- /diagrams/
+  - state-machine.md — visual state transitions
 
 ---
 
@@ -192,7 +186,3 @@ Planned: Additional references (JAX, Rust); case studies (LLMs, multi-agent coor
 
 ## License
 See LICENSE file.
-
----
-
-(Full history: see CHANGELOG.md.)
