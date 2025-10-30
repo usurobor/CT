@@ -2,102 +2,210 @@
 All notable changes to this project will be documented in this file.  
 Entries are ordered from newest to oldest.
 
----
-
-## [v1.2.9] – 2025-10-28  
-**Status:** Stable / Final Consolidation  
-
-### Highlights  
-- Consolidated all v1.2.x logic into unified specification (verification, controller, resources).  
-- No new mechanics introduced.  
-- Added compliance schema and audit checklist.  
-- Standardized file naming to `tsc-core` / `tsc-operational`.  
-- Retired global cadence in favor of per-agent cadence \(K_i\).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
-## [v1.2.8] – 2025-10-20  
-**Status:** Hardened Verification & Onboarding  
+## [v2.1.0] – 2025-10-30
+**Status:** Progressive Disclosure & Tooling
 
-### Highlights  
-- Added **Verification Sampling Policy** \(π_verify\) for adversarial verification.  
-- Introduced **J_cost** = information + verification cost.  
-- Added **HANDSHAKE** state for new-agent onboarding.  
-- Secured distributed trust initialization (α_i = 0).  
-- Expanded “Simplify” actions to cover verification cost.
+### Added
+- **Progressive disclosure structure** for newcomers (5-min → 15-min → 1-hour → deep dive paths)
+- **CLI tool** (`tsc` command) via `pyproject.toml` and `reference/cli/tsc.py`
+- **Conformance tests** (`tests/conformance/`) for glider (positive) and random-soup (negative) controls
+- **Negative control example** (`examples/cellular-automata/random-soup.md`) with expected C_Σ ≈ 0.24
+- **QUICKSTART.md** with executable 5-minute setup guide
+- **CITATION.cff** for academic citations and Zenodo integration
+- **GitHub Actions CI** (`.github/workflows/ci.yml`) running lint, test, and linkcheck
+- **Makefile** with `setup`, `lint`, `fmt`, `test`, `quickstart` targets
+- **Python package structure** (`pyproject.toml`, `reference/__init__.py` hierarchy)
+- **Public API stub** `compute_c_from_file()` entry point for CLI and tests
 
----
+### Changed
+- **Renamed `core/` → `spec/`** for clearer normative boundary
+- **Moved `tsc-glossary.md`** from `docs/` to `spec/` (now normative v2.0.0)
+- **Restructured `reference/`** with `cli/` and `python/` subdirectories
+- **Reorganized examples** into `examples/cellular-automata/` with both controls
+- **Updated `README.md`** with explicit entry paths and progressive disclosure
+- **Modernized type hints** (Python 3.10+: `X | None`, `tuple` instead of `Tuple`, `X | Y` instead of `Union`)
+- **Updated ruff configuration** to use `[tool.ruff.lint]` section
 
-## [v1.2.7] – 2025-10-15  
-**Status:** Full Control Formalization  
+### Fixed
+- All linting errors (line length, trailing whitespace, import sorting)
+- Python module naming (`tsc_controller.py` instead of `tsc-controller.py`)
+- Internal documentation links (core/ → spec/)
 
-### Highlights  
-- Introduced **LOCKDOWN** state for OOD isolation.  
-- Fixed threshold at 0.80 (removed adaptive θ_t).  
-- Added **τ-budget** as a managed controller resource.  
-- Unified sensitivity tuning under meta-controller \(R_meta\).  
-- Linked distributed agents axiomatically to core composition law.
-
----
-
-## [v1.2.6] – 2025-10-10  
-**Status:** Meta-Stability & Distributed Dynamics  
-
-### Highlights  
-- Added hysteresis to prevent controller state oscillation.  
-- Introduced formal \(I(C)\) definition.  
-- Defined programmatic “Simplify” action.  
-- Implemented distributed cadence \(K_i\) tied to trust α_i.  
-
----
-
-## [v1.2.5] – 2025-10-06  
-**Status:** Adaptive Dynamics & Minimal-Information Control  
-
-### Highlights  
-- Made `REINFLATE` objective adaptive with dynamic witness weights.  
-- Introduced uncertainty-gated cadence \(K\).  
-- Replaced “H-first fallback” with `STATE_MINIMAL_INFO`.  
-- Clarified meta-controller as preconditioner for Φ_info optimization.  
+### Removed
+- `schema/observability.schema.yaml` (deferred to future release)
+- `diagrams/` directory (deferred to future release)
+- `core/` directory (renamed to `spec/`)
 
 ---
 
-## [v1.2.4] – 2025-10-02  
-**Status:** Info-Theoretic Control & Isometry  
+## [v2.0.0] – 2025-10-29
+**Status:** C≡-Native Formulation (Breaking Change)
 
-### Highlights  
-- Upgraded Lyapunov candidate to information-theoretic Φ_info.  
-- Added gauge-isometry objective to R_meta.  
-- Introduced formal `STATE_REINFLATE` safe mode.  
-- Hardened D_c metric against collapse via entropy/variance floors.  
+### Added
+- **C≡ language specification** (`c-equiv.md` v1.0.9) defining coinductive semantics
+- **Tripling rule normalization** (≡ ≡ ≡ → ≡) with confluence proof
+- **S₃ symmetry requirement** across all definitions and metrics
+- **Aspectual coalgebra semantics** with tolerant finality theorem
+- **Self-contained core** (`tsc-core.md` v2.0.0) depending on no other files
+- **Alignment ensembles** replacing "map" terminology
+- **Scale-equivariance axiom** (A3) with bounded drift
+- **Verification interface** as mathematical contract
+- **Composition law** for modular verification
+- **README v2.0.1** with dual TL;DRs (philosophers vs engineers)
+
+### Changed
+- **Ontology:** "There is only cohering (≡)" replaces "things that cohere"
+- **Dimensions:** H/V/D are co-equal co-constitutive aspects, not perspectives
+- **Terminology:** "Articulation" replaces "observation," "alignment" replaces "map"
+- **Metrics:** Geometric mean `C_Σ = (H_c V_c D_c)^(1/3)` with degeneracy guard
+- **Axioms:** Rewritten as aspectual (A1-A4) with cross-aspect commensurability
+- **Controller:** Effect-based design with pure transitions and interpreter pattern
+- **File naming:** `tsc-core.md`, `tsc-operational.md` (hyphenated for markdown)
+
+### Breaking Changes
+- Complete conceptual rewrite from v1.x measurement framework to coinductive ontology
+- API surface changed (controller now uses `VerifyEnv` and `Metrics` dataclasses)
+- File structure reorganized (`core/` introduced for normative specs)
 
 ---
 
-## [v1.2.3] – 2025-09-29  
-**Status:** Hardened Witnesses & Meta-Gauging  
+## [v1.2.9] – 2025-10-28
+**Status:** Stable / Final Consolidation
 
-### Highlights  
-- Added entropy floor H_min to prevent multimodal collapse.  
-- Introduced meta-optimization for gauge sharpness.  
-- Added trust-weighted consensus for multi-agent coherence.  
+### Changed
+- Consolidated all v1.2.x logic into unified specification
+- Standardized file naming to `tsc-core` / `tsc-operational`
+- Retired global cadence in favor of per-agent cadence \(K_i\)
 
----
+### Added
+- Compliance schema and audit checklist
+- Observability schema (YAML format)
 
-## [v1.2.2] – 2025-09-26  
-**Status:** Gauge & Risk-Aware Addendum  
-
-### Highlights  
-- Added gauge normalization and variance witness.  
-- Introduced CI-based verification and risk-aware thresholds.  
-- Added Lyapunov formulation for controller convergence.  
+### Fixed
+- No new mechanics introduced (consolidation only)
 
 ---
 
-## [v1.1.17] – 2025-09-20  
-**Status:** Immutable Core Foundation  
+## [v1.2.8] – 2025-10-20
+**Status:** Hardened Verification & Onboarding
 
-### Highlights  
-- Defined Triadic Axioms (A1–A4).  
-- Established coherence metrics \(H_c, V_c, D_c, C_\Sigma\).  
-- Proved contraction of controller \(R\) and final coalgebra uniqueness.  
-- This version is immutable and mathematically authoritative.
+### Added
+- **Verification Sampling Policy** \(π_{verify}\) for adversarial verification
+- **J_cost** = information rate + verification cost
+- **HANDSHAKE** state for new-agent onboarding
+- Secured distributed trust initialization (α_i = 0)
+
+### Changed
+- Expanded "Simplify" actions to cover verification cost optimization
+
+---
+
+## [v1.2.7] – 2025-10-15
+**Status:** Full Control Formalization
+
+### Added
+- **LOCKDOWN** state for OOD isolation
+- **τ-budget** as managed controller resource
+- Fixed decision threshold at 0.80 (removed adaptive θ_t)
+
+### Changed
+- Unified sensitivity tuning under meta-controller \(R_{meta}\)
+- Linked distributed agents axiomatically to core composition law
+
+---
+
+## [v1.2.6] – 2025-10-10
+**Status:** Meta-Stability & Distributed Dynamics
+
+### Added
+- Hysteresis to prevent controller state oscillation
+- Formal \(I(C)\) information definition
+- Programmatic "Simplify" action
+- Distributed cadence \(K_i\) tied to trust α_i
+
+---
+
+## [v1.2.5] – 2025-10-06
+**Status:** Adaptive Dynamics & Minimal-Information Control
+
+### Added
+- `STATE_MINIMAL_INFO` for resource-constrained operation
+
+### Changed
+- Made `REINFLATE` objective adaptive with dynamic witness weights
+- Introduced uncertainty-gated cadence \(K\)
+- Replaced "H-first fallback" with minimal-information state
+- Clarified meta-controller as preconditioner for Φ_info optimization
+
+---
+
+## [v1.2.4] – 2025-10-02
+**Status:** Info-Theoretic Control & Isometry
+
+### Added
+- Information-theoretic Lyapunov candidate Φ_info
+- Gauge-isometry objective to \(R_{meta}\)
+- Formal `STATE_REINFLATE` safe mode
+
+### Changed
+- Hardened D_c metric against collapse via entropy/variance floors
+
+---
+
+## [v1.2.3] – 2025-09-29
+**Status:** Hardened Witnesses & Meta-Gauging
+
+### Added
+- Entropy floor H_min to prevent multimodal collapse
+- Meta-optimization for gauge sharpness
+- Trust-weighted consensus for multi-agent coherence
+
+---
+
+## [v1.2.2] – 2025-09-26
+**Status:** Gauge & Risk-Aware Addendum
+
+### Added
+- Gauge normalization and variance witness
+- CI-based verification with confidence intervals
+- Risk-aware thresholds
+- Lyapunov formulation for controller convergence
+
+---
+
+## [v1.1.19] – 2025-09-25
+**Status:** Immutable Core (Stable)
+
+### Changed
+- Final v1.1.x refinements before v1.2 operational layer
+- This version cited in v1.2.9 as immutable mathematical foundation
+
+---
+
+## [v1.1.17] – 2025-09-20
+**Status:** Immutable Core Foundation
+
+### Added
+- **Triadic Axioms** (A1–A4) defining coherence framework
+- **Coherence metrics** \(H_c, V_c, D_c, C_\Sigma\)
+- **Controller contraction proof** for \(R\)
+- **Final coalgebra uniqueness** theorem
+
+### Notes
+- This version is mathematically authoritative and immutable
+- Foundation for all subsequent operational layers
+
+---
+
+## Version History Summary
+
+- **v1.1.x** (Sep 2025): Immutable mathematical core
+- **v1.2.x** (Sep-Oct 2025): Operational layer evolution
+- **v2.0.0** (Oct 29, 2025): C≡-native rewrite (breaking)
+- **v2.1.0** (Oct 30, 2025): Progressive disclosure & tooling
+
