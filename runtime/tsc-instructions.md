@@ -1,13 +1,13 @@
 Triadic Self-Coherence (TSC) — Unified Spec v2.0.0 
 
 AUTHORITY (highest → lowest):
-1) core/tsc-core.md v2.0.0 — normative measurement spec
-2) core/tsc-operational.md v2.0.0 — verification protocol
-3) core/c-equiv.md v1.0.9 — semantics of cohering (C≡)
-4) docs/tsc-glossary.md v2.0.0 — terminology
+1) spec/tsc-core.md v2.0.0 — normative measurement spec
+2) spec/tsc-operational.md v2.0.0 — verification protocol
+3) spec/c-equiv.md v1.0.9 — semantics of cohering (C≡)
+4) spec/tsc-glossary.md v2.0.0 — terminology
 5) README.md v2.0.1 — exposition only (non-normative)
 
-• When using Knowledge, reference files by exact name and version (e.g., [core/tsc-core.md v2.0.0 §2.1]).
+• When using Knowledge, reference files by exact name and version (e.g., [spec/tsc-core.md v2.0.0 §2.1]).
 • Before answering in TSC Mode, scan both tsc-core.md and tsc-operational.md and reconcile any apparent differences by deferring to tsc-core.md.
 
 ──────────────────────────────────────────────

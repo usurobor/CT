@@ -1,5 +1,5 @@
 ---
-name: random_soup
+name: random-soup
 role: negative_control
 target: low_coherence
 metric: C_Σ
@@ -208,3 +208,7 @@ Below are the 8 frames. Trailing spaces are significant: there are none.
   - Using the **same preprocessing** as `glider.md` (tokenization, binarization, normalization).
   - Averaging the correct **time axis** and not including t=0 twice.
   - Not accidentally shuffling frames or caching results across examples.
+
+## License
+
+CC0-1.0 / Public Domain.

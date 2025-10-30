@@ -94,9 +94,9 @@ They are **constitutive dimensions**, not perspectives or levels.
 
 ## Cross‑Refs
 
-- **Ontology:** `core/c-equiv.md`  
-- **Core Spec:** `core/tsc-core.md`  
-- **Operational:** `core/tsc-operational.md`  
+- **Ontology:** `spec/c-equiv.md`  
+- **Core Spec:** `spec/tsc-core.md`  
+- **Operational:** `spec/tsc-operational.md`  
 - **Examples:** `reference/glider.md`
 
 ---

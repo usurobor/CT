@@ -1,5 +1,5 @@
 """
-reference/tsc-controller.py — Functional-core / effect-interpreter controller
+reference/python/tsc_controller.py — Functional-core / effect-interpreter controller
 TSC Operational v2.0.0 (compatible with Core v2.0.0)
 
 Design goals
@@ -13,13 +13,11 @@ Design goals
 
 Public surface
 --------------
+- compute_c_from_file(...) -> float (v2.1 CLI/test entry point)
 - verify_tsc_plus(...) -> (Verdict, Metrics, WitnessStatus, OODStatus, indices)
 - transition(...)       -> (ControllerState, Effects)
 - interpret(...)        -> TauBudget
 - step(...)             -> ControllerState
-
-This file is the normative v2 example; keep the v1 controller available under
-reference/legacy/tsc-controller-v1.py for historical compatibility.
 """
 
 from __future__ import annotations
@@ -28,7 +26,39 @@ from dataclasses import dataclass, field, replace
 from enum import Enum, auto
 from typing import Any, Callable, Iterable, Mapping, Optional, Tuple, Union, Literal
 
-# ----------------------------- Domain -----------------------------------------
+# ===== v2.1 CLI/TEST ENTRY POINT =====
+
+def compute_c_from_file(path: str, *, seed: Optional[int] = None) -> float:
+    """
+    Entry point for CLI and conformance tests.
+    
+    Parses a markdown example file (e.g., glider.md) and returns C_Σ.
+    
+    Parameters
+    ----------
+    path : str
+        Path to example file
+    seed : Optional[int]
+        RNG seed for reproducibility
+        
+    Returns
+    -------
+    float
+        C_Σ ∈ [0,1]
+    """
+    # TODO: Parse markdown, extract frames/data
+    # TODO: Build VerifyEnv, WitnessFloors, PolicyConfig
+    # TODO: Call verify_tsc_plus (the function below)
+    # TODO: Extract C_Σ from Metrics
+    
+    # Placeholder until you wire the parser:
+    raise NotImplementedError(
+        "Parser not yet implemented. "
+        "Need to extract H/V/D observations from markdown and call verify_tsc_plus."
+    )
+
+
+# ===== CORE CONTROLLER (v2.0.0) =====
 
 Dim = Literal["H", "V", "D"]
 
@@ -397,33 +427,39 @@ def step(
 # ----------------------------- Tiny self-test ---------------------------------
 
 if __name__ == "__main__":
-    # Minimal fake environment (pure)
+    print("Testing internal controller...")
+    
+    # Original test (keep this - it's useful)
     def sample_index_set(state: State, policy: VerifyPolicy):
         return range(32)
-
+    
     def compute_metrics(I):
-        # Pretend a strong but not perfect triadic coherence window
         return Metrics(0.91, 0.90, 0.92, 0.91, (0.86, 0.95))
-
+    
     def compute_witnesses(I):
-        # Above floors for H/V and D
         return WitnessStatus(0.02, 0.25, 0.06, 0.22, 0.015)
-
+    
     def compute_ood(I):
         return OODStatus(0.10, 0.95)
-
+    
     env = VerifyEnv(sample_index_set, compute_metrics, compute_witnesses, compute_ood)
-
-    # Floors, policy, config
     floors = WitnessFloors(1e-3, 0.1, 1e-3, 1e-4, 0.05)
     policy = VerifyPolicy()
     cfg = PolicyConfig()
-
-    # Hooks (no-op)
     hooks = Hooks()
-
-    # Run a few steps
+    
     ctrl = ControllerState()
     for i in range(3):
         ctrl = step(ctrl=ctrl, floors=floors, cfg=cfg, policy=policy, env=env, hooks=hooks)
         print(f"step={i} state={ctrl.state.name} τ=({ctrl.tau.H:.3f},{ctrl.tau.V:.3f},{ctrl.tau.D:.3f})")
+    
+    print("\nTesting CLI entry point...")
+    
+    # Test the public interface
+    try:
+        c = compute_c_from_file("examples/cellular-automata/glider.md")
+        print(f"✓ compute_c_from_file() returned C_Σ = {c:.4f}")
+    except NotImplementedError as e:
+        print(f"⚠ compute_c_from_file() not yet implemented: {e}")
+    except FileNotFoundError:
+        print("⚠ Example file not found (expected if running outside repo root)")

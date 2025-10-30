@@ -5,8 +5,8 @@
 
 > [!IMPORTANT]
 > **Given:** C≡ recognizes **≡** as *cohering itself* (not a thing-that-coheres).  
-> **Normative:** `core/tsc-core.md` v2.0.0 is authoritative. Formal semantics: `core/c-equiv.md` v1.0.9.  
-> **See also:** [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
+> **Normative:** `spec/tsc-core.md` v2.0.0 is authoritative. Formal semantics: `spec/c-equiv.md` v1.0.9.  
+> **See also:** [`./spec/tsc-glossary.md`](./spec/tsc-glossary.md)
 
 ---
 
@@ -194,7 +194,7 @@ Do check the **articulation of TSC** (specs/docs/examples) for self-consistency 
 
 ## 9 · Repository Structure
 
-`/core/` — Normative specifications  
+`/spec/` — Normative specifications  
 - `c-equiv.md` (v1.0.9) — Coinductive semantics, tripling rule  
 - `tsc-core.md` (v2.0.0) — Measurement framework, formal properties  
 - `tsc-operational.md` (v2.0.0) — Verification protocol, controller states
