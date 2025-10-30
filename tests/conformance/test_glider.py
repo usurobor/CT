@@ -18,7 +18,6 @@ def test_cli_help_smoke():
     assert "TSC CLI (v2.1)" in result.output
 
 
-@pytest.mark.xfail(reason="Reference algorithm not wired; remove xfail when ready.", strict=True)
 def test_glider_c_in_range():
     if not EXAMPLE.exists():
         pytest.skip(f"Missing example: {EXAMPLE}")
