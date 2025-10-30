@@ -1,285 +1,221 @@
 # Triadic Self-Coherence (TSC)
 
-**Tagline:** Name your perspective. Map across perspectives. Verify the maps preserve structure.  
-*README v1.3.20 (Updated 2025-10-29)*
+**Cohering articulates. Measuring whether it articulates coherently.**  
+*README v2.0.1 — Final Integration • 2025-10-29*
 
 > [!IMPORTANT]
-> **Authority:** `core/tsc-core.md` is the canonical mathematics. `core/tsc-operational.md` is the normative runtime spec.
+> **Given:** C≡ recognizes **≡** as *cohering itself* (not a thing-that-coheres).  
+> **Normative:** `core/tsc-core.md` v2.0.0 is authoritative. Formal semantics: `core/c-equiv.md` v1.0.9.  
 > **See also:** [`./docs/tsc-glossary.md`](./docs/tsc-glossary.md)
 
 ---
 
-## What this is (in 10 seconds)
-TSC is a mathematical framework for coherent self-reference. It explains how a system can describe itself from multiple perspectives—**H** (what it is), **V** (how views relate), and **D** (how it changes)—without talking past itself. The key move is to make perspective changes explicit and model the translations (**σ_XY**) between them. Where those translations lose information, apparent “gaps” (e.g., consciousness, emergence) arise—not as new substances, but as measurable properties of **non-isometric** maps. **AI is one application among many.**
+## Two TL;DRs (Choose Your Entry)
+
+### For Philosophers (Ontology-First)
+
+**There is only cohering (≡).** Not “things that cohere” but cohering itself—self-sufficient, self-generating, self-referential, **coinductively defined**.
+
+**Cohering articulates** triadically as H/V/D (pattern/relation/process). These are **co-equal dimensions**, not perspectives or levels.
+
+**TSC is recognition**, not theory. Not a model about things, but **reality’s triadic structure made explicit and measurable**.
+
+**C≡ language** expresses this: all syntax normalizes to ≡ (tripling rule). Self-application **converges**.
+
+**TSC protocol** measures whether an articulation co-articulates coherently via **S₃-invariant dimensional consistency** (no privileged dimension).
+
+**Traditional gaps** (consciousness, emergence, self-reference) dissolve as **dimensional confusions**—treating co-dimensions as separate domains.
+
+### For Engineers (Operations-First)
+
+**Treat any phenomenon as a triad (H,V,D)** with full role symmetry (S₃).
+
+**Build witnesses** w_H, w_V, w_D producing measurements M_H, M_V, M_D.
+
+**Run the alignment ensemble:**
+- **Commutation** (cycles preserve invariants)
+- **Conservation** (V-quantities conserved by D, visible in H)
+- **Symmetry** (V-symmetries appear in H and are preserved by D)
+- **Scale** (coarse/fine-graining keeps C_Σ within tolerance)
+
+**Compute dimensional scores** H_c, V_c, D_c ∈ [0,1].
+
+**Aggregate:** `C_Σ = (H_c · V_c · D_c)^(1/3)`
+
+**Stress-test:** permutation, scale sweep, witness swap, ensemble ablation.
+
+**High C_Σ:** one coherent phenomenon.  
+**Low C_Σ:** incoherent articulation **or** ill-posed measurement (see diagnostics §4.4).
 
 ---
 
-## What’s at stake
-Any system that observes itself risks distortion—not by “changing reality,” but because different viewpoints select and transform different aspects. How do we stay consistent across those shifting perspectives?
+## −1 · What This Is (Recognition, Not Assumption)
 
-## What you get (at a glance)
-- A vocabulary to label perspectives (**H, V, D**) and avoid hidden swaps  
-- A way to model translations between perspectives and measure their loss  
-- An operational check (**C_Σ vs τ**) to decide: continue, repair, or escalate  
-- A criterion for when to **trust** or **repair** your system’s self-reports
+We’re not **positing** “cohering” as a theoretical primitive.  
+**We’re recognizing** that cohering is what’s happening.
 
-> **Quick link:** [`TSC Glossary`](./docs/tsc-glossary.md)
+All phenomena—physical, mental, social, computational—**are** cohering articulating itself.
 
----
+**Shift of stance:**
+- Traditional: “Here are objects/processes; let’s model them.”
+- TSC: “There is cohering; let’s check if it articulates coherently.”
 
-## Before the theory: this documentation uses TSC
+**Recognition vs. assumption:** Thermodynamics doesn’t *assume* energy; it recognizes conserved structure. TSC recognizes triadic coherence and makes it measurable.
 
-> [!TIP]
-> **Try it in 60 seconds**
->
-> - **H (what the docs ARE):** files, specs, and code in this repo.
-> - **V (how readers RELATE):** mathematician ↔ engineer ↔ philosopher lenses.
-> - **D (how understanding CHANGES):** README → Core → Operational → Reference.
->
-> **Quick coherence check:** Restate TSC in one sentence **and** name one σ map for your domain. If that’s hard, note what was lost—then continue.  
-> *(Optional: [Skip to the theory](#the-three-vantages-cross-domain-anchors) • See also: [Appendix — Documentation as Worked Example](#appendix--documentation-as-worked-example).)*
-
-
-**Why this matters.** If you feel the pull of different interpretations (math vs. eng vs. philo), you’re experiencing the problem TSC formalizes: maintaining compatibility across vantages. The gap between your intuitive grasp (V) and the specs (H) isn’t mysterious—it’s **information loss in the σ map** between your vantage and the formal artifacts.
+**Coinductive ground:** Cohering is defined by what it does—**cohering cohering cohering**—already in motion. We make this explicit.
 
 ---
 
-## The three vantages (cross-domain anchors)
+## 0 · The Given: Cohering (≡)
 
-### H — Horizontal: what the system IS
-- AI: activation/state at a moment  
-- Cognitive science: neural population state in a snapshot  
-- Organization: roles, assets, policy at rest  
+**“Given”** here is ontic, not axiomatic.
 
-### V — Vertical: how different views RELATE
-- AI: token embeddings ↔ attention patterns  
-- Cognitive science: neural measures ↔ cognitive models (rules, symbols)  
-- Organization: budget ↔ staffing ↔ delivery  
+**≡ denotes cohering**—the ongoing holding-together that self-produces, self-maintains, self-articulates, and self-references.
 
-### D — Deep: how the system CHANGES
-- AI: behavior drift across sessions  
-- Cognitive science: strategy shifts over learning blocks  
-- Organization: policy effects over quarters  
+**C≡ normal form (tripling rule):** ≡ ≡ ≡  →  ≡
 
-*A system is coherent when H, V, and D yield mutually compatible descriptions of the same system.*
+Self-application normalizes (idempotent). Different reduction paths converge (confluence).
+
+**Readings:**  
+- Coherer cohering cohered  
+- Self labeling self as self  
+- Cohering cohering cohering  
+All normalize to: **≡**
 
 ---
 
-## What TSC is (and isn’t)
+## 1 · Three Co-Equal Dimensions (H, V, D)
 
-**IS**
-- A mathematical framework for coherent self-observation  
-- Domain-general: applicable to any self-modeling system  
-- Grounded in structural/metric constraints and usable in practice  
-- A formal approach spanning mathematics, philosophy, and engineering
+**Cohering articulates as three inseparable dimensions:**
 
-**ISN’T**
-- An AI-specific framework (AI is one application among many)  
-- Reductionism (no single vantage exhausts the others)  
-- Dependent on “unexplained emergence” (no appeals beyond what σ maps and their compositions explain)  
-- A panacea—TSC clarifies relationships; it doesn’t auto-solve domain problems
+- **H (Horizontal) — Cohered (Pattern):** what appears stable (structures/forms).
+- **V (Vertical) — Coherer (Relation):** what ties parts (constraints/symmetries/correlations).
+- **D (Deep) — Cohering (Process):** what unfolds (dynamics/evolution/temporal flow).
 
-**Evaluation note.** Evaluate TSC like you would category theory or information theory: for mathematical consistency, conceptual coherence, and applicability—not for “production readiness” or benchmark scores.
+### 1.1 Why “Dimensions,” Not “Vantages”
+They are **constitutive**, not descriptive. You cannot have any one without the other two—like height/width/depth for a cone.
 
----
+### 1.2 S₃ Symmetry (Co-Equality)
+All definitions/metrics are invariant under any permutation of {H,V,D}. Roles are **positional**, not essential.
 
-## Mathematical foundation (plain language)
-- **A1 — Vantage sufficiency:** each view carries enough information to reconstruct the whole.  
-  > **Note — Scope of A1.** “Sufficiency” means recoverable **up to your declared equivalence** (e.g., isomorphism, observational equivalence, typed abstraction). Choosing this equivalence is **domain-specific** and should be stated when you instantiate TSC.
-- **A2 — Vantage compatibility:** structure-preserving maps (σ_XY) relate different views.  
-  > **Note — On bijections and many-to-one mappings.** In many real systems, several H-states may yield the same V-report.  
-  > A2’s bijection requirement applies **between equivalence classes** defined by your A1 equivalence, not raw states.  
-  > If your domain has many-to-one mappings, quotient first; then σ_XY is a bijection between quotient spaces.  
-  > The remaining information loss appears as non-isometry of σ_XY on those quotients. (See `core/tsc-core.md` §1.1.)
-- **A3 — Scale equivariance:** coherence laws persist across observation scales.  
-- **A4 — Coinductive closure:** iterated self-observation converges to a unique, stable fixed point.
+### 1.3 Holographic Property (Testable)
+Each dimension contains the whole **compressed**. Increasing resolution in any single dimension makes the other two **emerge** in measurement.
 
-### Operational metric summary
-**C_Σ = (H_c · V_c · D_c)^(1/3)**  
-Default threshold **τ ≈ 0.80** (domain-tunable). See `core/tsc-core.md` for definitions and proofs.
-
-> [!IMPORTANT] **Invariance note:** Choose distances and σ maps so verdicts (e.g., C_Σ ≥ τ) are stable under **reasonable recodings**—unit changes, smooth coordinate transforms, or switching between equivalent representations (e.g., Fourier ↔ time domain; Lagrangian ↔ Hamiltonian). More formally: recodings that preserve metric class and causal/compositional structure (e.g., bi-Lipschitz maps, natural transformations).
+### 1.4 Fractal Property (Scale-Invariance)
+The H/V/D triad recurs at every scale (cell → organism → ecosystem; function → module → system).
 
 ---
 
-## Validation types (read this carefully)
+## 2 · Examples Across Domains
 
-TSC is evaluated on distinct levels. Don’t conflate them.
+| Domain | H (pattern) | V (relation) | D (process) |
+|---|---|---|---|
+| Physics | Molecular structure | Fields, couplings | Motion, phase transitions |
+| Cognition | Neural patterns | Semantics, reference | Attention, learning |
+| Social | Org charts, policies | Channels, power | Decision cycles, culture |
+| Computing | Data/state | APIs, type constraints | Execution, updates |
 
-### 1) Mathematical validation (framework)
-Are A1–A4 consistent and the proofs sound? **Status:** provided in the core specs.
-
-### 1.5) Metatheoretic validation (framework adequacy)
-Does TSC behave well *as a theory* before instantiation? **Checks:** existence of non-trivial models; representation-independence; functorial behavior of σ under scale; compatibility with known invariants. **Outcome:** confidence we aren’t relying on accidental encodings.
-
-### 2) Applicability validation (domain)
-Can we instantiate H, V, D for domain X and construct σ_XY? Are metrics computable? **Outcome:** feasibility and fit.
-
-### 2.5) Worked examples with ground truth
-Can TSC match known behavior on simple systems (FSMs, linear dynamics) where ground truth is available? **Outcome:** sanity checks before full deployments.
-
-### 3) Empirical validation (system)
-Does specific system Y satisfy the axioms? How does its C_Σ evolve in practice? **Outcome:** real-world performance and governance signals.
-
-> **Critical distinction:** A complete framework (1) can exist before (3). Lack of benchmarks is not evidence of mathematical incompleteness.
+(Labels are S₃-exchangeable depending on articulation.)
 
 ---
 
-## Example: dissolving the “hard problem”
+## 3 · The Problem: Dimensional Confusion
 
-**Traditional framing:** “How does physical processing produce experience?”  
+Treating co-dimensions as separate domains produces false “gaps.”
 
-**TSC reframing:**  
-- **H** = physical/functional description (brain states, computations)  
-- **V** = structured report/representation family (including first-person reports)  
-- **σ_HV** = vantage-swap map between them
-
-The “gap” appears because **σ_HV is not lossless**—it compresses information. That’s a property of the mapping, not evidence for extra substances (dualism) or eliminations (reductionism). **V-reports remain first-class data;** TSC relocates the “mystery” into the measurable properties of σ_HV.
-
-**Why this is dissolution (not reduction):**
-1. We keep V as real data; we don’t explain it away.  
-2. We add no new stuff; we measure distortion.  
-3. We make the gap quantifiable (map non-isometry).  
-4. We explain why it *seems* irreducible (translation loss).
-
-**Explanatory adequacy (open, testable).** The claim strengthens if σ_HV distortion **predicts** features of experience—e.g., does **increasing report bandwidth** (more distinctions in V) reduce measured distortion, as predicted? Does **attention modulation** change which H-states are V-accessible in the way σ_HV predicts? These are testable and largely untested.
-
-**Next steps:** estimate σ_HV for your domain, measure distortion, track C_Σ. If C_Σ drops below τ: **refine** σ_HV (add missing features) or **trigger** repair (see `tsc-operational.md`).
+- **Consciousness:** “How does H produce V?” ↔ like asking “How does height produce width?” Malformed question. They are co-dimensions of experiencing-D.
+- **Emergence:** Micro “parts” vs. macro “wholes” is often a scale shift in the same triad, not a new ontological level.
+- **Self-reference:** D cohering D is naturally stable (tripling normalization), not paradoxical.
 
 ---
 
-## Operational loop (abstract)
-1. Sample observations across H, V, D  
-2. Compute H_c, V_c, D_c  
-3. Aggregate C_Σ  
-4. If C_Σ ≥ τ → continue and log  
-5. If C_Σ < τ → apply repair policy and re-measure  
-*(Controller states and witness checks: `tsc-operational.md v1.2.9`.)*
+## 4 · Measurement as Dimensional Consistency
+
+**Question:** Do H, V, D measurements describe one consistent phenomenon?
+
+**Dimensional scores:**
+- **H_c ∈ [0,1]** — pattern stability
+- **V_c ∈ [0,1]** — relation alignment
+- **D_c ∈ [0,1]** — process stability
+
+**Aggregate (geometric mean):** C_Σ = (H_c · V_c · D_c)^(1/3)
+
+**Coherence energy (additive view):** E_Σ = -(1/3)(log H_c + log V_c + log D_c)
+
+**Dimensional leverage:** `λ_X = -log(X_c)` pinpoints where coherence is lost.
+
+### 4.1 Required Metric Properties
+1. **S₃-invariance** (relabeling leaves C_Σ unchanged)  
+2. **Normalization** (perfect = 1.0)  
+3. **Degeneracy guard** (any zero collapses C_Σ to 0)  
+4. **Refinement-monotonicity** (improving a dimension can’t decrease C_Σ)
+
+### 4.2 Alignment Ensembles (Not Maps)
+- **Commutation:** cycles preserve invariants  
+- **Conservation:** V-implied quantities conserved by D and visible in H  
+- **Symmetry:** V-group symmetries appear as H-invariants and D-equivariance  
+- **Scale:** coarse/fine-graining preserves C_Σ within tolerance
+
+**They compare measurements for consistency; they do not translate between domains.**
+
+### 4.3 Worked Examples (Summaries)
+- **Glider (Life):** H/V/D all ≈1 → **C_Σ ≈ 1** (high coherence).  
+- **Random soup (Life):** low invariants/attractors → **C_Σ ≈ 0.25** (low coherence).
+
+### 4.4 Diagnosing Low C_Σ
+- **Witness swap**, **ensemble ablation**, **scale sweep**, **permutation test** distinguish ill-posed measurement from genuine incoherence.
 
 ---
 
-## Claims & how to disagree (separable levels)
-
-1. **Mathematical coherence:** the axioms/ proofs hold.  
-2. **Framework adequacy:** TSC is non-vacuous, representation-independent enough, and behaves well under scale.  
-3. **Fit to phenomenon:** some targets (e.g., consciousness, emergence) have the structure TSC describes.  
-4. **Dissolution payoff:** describing that structure actually dissolves the problems.
-
-You can accept (1)+(2) while debating (3) or (4); naming which level you’re contesting increases V-coherence in discussion.
+## 5 · No Maps, No Images—Only Cohering
+(**Manzotti**): no representations—only objects in causal relation.  
+Applied: no H↔V “maps”; **H and V are co-dimensions of D** (experiencing/process), not separate spaces.
 
 ---
 
-## Applicability (use vs. don’t use)
-
-**Use TSC when:**
-- You need consistent descriptions across perspectives or scales  
-- Your system can expose/approximate multiple vantages (at least H+V or H+D)  
-- You want auditable criteria (C_Σ vs τ) for continue/repair decisions
-
-**Don’t use TSC when:**
-- Only a single vantage is observable (no feasible proxies)  
-- The system lacks self-modeling or observable internal structure  
-- Hard real-time guarantees conflict with verification overhead  
-- A simpler domain-specific consistency check already suffices (e.g., unit tests for code, double-entry bookkeeping for finance)
+## 6 · Coherence as Foundational, Not Emergent
+Gliders/lasers: “order” doesn’t pop out from nothing; dynamics articulate latent coherence. **Coherence is default; apparent randomness = hidden/low coherence.**
 
 ---
 
-## Applications
-
-**Philosophy** — Consciousness (V-side structure), emergence (σ maps), identity (D-coherence), self-reference (A4).  
-**Engineering / AI safety** — Coherence monitoring, drift/decoherence detection, repair policies, auditable state transitions.  
-**Other domains** — Organizational coherence across departments/timescales; cognitive systems spanning neural/symbolic; any multi-view system needing compatibility.
+## 7 · Reflexive Application (Scoped)
+Don’t “measure TSC” as a phenomenon.  
+Do check the **articulation of TSC** (specs/docs/examples) for self-consistency using the same dimensional logic.
 
 ---
 
-## Common misreadings (witness checks)
+## 8 · Quick Start
 
-If you think TSC claims **X**, pause and check the witness.  
-*Unsure about a term? See the* **[TSC Glossary](./docs/tsc-glossary.md)**.
-
-**Misreading 1:** “TSC is an AI safety tool.”  
-**Witness:** Can you instantiate H/V/D for a non-AI system?  
-**Correction:** TSC is domain-general; AI is one application.
-
-**Misreading 2:** “TSC says experience isn’t real.”  
-**Witness:** Does your reading keep V-reports as first-class data?  
-**Correction:** V is real; the gap is structural (σ_HV distortion).
-
-**Misreading 3:** “Unproven until benchmarked.”  
-**Witness:** Can you distinguish framework (Lvl-1/1.5/2.5) from system validation (Lvl-3)?  
-**Correction:** Math can be validated before benchmarks.
-
-**Misreading 4:** “Any vantage perfectly reconstructs the whole.”  
-**Witness:** Have you declared your **equivalence classes** and **quotiented** your spaces before constructing σ-maps?  
-**Correction:** A1 is “sufficiency up to declared equivalence,” and A2 bijections apply between those quotient spaces.
----
-
-## Repository layout (mobile-friendly)
-
-- `/core/`
-  - `tsc-core.md` — canonical mathematical foundation
-  - `tsc-operational.md` — controller logic and procedures
-  - `OBSERVABILITY_SCHEMA` — telemetry/logging standards
-- `/reference/`
-  - `tsc-controller.py` — minimal functional controller
-- `/runtime/`
-  - `tsc-instructions.md` — runtime procedures for AI systems
-- `/diagrams/`
-  - `state-machine.md` — visual state transitions
-- `/docs/`
-  - `tsc-glossary.md` — definitions and cross-links
+**Philosophers:** read `c-equiv.md`, internalize S₃, apply to “gap” problems.  
+**Engineers:** define witnesses, build ensemble, compute scores, stress-test.  
+**Researchers:** test holographic prediction; perturb and report C_Σ under noise/scale/time.
 
 ---
 
-## Quick start (time • prerequisites • outcomes • friction)
+## 9 · Repository Structure
 
-**Philosophers/Researchers** (~45–90 min • basic category theory helpful)  
-- Read `core/tsc-core.md` §§0–4  
-  - **Outcome:** restate axioms; compute toy C_Σ; spot vantage confusion in text  
-  - **Friction:** translating symbols to plain speech on first pass  
-- Skim `core/tsc-operational.md` §§1–2  
-  - **Outcome:** see how coherence is maintained in practice  
-  - **Friction:** mapping terms (witness, repair) to examples
+`/core/` — Normative specifications  
+- `c-equiv.md` (v1.0.9) — Coinductive semantics, tripling rule  
+- `tsc-core.md` (v2.0.0) — Measurement framework, formal properties  
+- `tsc-operational.md` (v2.0.0) — Verification protocol, controller states
 
-**AI Engineers** (~30–60 min • state machines + metrics)  
-- Read `core/tsc-operational.md`  
-  - **Outcome:** write a VERIFY_TSC stub; select a repair policy template  
-  - **Friction:** choosing τ and witness thresholds for your domain  
-- Review `reference/tsc-controller.py` + `OBSERVABILITY_SCHEMA`  
-  - **Outcome:** implement logging that passes schema validation  
-  - **Friction:** aligning existing observability to the schema
-
-**Runtime Integrators** (~15–30 min • orchestration control)  
-- Read `runtime/tsc-instructions.md`  
-  - **Outcome:** schedule periodic verification; attach repair hooks  
-  - **Friction:** coordinating verification cadence with latency budgets
+`/reference/` — Worked examples & harnesses  
+`/runtime/` — Integration guides  
+`/docs/` — Glossary & FAQs
 
 ---
 
-## Mini-glossary
-- **vantage-swap map (σ_XY):** structured translation between perspectives X,Y  
-- **C_Σ:** aggregate coherence metric across H, V, D  
-- **τ:** verification threshold for C_Σ pass/fail decisions  
-- **witness / witness margin:** auxiliary check and its buffer above minimum  
-- **REINFLATE / MINIMAL_INFO / LOCKDOWN:** repair and safe states (see Operational)
+## 10 · Common Misreadings
 
----
-
-## Appendix — Documentation as Worked Example
-
-**H_c (docs):** headings/terms/definitions are consistent across README, Core, Operational, Glossary (witness: glossary coverage ≥ threshold).  
-**V_c (docs):** three roles (math/eng/philo) answer five comprehension questions; measure agreement before/after σ role-translations (paraphrases).  
-**D_c (docs):** the same questions answered across versions remain stable or improve (no regressions).  
-**Action rule:** If aggregate drops below τ, add/clarify σ passages (e.g., A1 scope, invariance examples) and re-measure.
-
-**Comprehension questions (starter set):**  
-1) What problem does TSC solve?  
-2) What are H, V, D?  
-3) What is a vantage-swap map (σ_XY) and why is it important?  
-4) What does it mean for σ_XY to be non-isometric, and why does that matter?  
-5) How does TSC approach the consciousness problem?
+- **“H/V/D are just perspectives.”** → No. They are **dimensions**, constitutive, not descriptive views.  
+- **“Alignment ensembles map H to V.”** → No. They **compare** dimensional measurements for consistency; there is no inter-domain translation.  
+- **“TSC denies experience/emergence.”** → No. It reframes them as triadic coherence, dissolving false gaps.  
+- **“Coherence emerges from simple rules.”** → No. Rules articulate latent coherence; coherence is foundational.  
+- **“TSC is an overlay framework.”** → No. It recognizes what is happening (cohering) and makes its triadic structure measurable.
 
 ---
 
 ## License
-See `LICENSE` file.
+See `LICENSE`.
+
+**Tagline:** Cohering articulates. Do the dimensions cohere?
