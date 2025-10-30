@@ -22,12 +22,25 @@ from reference.python.parsers.cellular_automaton import (
     cellular_automaton_parser,
     is_cellular_automaton,
 )
-from reference.python.parsers.stub import is_stub, stub_parser
+from reference.python.parsers.stub import (
+    is_stub,
+    stub_parser,
+)
+from reference.python.parsers.tsc_yaml_v2 import (
+    is_tsc_yaml,
+    parse_tsc_document,
+)
 
-# Parser dispatch table (order matters - first match wins)
+# Add this to the PARSERS list (ORDER MATTERS - put before stub)
 PARSERS: list[ParserEntry] = [
+    # Cellular automaton patterns
     (is_cellular_automaton, cellular_automaton_parser),
-    (is_stub, stub_parser),  # Always last (catch-all)
+    
+    # Philosophical examples with tsc: YAML blocks
+    (is_tsc_yaml, parse_tsc_document),
+    
+    # Fallback: always matches
+    (is_stub, stub_parser),
 ]
 
 
