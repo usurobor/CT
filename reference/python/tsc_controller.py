@@ -28,36 +28,32 @@ from enum import Enum, auto
 from typing import Any, Literal
 
 # ===== v2.1 CLI/TEST ENTRY POINT =====
+from typing import Optional
 
-def compute_c_from_file(path: str, *, seed: int | None = None) -> float:
+def compute_c_from_file(path: str, *, seed: Optional[int] = None) -> float:
     """
     Entry point for CLI and conformance tests.
 
-    Parses a markdown example file (e.g., glider.md) and returns C_Σ.
+    Purely functional: path → ParsedInput → Metrics → C_Σ
 
-    Parameters
-    ----------
-    path : str
-        Path to example file
-    seed : Optional[int]
-        RNG seed for reproducibility
-
-    Returns
-    -------
-    float
-        C_Σ ∈ [0,1]
+    To add support for new formats, add a parser function to
+    reference/python/parsers/ and register it in the dispatch table.
     """
-    # TODO: Parse markdown, extract frames/data
-    # TODO: Build VerifyEnv, WitnessFloors, PolicyConfig
-    # TODO: Call verify_tsc_plus (the function below)
-    # TODO: Extract C_Σ from Metrics
+    from reference.python.parser_interface import parse_file
+    from reference.python.tsc_controller import verify_tsc_plus  # local import to avoid cycles
 
-    # Placeholder until you wire the parser:
-    raise NotImplementedError(
-        "Parser not yet implemented. "
-        "Need to extract H/V/D observations from markdown and call verify_tsc_plus."
+    # Pure pipeline: parse → verify → extract
+    parsed = parse_file(path, seed)
+
+    verdict, metrics, witnesses, ood, indices = verify_tsc_plus(
+        state=parsed.state,
+        policy=parsed.policy,
+        floors=parsed.floors,
+        cfg=parsed.cfg,
+        env=parsed.env,
     )
 
+    return float(metrics.C_sigma)
 
 # ===== CORE CONTROLLER (v2.0.0) =====
 
