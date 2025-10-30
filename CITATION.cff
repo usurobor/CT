@@ -4,8 +4,8 @@ message: "If you use this repository, please cite it using the metadata below."
 type: software
 version: "2.1.0"
 date-released: "2025-10-25"
-repository-code: "https://github.com/usurobor/ct"
-url: "https://github.com/usurobor/ct"
+repository-code: "https://github.com/usurobor/tsc"
+url: "https://github.com/usurobor/tsc"
 authors:
   - family-names: "Lisovin"
     given-names: "Peter"
