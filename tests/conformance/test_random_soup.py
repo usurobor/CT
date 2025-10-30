@@ -1,5 +1,4 @@
 # tests/conformance/test_random_soup.py
-import os
 from pathlib import Path
 
 import pytest
@@ -23,6 +22,7 @@ def test_random_soup_c_in_range(seed: int):
     assert result.exit_code == 0, result.output
 
     import json
+
     payload = json.loads(result.output)
     c = float(payload["c"])
 

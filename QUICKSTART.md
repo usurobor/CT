@@ -3,6 +3,7 @@
 This guide assumes Python **3.10+**.
 
 ## 1) Install
+
 ```bash
 python -m pip install --upgrade pip
 pip install -e ".[dev]"
@@ -13,6 +14,7 @@ This exposes a `tsc` CLI (via an internal reference package). It does not imply 
 ## 2) Wire your reference implementation
 
 Open:
+
 ```
 reference/python/tsc_controller.py
 ```
@@ -23,6 +25,7 @@ with a thin adapter around your reference implementation. Keep the signature sta
 If you need more helpers, add them under `reference/python/` and import them here.
 
 ## 3) Run the CLI
+
 ```bash
 tsc path/to/example.md --format text
 tsc path/to/example.md --format json
@@ -32,6 +35,7 @@ tsc path/to/random-soup.md --format json --seed 42
 If you see a "reference not wired" message, finish step 2.
 
 ## 4) Run tests
+
 ```bash
 pytest
 ```
@@ -43,10 +47,11 @@ pytest
 ## 5) Calibrate tolerance bands (once)
 
 1. Run ≥200 trials per case (vary seeds, or sampling windows).
-2. Compute median and MAD; set bounds to median ± 3×MAD (clip to [0,1]).
-3. Update assertions in `tests/conformance/` and commit with a short note (N, seeds, machine).
+1. Compute median and MAD; set bounds to median ± 3×MAD (clip to [0,1]).
+1. Update assertions in `tests/conformance/` and commit with a short note (N, seeds, machine).
 
 ## 6) Developer UX
+
 ```bash
 make setup     # install dev deps
 make lint      # code style
@@ -58,6 +63,7 @@ make quickstart
 ## 7) Migration notes (core → spec)
 
 When renaming:
+
 ```bash
 git mv core spec
 

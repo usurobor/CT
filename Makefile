@@ -1,6 +1,10 @@
 # Simple developer UX for v2.1
 .PHONY: help setup lint fmt test quickstart linkcheck
 
+# Detect Python command
+PYTHON := $(shell command -v python3.11 2>/dev/null || command -v python3 2>/dev/null || command -v python 2>/dev/null)
+PIP := $(PYTHON) -m pip
+
 help:
 	@echo "Common targets:"
 	@echo "  setup       - pip install -e .[dev]"
@@ -11,21 +15,21 @@ help:
 	@echo "  linkcheck   - check Markdown links (requires lychee)"
 
 setup:
-	python -m pip install --upgrade pip
-	pip install -e ".[dev]"
+	$(PIP) install --upgrade pip
+	$(PIP) install -e ".[dev]"
 
 lint:
-	ruff check .
+	$(PYTHON) -m ruff check .
 
 fmt:
-	ruff format .
-	mdformat .
+	$(PYTHON) -m ruff format .
+	$(PYTHON) -m mdformat . --exclude spec/tsc-operational.md
 
 test:
-	pytest
+	$(PYTHON) -m pytest
 
 quickstart:
-	tsc examples/cellular-automata/glider.md --format text || true
+	$(PYTHON) -m reference.cli.tsc examples/cellular-automata/glider.md --format text || true
 
 linkcheck:
 	@command -v lychee >/dev/null 2>&1 \

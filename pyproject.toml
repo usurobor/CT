@@ -37,8 +37,10 @@ include = ["reference*"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
+[tool.ruff.lint]
 select = ["E", "F", "I", "W", "C90", "UP"]
-ignore = ["E203"]
+ignore = ["E203", "E741", "C901"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

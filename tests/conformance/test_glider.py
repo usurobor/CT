@@ -1,11 +1,10 @@
 # tests/conformance/test_glider.py
-import os
 from pathlib import Path
 
 import pytest
+from click.testing import CliRunner
 
 from reference.cli.tsc import main as tsc_main
-from click.testing import CliRunner
 
 EXAMPLE = Path("examples/cellular-automata/glider.md")
 
@@ -30,6 +29,7 @@ def test_glider_c_in_range():
 
     # Parse JSON-like output printed by rich (it's strict JSON)
     import json
+
     payload = json.loads(result.output)
     c = float(payload["c"])
 

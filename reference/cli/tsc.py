@@ -1,10 +1,8 @@
 # reference/cli/tsc.py
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
-from typing import Optional
 
 import click
 from rich.console import Console
@@ -36,7 +34,7 @@ console = Console()
     show_default=False,
     help="Optional RNG seed (if your implementation uses one).",
 )
-def main(input_path: Path, out_format: str, seed: Optional[int]) -> None:
+def main(input_path: Path, out_format: str, seed: int | None) -> None:
     """
     TSC CLI (v2.1): run the reference TSC computation on INPUT_PATH.
 
