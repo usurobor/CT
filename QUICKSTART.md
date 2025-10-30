@@ -60,15 +60,24 @@ pytest
 
 ## 5) Add support for your data format
 
-Write a pure parser function in `reference/python/parsers/`:
+Write a pure parser function in `reference/python/parsers/my_format.py`:
 ```python
 # reference/python/parsers/my_format.py
 
 from typing import Optional
 from reference.python.parser_interface import ParsedInput
 from reference.python.tsc_controller import (
-    VerifyEnv, WitnessFloors, PolicyConfig
+    VerifyEnv, WitnessFloors, PolicyConfig,
+    Metrics, WitnessStatus, OODStatus
 )
+
+
+def is_my_format(path: str) -> bool:
+    """Predicate: detect your format."""
+    with open(path) as f:
+        first_line = f.readline()
+    return first_line.startswith("MY_FORMAT")
+
 
 def my_format_parser(path: str, seed: Optional[int] = None) -> ParsedInput:
     """
@@ -114,23 +123,25 @@ def my_format_parser(path: str, seed: Optional[int] = None) -> ParsedInput:
     cfg = PolicyConfig(Theta=0.80)
     
     return ParsedInput(env=env, floors=floors, cfg=cfg)
+
+
+__all__ = ["is_my_format", "my_format_parser"]
 ```
 
-Register in `parsers/__init__.py`:
+Register in `parsers/__init__.py` (just 2 lines):
 ```python
-from reference.python.parsers.my_format import my_format_parser
+# Add import
+from reference.python.parsers.my_format import is_my_format, my_format_parser
 
-def is_my_format(path: str) -> bool:
-    """Predicate: detect your format."""
-    text = _peek_text(path)
-    return "MY_FORMAT_MARKER" in text
-
+# Add to PARSERS list (before stub)
 PARSERS = [
-    (is_my_format, my_format_parser),  # Add before stub
+    (is_my_format, my_format_parser),           # Your parser
     (is_cellular_automaton, cellular_automaton_parser),
-    (is_stub, stub_parser),  # Always last (catch-all)
+    (is_stub, stub_parser),                     # Always last
 ]
 ```
+
+That's it! The predicate and parser live together in one file.
 
 See `parsers/stub.py` for a minimal complete example, or `parsers/cellular_automaton.py` for a realistic parser with markdown frame extraction.
 
