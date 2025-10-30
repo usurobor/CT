@@ -88,18 +88,36 @@ def cellular_automaton_parser(path: str, seed: Optional[int] = None) -> ParsedIn
         return range(len(frames))
 
     def compute_metrics(indices: Iterable[int]) -> Metrics:
-        Hs, Vs, Ds = [], [], []
-        for i in indices:
-            H, V, D = _adjacency_coherences(frames[i])
+        """
+        Compute H/V/D coherence metrics.
+        
+        H = horizontal (spatial) adjacency within frames
+        V = vertical (spatial) adjacency within frames  
+        D = temporal coherence between consecutive frames
+        """
+        idx_list = list(indices)
+        
+        # Spatial coherence (within-frame): H and V
+        Hs, Vs = [], []
+        for i in idx_list:
+            H, V, _ = _adjacency_coherences(frames[i])
             Hs.append(H)
             Vs.append(V)
-            Ds.append(D)
-
+        
         Hm = sum(Hs) / len(Hs) if Hs else 0.0
         Vm = sum(Vs) / len(Vs) if Vs else 0.0
-        Dm = sum(Ds) / len(Ds) if Ds else 0.0
-
-        C = 0.5 * Hm + 0.3 * Vm + 0.2 * Dm
+        
+        # Temporal coherence (between frames): D as process dimension
+        # Use only frames in the sampled indices
+        sampled_frames = [frames[i] for i in idx_list]
+        Dm = _temporal_stability(sampled_frames)
+        
+        # Geometric mean (as per TSC spec)
+        if Hm > 0 and Vm > 0 and Dm > 0:
+            C = (Hm * Vm * Dm) ** (1/3)
+        else:
+            C = 0.0
+        
         ci = (max(C - 0.05, 0.0), min(C + 0.05, 1.0))
         return Metrics(C, Hm, Vm, Dm, ci)
 
