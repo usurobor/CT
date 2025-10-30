@@ -15,9 +15,9 @@
 **Articulation** — *expression of ≡* → A concrete way cohering presents itself (e.g., as structures, relations, dynamics). All articulations reduce to ≡ under contraction.
 
 **H / V / D** — *co-equal dimensions* →  
-- **H (Cohered, Pattern):** what appears stable (structures, forms).  
-- **V (Coherer, Relation):** what ties parts (constraints/symmetries).  
-- **D (Cohering, Process):** what unfolds (dynamics, evolution).  
+- **H (Horizontal, Cohered, Pattern):** what appears stable (structures, forms).  
+- **V (Vertical, Coherer, Relation):** what ties parts (constraints/symmetries).  
+- **D (Deep, Cohering, Process):** what unfolds (dynamics, evolution).  
 They are **constitutive dimensions**, not perspectives or levels.
 
 **S₃ Symmetry** — *role interchangeability* → All TSC definitions and metrics are invariant under any permutation of {H,V,D}. No dimension is privileged.
