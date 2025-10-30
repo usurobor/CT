@@ -50,7 +50,7 @@ We welcome:
 
 1. **Fork & clone**
 ```bash
-   git clone https://github.com/YOUR_USERNAME/tsc.git
+   git clone https://github.com/usurobor/tsc.git
    cd tsc
 ```
 
