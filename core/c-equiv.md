@@ -70,6 +70,7 @@ Every compound statement `A ≡ B` admits three **readings**:
 Let the rewrite system be:
 
 R_contr = {  ≡ ≡  →  ≡  }
+
 R_expand = {  ≡    →  ≡ ≡ ≡  }
 
 - **Normal form:** `≡` (idempotent).  
