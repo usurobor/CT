@@ -131,9 +131,8 @@ def _first_tsc_block(s: str) -> dict[str, Any]:
     
     Searches in priority order:
     1. YAML front-matter (--- ... ---)
-    2. Fenced code blocks with closing fence (```yaml ... ```)
-    3. Unclosed fenced blocks (```yaml ... to EOF)
-    4. Whole-file YAML
+    2. Fenced code blocks (```yaml ... ```)
+    3. Whole-file YAML
     
     Parameters
     ----------
@@ -159,18 +158,9 @@ def _first_tsc_block(s: str) -> dict[str, Any]:
         ):
             return d.get("tsc", d)
 
-    # Try fenced YAML blocks (with closing fence)
+    # Try fenced YAML blocks
     for fm in _YAML_FENCE.findall(s):
         d = _load_yaml_or_json(fm)
-        if "tsc" in d or any(
-            k in d for k in ("O_H", "O_V", "O_D", "aligners", "observations")
-        ):
-            return d.get("tsc", d)
-    
-    # Try unclosed fence (captures from ```yaml to end of file)
-    unclosed = re.search(r"```(?:ya?ml)\s+(.*)", s, re.DOTALL | re.IGNORECASE)
-    if unclosed:
-        d = _load_yaml_or_json(unclosed.group(1))
         if "tsc" in d or any(
             k in d for k in ("O_H", "O_V", "O_D", "aligners", "observations")
         ):
