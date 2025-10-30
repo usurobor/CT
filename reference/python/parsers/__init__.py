@@ -10,19 +10,19 @@ To add a new parser:
 3) Add to PARSERS list (order matters - first match wins)
 """
 
-from typing import Callable, Tuple
+from collections.abc import Callable
+
 from reference.python.parser_interface import Parser
 
 # Type: (predicate, parser_function)
-ParserEntry = Tuple[Callable[[str], bool], Parser]
+ParserEntry = tuple[Callable[[str], bool], Parser]
 
 # Import parsers (each provides predicate + function)
 from reference.python.parsers.cellular_automaton import (
-    is_cellular_automaton,
     cellular_automaton_parser,
+    is_cellular_automaton,
 )
 from reference.python.parsers.stub import is_stub, stub_parser
-
 
 # Parser dispatch table (order matters - first match wins)
 PARSERS: list[ParserEntry] = [

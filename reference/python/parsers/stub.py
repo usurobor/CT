@@ -3,11 +3,16 @@ from __future__ import annotations
 
 """Stub parser returning fixed values (for CLI testing)."""
 
-from typing import Optional, Iterable
+from collections.abc import Iterable
+
 from reference.python.parser_interface import ParsedInput
 from reference.python.tsc_controller import (
-    VerifyEnv, WitnessFloors, PolicyConfig,
-    Metrics, WitnessStatus, OODStatus,
+    Metrics,
+    OODStatus,
+    PolicyConfig,
+    VerifyEnv,
+    WitnessFloors,
+    WitnessStatus,
 )
 
 
@@ -16,7 +21,7 @@ def is_stub(_path: str) -> bool:
     return True
 
 
-def stub_parser(path: str, seed: Optional[int] = None) -> ParsedInput:
+def stub_parser(path: str, seed: int | None = None) -> ParsedInput:
     """
     Pure function: path → fixed ParsedInput.
 

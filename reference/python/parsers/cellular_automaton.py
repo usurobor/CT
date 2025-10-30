@@ -8,27 +8,29 @@ Pure functional pipeline:
   markdown → frames → grids → H/V/D witnesses → ParsedInput
 """
 
-from dataclasses import dataclass
-from typing import Optional, List, Iterable, Tuple
 import re
+from collections.abc import Iterable
 
 from reference.python.parser_interface import ParsedInput
-from reference.python.tsc_controller import (
-    VerifyEnv, WitnessFloors, PolicyConfig,
-    Metrics, WitnessStatus, OODStatus,
-)
 
 # Local import to avoid cycles (parsers.__init__ imports us)
 from reference.python.parsers.stub import stub_parser
+from reference.python.tsc_controller import (
+    Metrics,
+    OODStatus,
+    PolicyConfig,
+    VerifyEnv,
+    WitnessFloors,
+    WitnessStatus,
+)
 
-
-Grid = List[List[int]]
+Grid = list[list[int]]
 
 
 def _peek_text(path: str, n: int = 1500) -> str:
     """Read first n characters of file."""
     try:
-        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        with open(path, encoding="utf-8", errors="ignore") as f:
             return f.read(n)
     except (FileNotFoundError, OSError):
         return ""
@@ -60,7 +62,7 @@ def is_cellular_automaton(path: str) -> bool:
     return False
 
 
-def cellular_automaton_parser(path: str, seed: Optional[int] = None) -> ParsedInput:
+def cellular_automaton_parser(path: str, seed: int | None = None) -> ParsedInput:
     """
     Pure function: markdown file → ParsedInput for cellular automaton.
 
@@ -72,7 +74,7 @@ def cellular_automaton_parser(path: str, seed: Optional[int] = None) -> ParsedIn
       5) construct ParsedInput
     """
     try:
-        with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        with open(path, encoding="utf-8", errors="ignore") as f:
             content = f.read()
     except OSError:
         return stub_parser(path, seed)
@@ -90,34 +92,34 @@ def cellular_automaton_parser(path: str, seed: Optional[int] = None) -> ParsedIn
     def compute_metrics(indices: Iterable[int]) -> Metrics:
         """
         Compute H/V/D coherence metrics.
-        
+
         H = horizontal (spatial) adjacency within frames
-        V = vertical (spatial) adjacency within frames  
+        V = vertical (spatial) adjacency within frames
         D = temporal coherence between consecutive frames
         """
         idx_list = list(indices)
-        
+
         # Spatial coherence (within-frame): H and V
         Hs, Vs = [], []
         for i in idx_list:
             H, V, _ = _adjacency_coherences(frames[i])
             Hs.append(H)
             Vs.append(V)
-        
+
         Hm = sum(Hs) / len(Hs) if Hs else 0.0
         Vm = sum(Vs) / len(Vs) if Vs else 0.0
-        
+
         # Temporal coherence (between frames): D as process dimension
         # Use only frames in the sampled indices
         sampled_frames = [frames[i] for i in idx_list]
         Dm = _temporal_stability(sampled_frames)
-        
+
         # Geometric mean (as per TSC spec)
         if Hm > 0 and Vm > 0 and Dm > 0:
-            C = (Hm * Vm * Dm) ** (1/3)
+            C = (Hm * Vm * Dm) ** (1 / 3)
         else:
             C = 0.0
-        
+
         ci = (max(C - 0.05, 0.0), min(C + 0.05, 1.0))
         return Metrics(C, Hm, Vm, Dm, ci)
 
@@ -160,7 +162,8 @@ def cellular_automaton_parser(path: str, seed: Optional[int] = None) -> ParsedIn
 # --- Rest of the helper functions remain the same ---
 _FRAME_HEADER_RE = re.compile(r"^\s{0,3}#{3,}\s*frame\b.*$", re.IGNORECASE | re.MULTILINE)
 
-def extract_frames(markdown: str) -> List[Grid]:
+
+def extract_frames(markdown: str) -> list[Grid]:
     """Pure: markdown → list of binary grids."""
     blocks: list[list[str]] = []
 
@@ -172,14 +175,14 @@ def extract_frames(markdown: str) -> List[Grid]:
     if not blocks:
         blocks.extend(_extract_bare_grids(markdown))
 
-    frames: List[Grid] = []
+    frames: list[Grid] = []
     for raw_lines in blocks:
         grid = _to_grid(raw_lines)
         if grid:
             frames.append(grid)
 
     unique: list[Grid] = []
-    seen: set[Tuple[Tuple[int, ...], ...]] = set()
+    seen: set[tuple[tuple[int, ...], ...]] = set()
     for g in frames:
         key = tuple(tuple(row) for row in g)
         if key not in seen:
@@ -253,7 +256,7 @@ def _to_grid(lines: list[str]) -> Grid:
     return grid
 
 
-def _adjacency_coherences(grid: Grid) -> Tuple[float, float, float]:
+def _adjacency_coherences(grid: Grid) -> tuple[float, float, float]:
     if not grid or not grid[0]:
         return (0.0, 0.0, 0.0)
     h, w = len(grid), len(grid[0])
@@ -289,7 +292,7 @@ def _adjacency_coherences(grid: Grid) -> Tuple[float, float, float]:
     return (H, V, D)
 
 
-def _mean_density(frames: List[Grid]) -> float:
+def _mean_density(frames: list[Grid]) -> float:
     tot = 0
     live = 0
     for g in frames:
@@ -299,7 +302,7 @@ def _mean_density(frames: List[Grid]) -> float:
     return (live / tot) if tot else 0.0
 
 
-def _temporal_stability(frames: List[Grid]) -> float:
+def _temporal_stability(frames: list[Grid]) -> float:
     if len(frames) < 2:
         return 1.0
     sims: list[float] = []

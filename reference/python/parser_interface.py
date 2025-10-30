@@ -8,16 +8,22 @@ A parser is just a function: str → ParsedInput
 Register parsers by pattern matching on file content.
 """
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable, Optional
+
 from reference.python.tsc_controller import (
-    VerifyEnv, WitnessFloors, PolicyConfig, VerifyPolicy, State
+    PolicyConfig,
+    State,
+    VerifyEnv,
+    VerifyPolicy,
+    WitnessFloors,
 )
 
 
 @dataclass(frozen=True)
 class ParsedInput:
     """Immutable container for verification inputs."""
+
     env: VerifyEnv
     floors: WitnessFloors
     cfg: PolicyConfig
@@ -33,10 +39,10 @@ class ParsedInput:
 
 
 # Type alias for parser functions
-Parser = Callable[[str, Optional[int]], ParsedInput]
+Parser = Callable[[str, int | None], ParsedInput]
 
 
-def parse_file(path: str, seed: Optional[int] = None) -> ParsedInput:
+def parse_file(path: str, seed: int | None = None) -> ParsedInput:
     """
     Parse file using registered parsers.
 

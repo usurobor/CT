@@ -25,12 +25,12 @@ from __future__ import annotations
 from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass, field, replace
 from enum import Enum, auto
-from typing import Any, Literal
 
 # ===== v2.1 CLI/TEST ENTRY POINT =====
-from typing import Optional
+from typing import Any, Literal
 
-def compute_c_from_file(path: str, *, seed: Optional[int] = None) -> float:
+
+def compute_c_from_file(path: str, *, seed: int | None = None) -> float:
     """
     Entry point for CLI and conformance tests.
 
@@ -55,6 +55,7 @@ def compute_c_from_file(path: str, *, seed: Optional[int] = None) -> float:
 
     return float(metrics.C_sigma)
 
+
 # ===== CORE CONTROLLER (v2.0.0) =====
 
 Dim = Literal["H", "V", "D"]
@@ -71,13 +72,14 @@ class State(Enum):
 class Verdict(Enum):
     PASS = auto()
     FAIL = auto()
-    FAIL_DEGENERATE = auto()   # H/V witness floors violated
-    FAIL_DEGENERATE_D = auto() # D witness floors violated
+    FAIL_DEGENERATE = auto()  # H/V witness floors violated
+    FAIL_DEGENERATE_D = auto()  # D witness floors violated
 
 
 @dataclass(frozen=True)
 class Metrics:
     """Dimensional coherence measurements for a single verification window."""
+
     H_c: float
     V_c: float
     D_c: float
@@ -88,10 +90,11 @@ class Metrics:
 @dataclass(frozen=True)
 class WitnessFloors:
     """Health minima for witnesses (keeps degeneracy from faking a pass)."""
+
     # Pattern witnesses (H) & relation witnesses (V)
-    nu_min: float      # minimal variance / sample richness
-    H_min: float       # minimal entropy or invariant count for H/V
-    L_min: float       # minimal Lipschitz / stability margin for H/V
+    nu_min: float  # minimal variance / sample richness
+    H_min: float  # minimal entropy or invariant count for H/V
+    L_min: float  # minimal Lipschitz / stability margin for H/V
     # Process witnesses (D)
     nu_min_D: float
     H_min_D: float
@@ -100,6 +103,7 @@ class WitnessFloors:
 @dataclass(frozen=True)
 class WitnessStatus:
     """Minimal cross-dimension witness health summary (S₃-symmetric by design)."""
+
     H_variance: float = 0.0
     H_entropy: float = 0.0
     H_lipschitz: float = 0.0
@@ -114,15 +118,13 @@ class WitnessStatus:
         )
 
     def d_fails(self, f: WitnessFloors) -> bool:
-        return (
-            (self.D_entropy < f.H_min_D)
-            or (self.D_variance < f.nu_min_D)
-        )
+        return (self.D_entropy < f.H_min_D) or (self.D_variance < f.nu_min_D)
 
 
 @dataclass(frozen=True)
 class OODStatus:
     """Simple OOD gate: Z_t is test statistic; compare to Z_crit."""
+
     Z_t: float
     Z_crit: float
     p_ref_hash: str | None = None  # provenance tag for reference distribution
@@ -131,6 +133,7 @@ class OODStatus:
 @dataclass(frozen=True)
 class TauBudget:
     """Measurement effort budget per dimension (kept S₃-symmetric)."""
+
     tau_max: float
     H: float = 0.0
     V: float = 0.0
@@ -146,24 +149,27 @@ class TauBudget:
 @dataclass(frozen=True)
 class PolicyConfig:
     """Controller policy thresholds and horizons (interpreted by transition logic)."""
-    Theta: float = 0.80          # decision threshold on CI_lo(C_sigma)
-    delta: float = 0.05          # not used here, reserved (tolerance)
-    Z_crit: float = 0.95         # OOD critical value
-    M_Z: int = 3                 # steps below Z_crit to exit LOCKDOWN
-    epsilon_H: float = 0.05      # witness margin (used by hooks)
-    M_R: int = 3                 # reserved
-    M_M: int = 5                 # drift patience before MINIMAL_INFO
-    M_H: int = 10                # consecutive HANDSHAKE passes to exit
+
+    Theta: float = 0.80  # decision threshold on CI_lo(C_sigma)
+    delta: float = 0.05  # not used here, reserved (tolerance)
+    Z_crit: float = 0.95  # OOD critical value
+    M_Z: int = 3  # steps below Z_crit to exit LOCKDOWN
+    epsilon_H: float = 0.05  # witness margin (used by hooks)
+    M_R: int = 3  # reserved
+    M_M: int = 5  # drift patience before MINIMAL_INFO
+    M_H: int = 10  # consecutive HANDSHAKE passes to exit
 
 
 @dataclass(frozen=True)
 class VerifyPolicy:
     """Runtime policy knob bag (domain-specific)."""
+
     name: str = "default"
     params: Mapping[str, Any] = field(default_factory=dict)
 
 
 # ----------------------------- Effects (ADTs) ---------------------------------
+
 
 @dataclass(frozen=True)
 class FreezeMetricsAndTrust:
@@ -205,6 +211,7 @@ class ApplySimplifyActions:
 class ResetCounters:
     names: tuple[str, ...] = ()
 
+
 Effect = (
     FreezeMetricsAndTrust
     | SetAllKiToMin
@@ -227,6 +234,7 @@ ComputeOOD = Callable[[Iterable[Index]], OODStatus]
 @dataclass(frozen=True)
 class VerifyEnv:
     """Plugs in domain-specific measurement procedures."""
+
     sample_index_set: SampleIndexSet
     compute_metrics: ComputeMetrics
     compute_witnesses: ComputeWitnesses
@@ -268,6 +276,7 @@ def verify_tsc_plus(
 
 
 # ----------------------------- Pure Transition --------------------------------
+
 
 @dataclass(frozen=True)
 class Counters:
@@ -362,6 +371,7 @@ def transition(
 
 # ----------------------------- Interpreter ------------------------------------
 
+
 class Hooks:
     """
     Implement these in your runtime. This default is a pure no-op layer.
@@ -371,21 +381,22 @@ class Hooks:
     def freeze_metrics_and_trust(self) -> None: ...
     def set_all_Ki_to_min(self) -> None: ...
     def oversample_failing_dimensions(self, policy: VerifyPolicy) -> None: ...
-    def reduce_tau_for_worst_dimension(
-        self, tau: TauBudget, witnesses: WitnessStatus
-    ) -> TauBudget:
+    def reduce_tau_for_worst_dimension(self, tau: TauBudget, witnesses: WitnessStatus) -> TauBudget:
         return tau
+
     def recenter_and_retune_lambda_mu(self) -> None: ...
-    def reallocate_tau_for_productive_adaptation(self, tau: TauBudget) -> TauBudget: return tau
+    def reallocate_tau_for_productive_adaptation(self, tau: TauBudget) -> TauBudget:
+        return tau
+
     def apply_simplify_actions(self, target: str) -> None: ...
     def reset_counters(self, names: tuple[str, ...]) -> None: ...
 
     # Optional policy checks for MINIMAL_INFO → exit
-    def witnesses_above_margins_for(
-        self, required_steps: int, epsilon_H: float
-    ) -> bool:
+    def witnesses_above_margins_for(self, required_steps: int, epsilon_H: float) -> bool:
         return False
-    def pass_M_M_with_non_increasing_J_cost(self, required_steps: int) -> bool: return False
+
+    def pass_M_M_with_non_increasing_J_cost(self, required_steps: int) -> bool:
+        return False
 
 
 def interpret(
@@ -420,6 +431,7 @@ def interpret(
 
 # ----------------------------- One-step runner --------------------------------
 
+
 def step(
     *,
     ctrl: ControllerState,
@@ -433,8 +445,7 @@ def step(
         state=ctrl.state, policy=policy, floors=floors, cfg=cfg, env=env
     )
     next_ctrl, effs = transition(
-        floors=floors, cfg=cfg, policy=policy, ctrl=ctrl,
-        verdict=verdict, witnesses=W, ood=O
+        floors=floors, cfg=cfg, policy=policy, ctrl=ctrl, verdict=verdict, witnesses=W, ood=O
     )
     new_tau = interpret(effects=effs, hooks=hooks, tau=next_ctrl.tau, witnesses=W)
     # Optional: use hooks.witnesses_above_margins_for / pass_M_M_with_non_increasing_J_cost
