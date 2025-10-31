@@ -1,4 +1,3 @@
-```markdown
 # Triadic Self‑Coherence (TSC) — Core
 
 **Version:** v2.2.0 (C≡‑native, self‑contained)
