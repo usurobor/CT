@@ -1,6 +1,6 @@
-# C≡ (Coherence Language, c-triple-bar)
+# C≡ (Coherence Language, c-triple-bar, ctb)
 
-*Version 1.1.0 • Status: Normative (Semantics)*
+*Version 1.1.1 • Status: Normative (Semantics)*
 
 C≡ is a minimal language whose sole semantic object is **cohering**. It provides the formal ground for TSC's ontology: **there is only cohering (≡); everything else is articulation of ≡.**
 
@@ -100,6 +100,8 @@ R_expand = { ≡ → ≡ ≡ ≡ }
 
 **Intuition:** cohering cohering cohering → cohering. Self-application **converges** (coinductively stable).
 
+**Validation link.** Self-application stability (≡ on ≡) provides the intuition behind Core §4's fixed-point stability; see Operational §12 for the self-measurement procedure.
+
 ______________________________________________________________________
 
 ## 10. Examples
@@ -136,11 +138,4 @@ ______________________________________________________________________
 
 ______________________________________________________________________
 
-## 12. Changelog
-
-- **1.1.0:** Added §5 (Scope & Role) clarifying C≡'s relationship to TSC; moved TSC relation from old §10 to §5; renumbered subsequent sections; added scope boundary and self-validation note. Part of TSC v2.2.0 release bundle.
-- **1.0.9:** Clarified rewrite semantics; explicit contraction/expansion rules; holographic lines refined.
-
-______________________________________________________________________
-
-**End — C≡ v1.1.0 (Normative Semantics).**
+**End — C≡ v1.1.1 (Normative Semantics).**
