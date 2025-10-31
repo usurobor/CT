@@ -1,12 +1,12 @@
 # Triadic Self‑Coherence (TSC) — Operational
-**Version:** v2.0.0  
+**Version:** v2.2.0  
 **Dependency:** This document depends only on the definitions in **TSC — Core** (aspects H/V/D, contexts Ω, articulations A, summaries S, alignments σ, coherence predicate Coh, metrics H_c/V_c/D_c, aggregate C_Σ). It introduces no additional ontology.
 
 ---
 
 ## 0 · Purpose and Position in the Stack
 
-**Purpose.** The Operational layer is the **policy and procedure** that turns the Core’s measurement calculus into a **repeatable verification process** with **verdicts**, **witnesses**, and **governance**. It answers:
+**Purpose.** The Operational layer is the **policy and procedure** that turns the Core's measurement calculus into a **repeatable verification process** with **verdicts**, **witnesses**, and **governance**. It answers:
 
 - *What to run* (protocol),  
 - *With which parameters* (policy),  
@@ -14,7 +14,7 @@
 - *How to remain stable and reproducible over time* (witnesses, logging, controller).
 
 **What it adds (and only this):**
-1. A **verification protocol** over the Core’s constructs.  
+1. A **verification protocol** over the Core's constructs.  
 2. **Parameter registry** and recommended **default budgets**.  
 3. **Witnesses** guarding against degenerate or ill‑posed comparisons.  
 4. A minimal **controller** that adapts solver ensembles and budgets.  
