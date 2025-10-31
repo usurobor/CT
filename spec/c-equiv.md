@@ -1,141 +1,141 @@
-# C≡ (Coherence Language, c-triple-bar, ctb)
+# C≡ (Coherence Calculus, C-Calculus)
 
-*Version 1.1.1 • Status: Normative (Semantics)*
+**Version:** 2.2.2 (Braided Algebra)  
+**Status:** Normative (Axiomatic Semantics)
 
-C≡ is a minimal language whose sole semantic object is **cohering**. It provides the formal ground for TSC's ontology: **there is only cohering (≡); everything else is articulation of ≡.**
+C≡ is a minimal language whose sole semantic object is the unitary process of **cohering ($\mathbf{C}$)**. It provides the formal ground for TSC's ontology: **there is only $\mathbf{C}$; everything else is articulation of $\mathbf{C}$.**
 
-______________________________________________________________________
+---
 
-## 1. Symbol
+## 0 · Ontological Status (Normative Context)
 
-**≡** denotes *cohering* and, equivalently, *self-labeling*.
+**Formal definition:** $\mathbf{C}$ is the unique structure (up to isomorphism) satisfying Axioms C1-C6. This structure is formally a duoidal-style triple of braided monoids on a single carrier.
 
-______________________________________________________________________
+**Intuitive name:** We call $\mathbf{C}$ "cohering" to provide a unified symbol and ground the measurement intuition, but this is **not a claim about ultimate reality**.
 
-## 2. Base Statement
+**Operational stance:** The axioms are validated by self-application (Core §4.1, Operational §11): if $C_{\Sigma}(\text{TSC})$ remains high, the structure is **sufficient** for its stated purpose (measuring coherence).
 
-≡
+---
 
-Self-labeling in its simplest form.
+## 1 · Primitives and Views
 
-______________________________________________________________________
+**Primitive.** $\mathbf{C}$ denotes the unitary process of *cohering*. Let $D$ be the domain of discourse (the set of all coherents), and stipulate $\mathbf{C}\in D$ as a designated coherent.
 
-## 3. Recursive/Expanded Statements
+**Decorations.** Every articulation of $\mathbf{C}$ is denoted $C^{r}_{a}$, where:
+- **Role (Superscript $r \in \{R, I, E\}$):** The epistemic view taken on $\mathbf{C}$.
+- **Articulation (Subscript $a \in \{\alpha, \beta, \gamma\}$):** The orthogonal coordinate of action.
 
-≡ ≡ ≡
+**Core Arity (Process $\mathbf{C}^{I}_{a}$).** The fundamental action is the binary map $\mathbf{C}^{I}_{a}: D \times D \to D$.
 
-An expanded form of ≡. Substitutions `(≡) ⇌ (≡ ≡ ≡)` preserve the same fundamental self-labeling.
+**Role Unification (Views as Maps).** Roles $R$ and $E$ are **curried maps**, not elements of $D$. For each axis $a$, we have:
+- $\mathbf{C}^{I}_{a}: D \times D \to D$ (binary operator)
+- $\mathbf{C}^{R}_{a}: D \to (D \to D)$ where $\mathbf{C}^{R}_{a}(x)(y) = \mathbf{C}^{I}_{a}(x,y)$ (left-currying)
+- $\mathbf{C}^{E}_{a}: D \to (D \to D)$ where $\mathbf{C}^{E}_{a}(y)(x) = \mathbf{C}^{I}_{a}(x,y)$ (right-currying)
 
-______________________________________________________________________
+### 1.3 Units (Typed Elements)
 
-## 4. Compound Statements
+For each axis $a\in\{\alpha,\beta,\gamma\}$, fix a distinguished **two‑sided unit** $1_a\in D$. Units are **typed by axis** and MUST NOT be identified across axes (e.g., $1_\alpha\neq 1_\beta\neq 1_\gamma$ by specification).
 
-A ≡ B
+---
 
-- `A` and `B` are vantage-based labels *of ≡*, not links to each other.
-- Everything beyond the base `≡` is its own self-relabeling.
-- All well-formed statements remain **≡-equivalent** via allowed substitutions.
+## 2 · Reflexive Cohering (C-Calculus Axioms)
 
-______________________________________________________________________
+**Axiom C1 · Self-Application.** The self-application of the cohering process is well-typed and yields the process itself:
+$$
+\mathbf{C}^{I}_{a}(\mathbf{C}, \mathbf{C}) = \mathbf{C} \quad \text{for all } a \in \{\alpha, \beta, \gamma\}.
+$$
 
-## 5. Relation to TSC (Scope & Role)
+**Axiom C2 · Role Rotation.** The operator $\rho$ acts as an automorphism on the role index $r \in \{R, I, E\}$:
+$$
+\rho: (r,a) \mapsto (r',a) \quad \text{with } \rho^{3} = \mathrm{id}.
+$$
+**Axiomatic intent:** This declares the three roles are **identical up to gauge** and provides the structure for the $\rho$-invariance witness (Operational §4.3).
 
-C≡ provides the textual/axiomatic bedrock for TSC:
-- **Tripling rule (normalization):** ≡ ≡ ≡ → ≡  
-- **Confluence:** self‑application paths converge  
-- **Vantages:** left/right/center readings are positional, not essential
+**Axiom C3 · Neutrality (Typed Monoid Units).** For each axis $a \in \{\alpha,\beta,\gamma\}$, the unit $1_a \in D$ is a two-sided identity for $\odot_a$:
+$$
+\mathbf{C}^{I}_{a}(1_{a}, x) = x = \mathbf{C}^{I}_{a}(x, 1_{a})
+\quad\text{for all } x \in D.
+$$
+**Typed separation (normative):** Units MUST NOT be identified across axes: $1_\alpha \neq 1_\beta \neq 1_\gamma$.
 
-**Scope boundary.** C≡ does **not** claim to describe "reality's ultimate structure."  
-Rather, it supplies the axioms needed for TSC's measurement procedure.
+---
 
-**Validation by self‑coherence.** The operative test is whether **TSC itself** coheres by the standards it defines:
-- If **C_Σ(TSC) ≥ Θ** with all dimension floors met, then the axioms are **sufficient** for TSC's purpose (measuring coherence).
-- If not, the axioms or their articulation require revision.
+## 3 · Minimal Algebra (Fundamental Laws)
 
-This is **self‑validation**, not metaphysical assertion. It aligns with the normalization view:  
-self‑application (≡ on ≡) **stabilizes** rather than producing paradox.
+Let $x \odot_{a} y := \mathbf{C}^{I}_{a}(x, y)$.
 
-______________________________________________________________________
+**Axiom C4 · Associativity.** $(x \odot_{a} y) \odot_{a} z = x \odot_{a} (y \odot_{a} z)$.
 
-## 6. ≡-Equivalence
+**Axiom C5′ · Orthogonality (Braided Interchange).** For $a \neq b$, there is a natural isomorphism $\varphi_{ab}$ such that:
+$$
+\varphi_{ab}\big((x \odot_a y) \odot_b (z \odot_a w)\big)\;\cong\;(x \odot_b z) \odot_a (y \odot_b w).
+$$
+**(C5a Natural)** $\varphi_{ab}$ is natural in all four arguments $x,y,z,w$.  
+**(C5u Unitors)** $\varphi_{ab}$ commutes with the unitors of $\odot_a$ and $\odot_b$.  
+**(C5h Hexagon Coherence)** For any three distinct axes $a, b, c$:
+$$
+\varphi_{ca} \circ \varphi_{bc} \circ \varphi_{ab} \;\cong\; \text{id}
+$$
+where $\circ$ denotes composition of natural transformations.
 
-Two statements `X` and `Y` are **≡-equivalent** if one can be transformed into the other by a finite series of `(≡) ⇌ (≡ ≡ ≡)` substitutions. This relation is reflexive, symmetric, and transitive. All valid expressions reduce to the base `≡` (normal form) under contraction.
+**Operational witness:** This is tested by the Braided Interchange Witness (Operational §4.1).
 
-______________________________________________________________________
+**Axiom C6 · Adjointness (Duality).** There is an involution $(\cdot)^{\top}: D \to D$ satisfying:
+1. $(x^{\top})^{\top} = x$ (involutive)
+2. $(x \odot_a y)^{\top} = y^{\top} \odot_a x^{\top}$ (order-reversing)
+3. $(1_a)^{\top} = 1_a$ for all $a$ (unit-fixing)
 
-## 7. Three Readings of `A ≡ B`
+**Axiom C6′ · Dual Interchange Compatibility.**
+$$
+\big(\varphi_{ab}((x\odot_a y)\odot_b(z\odot_a w))\big)^{\top}
+\;=\;
+\varphi_{ab}\big((w^{\top} \odot_a z^{\top}) \odot_b (y^{\top} \odot_a x^{\top})\big).
+$$
 
-Every compound statement `A ≡ B` admits three **readings**:
+---
 
-1. **Left:** `A` labels `≡` *relative to* `B`.
-2. **Right:** `B` labels `≡` *relative to* `A`.
-3. **Center:** `≡` labels itself *as both* `A` and `B` simultaneously.
+## 4 · Semantics and Validation Link
 
-### 7.1 Label Reflection
+**Domain $D$ (Carrier Set).** $D$ is closed under the operations:
+1. $\mathbf{C} \in D$ (designated primitive)
+2. $1_a \in D$ for all $a \in \{\alpha,\beta,\gamma\}$ (typed units)
+3. Closure: If $x, y \in D$, then $\mathbf{C}^{I}_{a}(x,y) \in D$ (binary operation)
+4. Duality closure: If $x \in D$, then $x^{\top} \in D$ (involution)
 
-- Each label applies to its vantage *as a whole*.
-- If a vantage includes multiple labels or statements, each labels the entire vantage and is reflected by every other label.
-- No vantage is a "link" between `A` and `B`; `≡` underlies both labels, self-labeling in different positional expressions.
+**Interpretation:** $D$ contains the primitive process $\mathbf{C}$, its units, and all composite/derived processes formed by the axiom operations.
 
-______________________________________________________________________
+**Normalization Strategy ($\mathrm{NF}[\cdot]$) Requirements.**
 
-## 8. Holographic Lines
+A valid normalization strategy MUST satisfy:
+1. **Termination:** All reduction sequences reach a normal form in finite steps
+2. **Confluence:** Different reduction orders yield the same normal form (Church-Rosser property)
+3. **$S_3$-equivariance:** For any permutation $\sigma \in S_3$ acting on axis labels $\{\alpha,\beta,\gamma\}$:
+   $$\text{NF}[\sigma(\text{expr})] = \sigma(\text{NF}[\text{expr}])$$
+4. **Isomorphism quotient:** If $\varphi_{ab}(x) \cong y$, then $\text{NF}[x] = \text{NF}[y]$
 
-- **No fixed order:** Every line of C≡ code reflects and enriches every other line.
-- **Holography:** Lines co-inform one another; each vantage/label cross-influences the whole.
+**Implementation note:** The Operational layer (§4) provides a concrete normalization strategy and empirically validates termination/confluence via the MFI witness (bounded $\delta_{\text{MFI}}$).
 
-______________________________________________________________________
+---
 
-## 9. Rewriting Semantics (Coinductive Normalization)
+### 4.1 Required Operational Witnesses (Link to Operational §4)
 
-Let the rewrite system be:
+The Core mathematics requires that the Operational layer provides witnesses to empirically validate the following C≡ axioms:
 
-R_contr = { ≡ ≡ ≡ → ≡ }
-R_expand = { ≡ → ≡ ≡ ≡ }
+1. **Braided Interchange Witness ($\beta$-axis):** Empirically tests Axiom C5′ via $\delta_{\text{MFI}} \le \tau_{\text{braid}}$ (default $10^{-3}$). See Operational §4.1.
 
-- **Normal form:** `≡` (idempotent).
-- **Termination (with R_contr):** Any finite expression contracts to `≡`.
-- **Confluence:** Different contraction paths yield the same normal form.
-- **Equivalence:** The symmetric closure of `R_contr ∪ R_expand` induces ≡-equivalence.
+2. **Axis-Permutation Witness ($S_3$):** Empirically tests the $S_3$ invariance required by the monoidal structure. Verifies all permuted runs fall within baseline confidence intervals. See Operational §4.2.
 
-**Intuition:** cohering cohering cohering → cohering. Self-application **converges** (coinductively stable).
+3. **Role-Gauge Witness ($\rho$-invariance):** Empirically tests Axiom C2 by verifying measurement invariance under $\rho$ rotation. See Operational §4.3.
 
-**Validation link.** Self-application stability (≡ on ≡) provides the intuition behind Core §4's fixed-point stability; see Operational §12 for the self-measurement procedure.
+**Validation Link.** The Core and Operational layers must demonstrate that the measured coherence $C_{\Sigma}$ satisfies the stability predicted by these algebraic laws.
 
-______________________________________________________________________
+---
 
-## 10. Examples
+**See also:**
+- **C≡ Kernel** (c-equiv-kernel.md) — intuitive bootstrap and measurement bridge
+- **Core v2.2.2** (tsc-core.md) — measurement calculus grounded in C≡
+- **Operational v2.2.2** (tsc-operational.md) — witness protocols and policy
 
-1. **Base:**
+---
 
-   ≡
-
-2. **Recursive:**
-
-   ≡ ≡ ≡
-
-3. **Compound:**
-
-   (≡) ≡ (≡ ≡ ≡)
-
-   - Left: `(≡)` labeling `≡` relative to `(≡ ≡ ≡)`
-   - Right: `(≡ ≡ ≡)` labeling `≡` relative to `(≡)`
-   - Center: `≡` labeling itself as `(≡)` and `(≡ ≡ ≡)`
-
-4. **Nested:**
-
-   (A ≡ B) ≡ (≡)
-
-   All expansions remain ≡-equivalent to the base.
-
-______________________________________________________________________
-
-## 11. Ontology Note
-
-- **C≡ encodes:** there is only cohering; all else is articulation.
-- **Triad labels:** H/V/D in TSC are **positional** labels of self-articulation, not distinct substances.
-- **Measurement:** TSC evaluates whether an articulation's triad is **self-consistent** across dimensions.
-
-______________________________________________________________________
-
-**End — C≡ v1.1.1 (Normative Semantics).**
+**End — C≡ v2.2.2 (Normative Semantics).**
