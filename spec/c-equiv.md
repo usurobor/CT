@@ -1,8 +1,9 @@
+```markdown
 # C≡ (Coherence Language, c-triple-bar)
 
-*Version 1.0.9 • Status: Normative (Semantics)*
+*Version 1.1.0 • Status: Normative (Semantics)*
 
-C≡ is a minimal language whose sole semantic object is **cohering**. It provides the formal ground for TSC’s ontology: **there is only cohering (≡); everything else is articulation of ≡.**
+C≡ is a minimal language whose sole semantic object is **cohering**. It provides the formal ground for TSC's ontology: **there is only cohering (≡); everything else is articulation of ≡.**
 
 ______________________________________________________________________
 
@@ -38,86 +39,102 @@ A ≡ B
 
 ______________________________________________________________________
 
-## 5. ≡-Equivalence
+## 5. Relation to TSC (Scope & Role)
+
+C≡ provides the textual/axiomatic bedrock for TSC:
+- **Tripling rule (normalization):** ≡ ≡ ≡ → ≡  
+- **Confluence:** self‑application paths converge  
+- **Vantages:** left/right/center readings are positional, not essential
+
+**Scope boundary.** C≡ does **not** claim to describe "reality's ultimate structure."  
+Rather, it supplies the axioms needed for TSC's measurement procedure.
+
+**Validation by self‑coherence.** The operative test is whether **TSC itself** coheres by the standards it defines:
+- If **C_Σ(TSC) ≥ Θ** with all dimension floors met, then the axioms are **sufficient** for TSC's purpose (measuring coherence).
+- If not, the axioms or their articulation require revision.
+
+This is **self‑validation**, not metaphysical assertion. It aligns with the normalization view:  
+self‑application (≡ on ≡) **stabilizes** rather than producing paradox.
+
+______________________________________________________________________
+
+## 6. ≡-Equivalence
 
 Two statements `X` and `Y` are **≡-equivalent** if one can be transformed into the other by a finite series of `(≡) ⇌ (≡ ≡ ≡)` substitutions. This relation is reflexive, symmetric, and transitive. All valid expressions reduce to the base `≡` (normal form) under contraction.
 
 ______________________________________________________________________
 
-## 6. Three Readings of `A ≡ B`
+## 7. Three Readings of `A ≡ B`
 
 Every compound statement `A ≡ B` admits three **readings**:
 
 1. **Left:** `A` labels `≡` *relative to* `B`.
-1. **Right:** `B` labels `≡` *relative to* `A`.
-1. **Center:** `≡` labels itself *as both* `A` and `B` simultaneously.
+2. **Right:** `B` labels `≡` *relative to* `A`.
+3. **Center:** `≡` labels itself *as both* `A` and `B` simultaneously.
 
-### 6.1 Label Reflection
+### 7.1 Label Reflection
 
 - Each label applies to its vantage *as a whole*.
 - If a vantage includes multiple labels or statements, each labels the entire vantage and is reflected by every other label.
-- No vantage is a “link” between `A` and `B`; `≡` underlies both labels, self-labeling in different positional expressions.
+- No vantage is a "link" between `A` and `B`; `≡` underlies both labels, self-labeling in different positional expressions.
 
 ______________________________________________________________________
 
-## 7. Holographic Lines
+## 8. Holographic Lines
 
 - **No fixed order:** Every line of C≡ code reflects and enriches every other line.
 - **Holography:** Lines co-inform one another; each vantage/label cross-influences the whole.
 
 ______________________________________________________________________
 
-## 8. Rewriting Semantics (Coinductive Normalization)
+## 9. Rewriting Semantics (Coinductive Normalization)
 
 Let the rewrite system be:
 
-R_contr = { ≡ ≡ → ≡ }
-
+\`\`\`
+R_contr = { ≡ ≡ ≡ → ≡ }
 R_expand = { ≡ → ≡ ≡ ≡ }
+\`\`\`
 
 - **Normal form:** `≡` (idempotent).
 - **Termination (with R_contr):** Any finite expression contracts to `≡`.
 - **Confluence:** Different contraction paths yield the same normal form.
 - **Equivalence:** The symmetric closure of `R_contr ∪ R_expand` induces ≡-equivalence.
 
-Intuition: **cohering cohering cohering → cohering.** Self-application **converges** (coinductively stable).
+**Intuition:** cohering cohering cohering → cohering. Self-application **converges** (coinductively stable).
 
 ______________________________________________________________________
 
-## 9. Examples
+## 10. Examples
 
 1. **Base:**
-
-≡
+   \`\`\`
+   ≡
+   \`\`\`
 
 2. **Recursive:**
-
-≡ ≡ ≡
+   \`\`\`
+   ≡ ≡ ≡
+   \`\`\`
 
 3. **Compound:**
-
-(≡) ≡ (≡ ≡ ≡)
-
-- Left: `(≡)` labeling `≡` relative to `(≡ ≡ ≡)`
-- Right: `(≡ ≡ ≡)` labeling `≡` relative to `(≡)`
-- Center: `≡` labeling itself as `(≡)` and `(≡ ≡ ≡)`
+   \`\`\`
+   (≡) ≡ (≡ ≡ ≡)
+   \`\`\`
+   - Left: `(≡)` labeling `≡` relative to `(≡ ≡ ≡)`
+   - Right: `(≡ ≡ ≡)` labeling `≡` relative to `(≡)`
+   - Center: `≡` labeling itself as `(≡)` and `(≡ ≡ ≡)`
 
 4. **Nested:**
-
-(A ≡ B) ≡ (≡)
-
-All expansions remain ≡-equivalent to the base.
-
-______________________________________________________________________
-
-## 10. Relation to TSC
-
-- **Ontology:** C≡ encodes that there is only cohering; all else is articulation.
-- **Triad labels:** H/V/D are **positional** labels of self-articulation, not distinct substances.
-- **Measurement:** TSC evaluates whether an articulation’s triad is **self-consistent** across dimensions.
+   \`\`\`
+   (A ≡ B) ≡ (≡)
+   \`\`\`
+   All expansions remain ≡-equivalent to the base.
 
 ______________________________________________________________________
 
-## 11. Changelog
+## 11. Ontology Note
 
-- **1.0.9:** Clarified rewrite semantics; explicit contraction/expansion rules; holographic lines refined.
+- **C≡ encodes:** there is only cohering; all else is articulation.
+- **Triad labels:** H/V/D in TSC are **positional** labels of self-articulation, not distinct substances.
+- **Measurement:** TSC evaluates whether an articulation's triad is **self-consistent** across dimensions.
