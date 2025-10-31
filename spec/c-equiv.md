@@ -90,10 +90,8 @@ ______________________________________________________________________
 
 Let the rewrite system be:
 
-\`\`\`
 R_contr = { ≡ ≡ ≡ → ≡ }
 R_expand = { ≡ → ≡ ≡ ≡ }
-\`\`\`
 
 - **Normal form:** `≡` (idempotent).
 - **Termination (with R_contr):** Any finite expression contracts to `≡`.
@@ -107,27 +105,25 @@ ______________________________________________________________________
 ## 10. Examples
 
 1. **Base:**
-   \`\`\`
+
    ≡
-   \`\`\`
 
 2. **Recursive:**
-   \`\`\`
+
    ≡ ≡ ≡
-   \`\`\`
 
 3. **Compound:**
-   \`\`\`
+
    (≡) ≡ (≡ ≡ ≡)
-   \`\`\`
+
    - Left: `(≡)` labeling `≡` relative to `(≡ ≡ ≡)`
    - Right: `(≡ ≡ ≡)` labeling `≡` relative to `(≡)`
    - Center: `≡` labeling itself as `(≡)` and `(≡ ≡ ≡)`
 
 4. **Nested:**
-   \`\`\`
+
    (A ≡ B) ≡ (≡)
-   \`\`\`
+
    All expansions remain ≡-equivalent to the base.
 
 ______________________________________________________________________
@@ -137,3 +133,14 @@ ______________________________________________________________________
 - **C≡ encodes:** there is only cohering; all else is articulation.
 - **Triad labels:** H/V/D in TSC are **positional** labels of self-articulation, not distinct substances.
 - **Measurement:** TSC evaluates whether an articulation's triad is **self-consistent** across dimensions.
+
+______________________________________________________________________
+
+## 12. Changelog
+
+- **1.1.0:** Added §5 (Scope & Role) clarifying C≡'s relationship to TSC; moved TSC relation from old §10 to §5; renumbered subsequent sections; added scope boundary and self-validation note. Part of TSC v2.2.0 release bundle.
+- **1.0.9:** Clarified rewrite semantics; explicit contraction/expansion rules; holographic lines refined.
+
+______________________________________________________________________
+
+**End — C≡ v1.1.0 (Normative Semantics).**
