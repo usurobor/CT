@@ -1,4 +1,3 @@
-```markdown
 # C≡ (Coherence Language, c-triple-bar)
 
 *Version 1.1.0 • Status: Normative (Semantics)*
