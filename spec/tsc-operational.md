@@ -1,5 +1,5 @@
 # Triadic Self‑Coherence (TSC) — Operational
-**Version:** v2.2.0  
+**Version:** v2.2.1  
 **Dependency:** This document depends only on the definitions in **TSC — Core** (aspects H/V/D, contexts Ω, articulations A, summaries S, alignments σ, coherence predicate Coh, metrics H_c/V_c/D_c, aggregate C_Σ). It introduces no additional ontology.
 
 ---
@@ -26,7 +26,7 @@
 
 From the Core we use, without redefining:
 - Aspects \( \{H,V,D\} \), contexts \( \Omega_X \), articulations \( O_X=A_X(\equiv) \).
-- Summaries \( S_X = (d_X, p_X, H_X, \mathcal{I}_X) \).
+- Summaries \( S_X = (d_X, p_X, \mathcal{H}_X, \mathcal{I}_X) \).
 - Alignment ensembles \( \mathcal{A}_{XY} \) and pairwise \( \overline{\mathrm{Coh}}_{XY} \) with ensemble variance.
 - Metrics \( H_c, V_c, D_c \) and aggregate \( C_\Sigma=(H_c V_c D_c)^{1/3} \).
 
@@ -42,6 +42,8 @@ All parameters MUST be fixed **before** observation and logged with the verdict.
 - \( \lambda_H > 0 \) — H-aspect sensitivity (default **4.0**).
 - \( \mu > 0 \) — D-aspect sensitivity (default **4.0**).
 - \( \Theta \in (0,1] \) — pass threshold on \( C_\Sigma \) (default **0.80**).
+
+**Contextual defaults.** General verification default is \(\Theta = 0.80\). Self-application (§12) recommends \(\Theta = 0.90\) for releases. Record which threshold applies in provenance.
 
 ### 2.2 Stability and Witness Floors
 - **Ensemble variance floor** on each pair:  
@@ -84,9 +86,9 @@ Recommended presets:
 
 3. **Align (ensemble)**  
    For each pair \( (X,Y)\in\{(H,V),(V,D),(D,H)\} \):  
-   run every \( \sigma \in \mathcal{A}_{XY} \) → compute \( \mathrm{Coh}^{(\sigma)}_{XY} \).  
+   run every \( \sigma \in \mathcal{A}_{XY} \) (**require \(|\mathcal{A}_{XY}|\ge 3\)** and bi-directional or inversion-closed ensembles) → compute \( \mathrm{Coh}^{(\sigma)}_{XY} \).  
    Aggregate to \( \overline{\mathrm{Coh}}_{XY} \) and \( \mathrm{Var}_{XY} \).  
-   Check \( \mathrm{Var}_{XY} \le \texttt{var\_floor} \) (witness).  
+   Check \( \mathrm{Var}_{XY} \le \texttt{var\_floor} \) (witness). If any \(\mathrm{Var}_{XY}\) exceeds floor → **FAIL_DEGENERATE**.  
    Record \( \texttt{Lipschitz95} \) from mapped vs. original distances (witness).
 
 4. **Compute metrics**  
@@ -112,7 +114,7 @@ Recommended presets:
 Witnesses are **monitors**, not metrics. Failure invalidates a run irrespective of \( C_\Sigma \).
 
 - **Sample sufficiency:** \( |O_X| \ge n_{\min} \) for all aspects.  
-- **Summary health:** \( H_X \ge \texttt{entropy\_floor\_X} \) and declared variance floors satisfied.  
+- **Summary health:** \( \mathcal{H}_X \ge \texttt{entropy\_floor\_X} \) and declared variance floors satisfied.  
 - **Alignment stability:** \( \mathrm{Var}_{XY} \le \texttt{var\_floor} \) for each pair.  
 - **Bounded distortion:** \( \texttt{Lipschitz95} \le \texttt{L\_max} \).  
 - **Scale drift (if used):** coherence drift under declared \(\phi\) stays within the budgeted δ.
@@ -178,34 +180,30 @@ STATE: controller_state ∈ {HANDSHAKE, OPTIMIZE, REINFLATE, MINIMAL_INFO, LOCKD
 2  Assert |O_X| ≥ n_min ∀X; else FAIL_DEGENERATE
 3  S_H ← Summary(O_H); S_V ← Summary(O_V); S_D ← Summary(O_D)
 4  For each (X,Y) in {(H,V),(V,D),(D,H)}:
-5      Choose ensemble E := policy(controller_state, 𝒜_XY)
-6      For each σ in E: Cohσ ← exp(−λ Δ(S_X,S_Y; σ))
-7      Coh̄_XY ← meanσ Cohσ; Var_XY ← varσ Cohσ
-8      Record Lipschitz95 from mapped vs original distances
-9  Check witnesses (Var floors, Lipschitz, entropy/variance, n_min)
-10 If any witness fails → FAIL_DEGENERATE
-11 V_c ← (Coh̄_HV Coh̄_VD Coh̄_DH)^(1/3)
-12 H_c, D_c ← declared constructions
-13 C_Σ ← (H_c V_c D_c)^(1/3)
-14 Bootstrap to compute CI_lo(C_Σ) and CI_hi(C_Σ)
-15 If CI_lo(C_Σ) ≥ Θ → PASS else FAIL
-16 Emit provenance bundle and controller actions 
-
-## 9 · Changelog
-
-- **v2.0.0:** Initial normative specification.
-- **v2.2.0:** Added reflexive self-application (§12), OOD detection (§11), dimensional leverage, mandatory CI.
+5      Assert |𝒜_XY| ≥ 3 and bi-directional/inversion-closed
+6      Choose ensemble E := policy(controller_state, 𝒜_XY)
+7      For each σ in E: Cohσ ← exp(−λ Δ(S_X,S_Y; σ))
+8      Coh̄_XY ← meanσ Cohσ; Var_XY ← varσ Cohσ
+9      Record Lipschitz95 from mapped vs original distances
+10 Check witnesses (Var floors, Lipschitz, entropy/variance, n_min)
+11 If any witness fails → FAIL_DEGENERATE
+12 V_c ← (Coh̄_HV Coh̄_VD Coh̄_DH)^(1/3)
+13 H_c, D_c ← declared constructions
+14 C_Σ ← (H_c V_c D_c)^(1/3)
+15 Bootstrap to compute CI_lo(C_Σ) and CI_hi(C_Σ)
+16 If CI_lo(C_Σ) ≥ Θ → PASS else FAIL
+17 Emit provenance bundle and controller actions taken
 
 ---
 
-## 10 · Notes (informative)
+## 9 · Notes (informative)
 
 - This layer may be extended with domain‑specific witness definitions (e.g., for neuroscience, computational systems) without changing the Core math.  
 - The controller states are recommendations; implementations may define different policies that still respect the witness floors and reproducibility requirements.
 
 ---
 
-## 11 · Out-of-Distribution Detection
+## 10 · Out-of-Distribution Detection
 
 **Purpose.** Track historical verification results to detect when current observations diverge from established patterns, triggering policy changes or closer scrutiny.
 
@@ -215,6 +213,8 @@ STATE: controller_state ∈ {HANDSHAKE, OPTIMIZE, REINFLATE, MINIMAL_INFO, LOCKD
 - Define a **critical threshold** \( Z_{\text{crit}} \) (default 0.95 quantile of historical \( Z_t \)).
 - **Action:** If \( Z_t \ge Z_{\text{crit}} \), flag as **out-of-distribution** and trigger controller transition (typically to LOCKDOWN or REINFLATE).
 
+**Default statistic.** Robust z-score on a rolling median/IQR of \( C_\Sigma \) (window size recorded) unless otherwise declared.
+
 **Normative requirements:**
 - OOD detection MUST be logged in provenance.
 - Reference distribution MUST be versioned and tied to a specific \( p_{\text{ref}} \) hash or manifest.
@@ -222,18 +222,18 @@ STATE: controller_state ∈ {HANDSHAKE, OPTIMIZE, REINFLATE, MINIMAL_INFO, LOCKD
 
 ---
 
-## 12 · Reflexive Self‑Application (Meta‑Verification)
+## 11 · Reflexive Self‑Application (Meta‑Verification)
 
 **Purpose.** TSC defines coherence and **applies this definition to itself**.  
 This section specifies how to measure the coherence of the TSC project as a phenomenon.
 
-### 12.1 Normative Claims (Scope & Symmetry)
+### 11.1 Normative Claims (Scope & Symmetry)
 
 - **\( S_3 \) invariance (normative).** All self‑measurement procedures MUST remain invariant under any permutation of \{H,V,D\}. No step may privilege a dimension by essence rather than position.
 - **Scope (operational).** Self‑application validates **coherence**, not metaphysical truth.  
   Whether triadic articulation is "how reality is" is **out of scope** for this document.
 
-### 12.2 Articulation of "TSC (the project)" as H/V/D
+### 11.2 Articulation of "TSC (the project)" as H/V/D
 
 Treat the living repository as a triad:
 
@@ -244,7 +244,7 @@ Treat the living repository as a triad:
 - **D (Process / Cohering).** The evolution across versions:  
   change‑log, deprecations/migrations, compatibility notes, controller invariants over time.
 
-### 12.3 Witness Sets (Required Checks)
+### 11.3 Witness Sets (Required Checks)
 
 Each dimension **MUST** define a witness set of checks producing scores in [0,1]. The default sets are:
 
@@ -271,7 +271,7 @@ Each dimension **MUST** define a witness set of checks producing scores in [0,1]
 
 > **Implementation note.** A check returns 1.0 if satisfied, 0.0 if violated, or a fractional value if partially satisfied (e.g., 0.5 "insufficient evidence"). Fractional scoring MUST be documented.
 
-### 12.4 Dimensional Scores and Aggregation
+### 11.4 Dimensional Scores and Aggregation
 
 Let each dimension \( X\in\{H,V,D\} \) produce a set of check results \{r_i\} with weights \{\alpha_i \ge 0\}.  
 Define the dimensional score:
@@ -279,7 +279,7 @@ $$
 X_c = \frac{\sum_i \alpha_i\, r_i}{\sum_i \alpha_i} \in [0,1].
 $$
 
-Let **\( w_H = w_V = w_D = 1 \)** by default (equal weighting). Project MAY choose other non-negative weights provided \( w_H + w_V + w_D = 3 \) (preserving normalization).
+**Weights.** Use \( w_H = w_V = w_D = 1 \) by default (\(\sum w = 3\)). Alternative non-negative weights are allowed if recorded; do not break \( S_3 \) covariance.
 
 Define the **coherence aggregate** as weighted geometric mean:
 $$
@@ -295,12 +295,12 @@ $$
 - Dimension floors: \( X_c \ge \phi \) with **\(\phi = 0.80\)** recommended.  
 - Release threshold: **\(\text{CI}_{\text{lo}}(C_\Sigma) \ge \Theta\)** with **\(\Theta = 0.90\)** recommended.
 
-### 12.5 Confidence Intervals & OOD
+### 11.5 Confidence Intervals & OOD
 
 - CI MUST be reported at **95%**. For self‑application, the CI MAY be estimated by non‑parametric bootstrap over witness checks (≥1000 resamples).  
-- OOD gate: compute a stability statistic \( Z_t \) over historic self‑checks. If \( Z_t \ge Z_{\text{crit}} \) (default 0.95), enter LOCKDOWN policy (no release) until cleared per §11.
+- OOD gate: compute a stability statistic \( Z_t \) over historic self‑checks. If \( Z_t \ge Z_{\text{crit}} \) (default 0.95), enter LOCKDOWN policy (no release) until cleared per §10.
 
-### 12.6 Coherer as Scope Regulator (\( C_r \))
+### 11.6 Coherer as Scope Regulator (\( C_r \))
 
 Self‑application introduces **recognition policy knobs** that guide measurement effort without breaking \( S_3 \) symmetry:
 
@@ -318,7 +318,7 @@ Self‑application introduces **recognition policy knobs** that guide measuremen
 
 > **Normative constraint.** \( \Phi \), \( V_{\text{EI}} \), \( R_C \) **MUST** operate only on scopes, weights, and budgets. They MUST NOT re‑define coherence or privilege a dimension by essence.
 
-### 12.7 Release Gating & Report Format
+### 11.7 Release Gating & Report Format
 
 A release candidate **MUST** include coherence_report.json with these fields:
 
@@ -333,9 +333,12 @@ A release candidate **MUST** include coherence_report.json with these fields:
 - policy: Phi, V_EI, R_C (current policy settings)
 - notes (optional explanatory text)
 
+**Naming convention.** Mathematical \( C_\Sigma \) appears as C_sigma in machine outputs; CI fields are C_sigma_lo / C_sigma_hi.
+
 Example structure:
+
 {
-  "version": "v2.2.0",
+  "version": "v2.2.1",
   "scores": { "H_c": 0.92, "V_c": 0.88, "D_c": 0.86, "C_sigma": 0.886 },
   "leverage": { "lambda_H": 0.083, "lambda_V": 0.128, "lambda_D": 0.151, "lambda_Sigma": 0.121 },
   "floors": { "phi": 0.80 },
@@ -351,7 +354,7 @@ Example structure:
 - FAIL release if \(\text{CI}_{\text{lo}}(C_\Sigma) < \Theta\) or any \( X_c < \phi \).
 - Record \( \Phi \) actions taken and any scope changes since prior release.
 
-### 12.8 Example Trend (Informative)
+### 11.8 Example Trend (Informative)
 
 Illustrative only; not normative data.
 
@@ -376,8 +379,8 @@ This demonstrates Φ/R_C working: effort allocated to worst dimension, resulting
 
 ---
 
-**End of §12. This section is normative for release gating.**
+**End of §11. This section is normative for release gating.**
 
 ---
 
-**End — TSC Operational v2.2.0.**
+**End — TSC Operational v2.2.1.**
