@@ -213,7 +213,7 @@ ______________________________________________________________________
 
 - `c-equiv.md` (v1.0.9) — Coinductive semantics, tripling rule
 - `tsc-core.md` (v2.0.0) — Measurement framework, formal properties
-- `tsc-operational.md` (v2.0.0) — Verification protocol, controller states
+- `tsc-oper.md` (v2.0.0) — Verification protocol, controller states
 
 `/reference/` — Worked examples & harnesses\
 `/runtime/` — Integration guides\

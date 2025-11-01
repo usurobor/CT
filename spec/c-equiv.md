@@ -134,7 +134,7 @@ The Core mathematics requires that the Operational layer provides witnesses to e
 **See also:**
 - **C≡ Kernel** (c-equiv-kernel.md) — intuitive bootstrap and measurement bridge
 - **Core v2.2.2** (tsc-core.md) — measurement calculus grounded in C≡
-- **Operational v2.2.2** (tsc-operational.md) — witness protocols and policy
+- **Operational v2.2.2** (tsc-oper.md) — witness protocols and policy
 
 ---
 

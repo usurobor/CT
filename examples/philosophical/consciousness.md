@@ -1,5 +1,5 @@
 # Consciousness — a TSC (Triadic Self‑Coherence) exemplar
-*Version:* examples v2.1.1 • aligns with **spec/tsc-core.md v2.0.0** and **spec/tsc-operational.md v2.0.0**
+*Version:* examples v2.1.1 • aligns with **spec/tsc-core.md v2.0.0** and **spec/tsc-oper.md v2.0.0**
 
 > **What this file is.** A **didactic, philosophy‑first** demonstration that treats a conscious event as one phenomenon ≡ articulated triadically as **H (pattern)**, **V (relation)**, **D (process)** and then asks a single question: *do these three articulations describe one coherent event?*  
 > **What this file is not.** Not a theory that "explains consciousness," not a replacement for empirical science, not a commitment to internal representations. It is a **consistency check** across three inseparable dimensions of one event.

@@ -132,7 +132,7 @@ C≡ asserts *labels of one happening*, not inner images. Core is a **measuremen
 **See also:**
 - **C≡ v2.2.2** (c-equiv.md) — full axiomatic foundation
 - **Core v2.2.2** (tsc-core.md) — measurement calculus
-- **Operational v2.2.2** (tsc-operational.md) — protocol and policy
+- **Operational v2.2.2** (tsc-oper.md) — protocol and policy
 
 ---
 
