@@ -530,8 +530,8 @@ If you use TSC in research, please cite:
 
 ```bibtex
 @software{tsc2025,
-  title = {TSC: Triadic Systems Coherence Framework},
-  author = {[Your Name]},
+  title = {TSC: Triadic Self-Coherence Framework},
+  author = {Peter Lisovin},
   year = {2025},
   version = {2.2.2},
   url = {https://github.com/usurobor/tsc}
@@ -544,7 +544,7 @@ If you use TSC in research, please cite:
 
 - **Issues:** [GitHub Issues](https://github.com/usurobor/tsc/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/usurobor/tsc/discussions)
-- **Email:** [your.email@example.com]
+- **Email:** [usurobor@gmail.com]
 
 -----
 
