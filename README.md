@@ -1,4 +1,4 @@
-# TSC (Triadic Systems Coherence)
+# TSC (Triadic Self-Coherence)
 
 **One sentence:** A measurement framework that tests whether your three descriptions of a system fit together—without claiming any of them is “true.”
 
